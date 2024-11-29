@@ -121,7 +121,7 @@ public class HomePage extends BasePage{
 
     //aside web element assert methods (not all pages have them)
     public boolean isNewsletterInputFieldDisplayed() {return newsLetterInputField.isDisplayed();}
-    public boolean isNewsLetterButtonDisplayed() {return newsLetterButton.isDisplayed();}
+    public boolean isNewsletterButtonDisplayed() {return newsLetterButton.isDisplayed();}
     public boolean isManufacturersLinkDisplayed() {return manufacturersAsideLink.isDisplayed();}
 
     public boolean isCategoriesLinkDisplayed() {
@@ -154,6 +154,14 @@ public class HomePage extends BasePage{
     }
     public boolean isProductCardDisplayed() {
         for (WebElement element : productCardElements) {
+            if (!element.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean isProductNameDisplayed() {
+        for (WebElement element : productNameElements) {
             if (!element.isDisplayed()) {
                 return false;
             }
