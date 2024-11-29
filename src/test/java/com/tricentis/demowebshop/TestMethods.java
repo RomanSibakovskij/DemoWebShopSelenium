@@ -14,6 +14,7 @@ public class TestMethods extends BaseTest{
 
     //navigate to register page test method
     protected void userNavigationToRegisterPageTest(HomePage homePage){
+        RegisterPage registerPage = new RegisterPage(driver);
         //homepage web element assert
         isHomePageWebElementDisplayed(homePage);
         //homepage text assert
@@ -28,6 +29,10 @@ public class TestMethods extends BaseTest{
         logHomePageProductsData(homePage);
         //click 'Register' header nav link
         homePage.clickRegisterHeadNavLink();
+        //assert the user gets onto register page
+        assertEquals("Register", registerPage.getRegisterPageTitle(), "The register page title doesn't match expectations or the user is on the wrong page");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Navigate To Register Page Test");
     }
 
     //homepage web element assert tst method
@@ -133,5 +138,18 @@ public class TestMethods extends BaseTest{
         assertTrue(homePage.isManufacturersLinkDisplayed(), "The aside manufacturer link isn't displayed");
         //assert aside categories link are displayed (as a list)
         assertTrue(homePage.isCategoriesLinkDisplayed(), "The aside categories link isn't displayed");
+    }
+
+    //test result screenshot method
+    public void captureScreenshot(WebDriver driver, String fileName) {
+        try {
+            Thread.sleep(1500);//apply wait time for the right time to get the screenshot (WebDriverWait doesn't work here)
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destination = new File("D:\\IntelliJ Selenium projects\\DemoWebShopSelenium\\src\\test\\resources" + " " +  fileName + ".png");
+            Files.copy(screenshot.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            logger.info("Screenshot saved at: " + destination.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
