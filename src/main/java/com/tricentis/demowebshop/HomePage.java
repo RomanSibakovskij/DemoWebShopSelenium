@@ -2,7 +2,11 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.*;
 
 public class HomePage extends BasePage{
@@ -39,9 +43,15 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//ul[@class='top-menu']/li[7]")
     private WebElement giftCardsNavLink;
     //aside menu elements
+    @FindBy(xpath = "//div[@class='block block-category-navigation']//strong")
+    private WebElement categoriesSectionTitle;
     private List<WebElement> categoriesAsideLinkElements = driver.findElements(By.xpath("//div[@class='block block-category-navigation']//ul/li"));
+    @FindBy(xpath = "//div[@class='block block-manufacturer-navigation']//strong")
+    private WebElement manufacturersSectionTitle;
     @FindBy(xpath = "//div[@class='block block-manufacturer-navigation']//ul/li")
     private WebElement manufacturersAsideLink;
+    @FindBy(xpath = "//div[@class='block block-popular-tags']//strong")
+    private WebElement tagsSectionTitle;
     private List<WebElement> tagsAsideLinkElements = driver.findElements(By.xpath("//div[@class='tags']//ul/li"));
     ///newsletter box  (general page elements)
     @FindBy(xpath = "//div[@id='newsletter-subscribe-block']//input[@id='newsletter-email']")
@@ -49,10 +59,14 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//div[@id='newsletter-subscribe-block']//input[@id='newsletter-subscribe-button']")
     private WebElement newsLetterButton;
     //community poll box
+    @FindBy(xpath = "//div[@class='block block-poll']//strong[.='Community poll']")
+    private WebElement communityPollTitle;
     private List<WebElement> communityPollOptionElements = driver.findElements(By.xpath("//ul[@class='poll-options']/li/input"));
     @FindBy(xpath = "//div[@class='block block-poll']//input[@id='vote-poll-1']")
     private WebElement voteButton;
     //homepage main section elements
+    @FindBy(xpath = "//div[@class='product-grid home-page-product-grid']//strong")
+    private WebElement productSectionTitle;
     private List<WebElement> productCardElements = driver.findElements(By.xpath("//div[@class='page-body']//div[@class='product-item']"));
     @FindBy(xpath = "//div[@class='page-body']//h2[@class='product-title']")
     private List<WebElement> productNameElements;
@@ -60,14 +74,70 @@ public class HomePage extends BasePage{
     private List<WebElement> productPriceElements;
     private List<WebElement> productAddToCartButtonElements = driver.findElements(By.xpath("//div[@class='page-body']//input[@type='button']"));
     //footer elements (general page elements)
+    @FindBy(xpath = "//div[@class='column information']/h3")
+    private WebElement columnInfoTitle;
     private List<WebElement> columnInfoLinkElements = driver.findElements(By.xpath("//div[@class='column information']//ul/li"));
+    @FindBy(xpath = "//div[@class='column customer-service']/h3")
+    private WebElement customerServiceTitle;
     private List<WebElement> customerServiceLinkElements = driver.findElements(By.xpath("//div[@class='column customer-service']//ul/li"));
+    @FindBy(xpath = "//div[@class='column my-account']/h3")
+    private WebElement myAccountTitle;
     private List<WebElement> myAccountLinkElements = driver.findElements(By.xpath("//div[@class='column my-account']//ul/li"));
+    @FindBy(xpath = "//div[@class='column follow-us']/h3")
+    private WebElement socialMediaTitle;
     private List<WebElement> socialMediaLinkElements = driver.findElements(By.xpath("//div[@class='column follow-us']//ul/li"));
     @FindBy(xpath = "//div[@class='footer-disclaimer']")
     private WebElement disclaimerText;
 
     public HomePage(WebDriver driver) {super(driver);}
+
+    //homepage product data getters
+    public List<String> getProductName() {
+        List<String> productName = new ArrayList<>();
+        for (WebElement element : productNameElements) {
+            productName.add(element.getText());
+        }
+        return productName;
+    }
+    public List<String> getProductPrice() {
+        List<String> productPrice = new ArrayList<>();
+        for (WebElement element : productPriceElements) {
+            productPrice.add(element.getText());
+        }
+        return productPrice;
+    }
+
+    //click 'Register' link method
+    public void clickRegisterHeadNavLink(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.elementToBeClickable(registerHeadNavLink));
+        registerHeadNavLink.click();
+    }
+
+    //categories box title getter
+    public String getCategoriesAsideBoxTitle(){return categoriesSectionTitle.getText();}
+    //manufacturers box title getter
+    public String getManufacturersAsideBoxTitle(){return manufacturersSectionTitle.getText();}
+    //tags box title getter
+    public String getTagsBoxTitle(){return tagsSectionTitle.getText();}
+
+    //community poll title getter
+    public String getCommunityPollTitle(){return communityPollTitle.getText();}
+
+    //homepage products section title getter
+    public String getProductsSectionTitle(){return productSectionTitle.getText();}
+
+    //footer getters
+    //column info title getter
+    public String getColumnInfoTitle(){return columnInfoTitle.getText();}
+    //customer service title getter
+    public String getCustomerServiceTitle(){return customerServiceTitle.getText();}
+    //my account title getter
+    public String getMyAccountTitle(){return myAccountTitle.getText();}
+    //social media title getter
+    public String getSocialMediaTitle(){return socialMediaTitle.getText();}
+    //disclaimer text getter
+    public String getDisclaimerText(){return disclaimerText.getText();}
 
     //general page web elements assert methods (elements that all pages have - header / footer)
     public boolean isHomePageLogoDisplayed(){return homePageLogo.isDisplayed();}
