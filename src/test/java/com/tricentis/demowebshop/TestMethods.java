@@ -35,7 +35,7 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Navigate To Register Page Test");
     }
 
-    //homepage web element assert tst method
+    //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){
         //assert homepage community poll radio buttons are displayed (as a list)
         assertTrue(homePage.isCommunityPollRadioButtonDisplayed(), "The homepage community poll radio button isn't displayed");
