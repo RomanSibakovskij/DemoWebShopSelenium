@@ -502,6 +502,31 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the test result
         captureScreenshot(driver, "Invalid User Account Creation (already existing email address)");
     }
+    //invalid user creation test method (mismatching confirm password)
+    protected void invalidUserCreationMismatchingConfirmPasswordTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (mismatching confirm password)
+        registerPage.invalidUserInputDataGetterMismatchingConfirmPassword();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input mismatching confirm password into input field
+        registerPage.inputMismatchingConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the mismatching input error message is displayed
+        assertEquals("The password and confirmation password do not match.", registerPage.getInvalidSingularInputErrorMessage(), "The mismatching input error message doesn't match expectations.");
+        //capture screenshot of the unexpected test result
+        captureScreenshot(driver, "Invalid User Account Creation (mismatching confirm password)");
+    }
 
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){

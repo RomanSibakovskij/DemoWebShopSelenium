@@ -69,6 +69,7 @@ public class RegisterPage extends BasePage {
     //invalid singular input
     private String invalidEmailAddressFormat;
     private String existingEmail;
+    private String mismatchingConfirmPassword;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -460,6 +461,29 @@ public class RegisterPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(existingEmail);
     }
+
+    //invalid user input data getter(mismatching confirm password)
+    public void invalidUserInputDataGetterMismatchingConfirmPassword() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        password = TestDataGenerator.generateRandomPassword();
+        mismatchingConfirmPassword = "KammErs_8789";
+
+        System.out.println("Invalid user data generated for registration (mismatching confirm password): " + "\n");
+        logger.info("Valid first name (mismatching confirm password): " + firstName);
+        logger.info("Valid last name (mismatching confirm password): " + lastName);
+        logger.info("Valid email (mismatching confirm password): " + email);
+        logger.info("Valid password (mismatching confirm password): " + password);
+        logger.info("Mismatching confirm password: " + mismatchingConfirmPassword);
+    }
+    //invalid input data method (mismatching confirm password)
+    public void inputMismatchingConfirmPasswordIntoConfirmPasswordInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(mismatchingConfirmPassword);
+    }
+
 
     //register page title getter
     public String getRegisterPageTitle() {return registerPageTitle.getText();}

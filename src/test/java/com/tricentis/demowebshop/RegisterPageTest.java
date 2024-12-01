@@ -229,4 +229,18 @@ public class RegisterPageTest extends TestMethods{
         //invalid user account creation test (already existing email address)
         invalidUserCreationExistingEmailAddressFormatTest(registerPage);
     }
+
+    //Test 002p -> invalid user account creation test (too long password / confirm password)
+    @Test
+    @DisplayName("Invalid Male User Creation Test - Mismatching Confirm Password")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Mismatching_Singular_Input")
+    void invalidMaleUserCreationMismatchingConfirmPasswordTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //invalid user account creation test (mismatching confirm password)
+        invalidUserCreationMismatchingConfirmPasswordTest(registerPage);
+    }
 }
