@@ -61,6 +61,8 @@ public class RegisterPage extends BasePage {
     private String tooLongFirstName;
     private String tooLongLastName;
     private String tooLongEmailAddress;
+    private String tooLongPassword;
+    private String tooLongConfirmPassword;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -378,6 +380,34 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(tooLongEmailAddress);
+    }
+
+    //invalid user input data getter(too long password / confirm password)
+    public void invalidUserInputDataGetterTooLongPassword() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        tooLongPassword = "m2rRYVTDs3434XdpBVIQWfMbeSZcuwlujHddddddddddddddddddddasdasdsaqeqdsads%$%#sd_-cxvxcvdxfsfsfdsfgdsfdf";
+        tooLongConfirmPassword = tooLongPassword;
+
+        System.out.println("Invalid user data generated for registration (too long password and confirm password): " + "\n");
+        logger.info("Valid first name (too long password and confirm password): " + firstName);
+        logger.info("Valid last name (too long password and confirm password): " + lastName);
+        logger.info("Valid email (too long password and confirm password): " + email);
+        logger.info("Too long password: " + tooLongPassword);
+        logger.info("Too long matching confirm password: " + tooLongConfirmPassword);
+    }
+    //invalid input data method (too long password)
+    public void inputTooLongPasswordIntoPasswordInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(tooLongPassword);
+    }
+    //invalid input data method (too long confirm password)
+    public void inputTooLongConfirmPasswordIntoConfirmPasswordInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(tooLongConfirmPassword);
     }
 
     //register page title getter

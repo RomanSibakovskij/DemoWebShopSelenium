@@ -395,6 +395,31 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the unexpected test result
         captureScreenshot(driver, "Invalid User Account Creation (the account gets created despite too long email address name)");
     }
+    //invalid user creation test method (too long password / confirm password) => 100 chars
+    protected void invalidUserCreationTooLongPasswordAndConfirmTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (too long password / confirm password)
+        registerPage.invalidUserInputDataGetterTooLongPassword();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input too long password into password input field
+        registerPage.inputTooLongPasswordIntoPasswordInputField();
+        //input too long confirm password into input field
+        registerPage.inputTooLongConfirmPasswordIntoConfirmPasswordInputField();
+        //since this input field has no error message output, capture screenshot of the test result (these input fields have no upper char limit)
+        captureScreenshot(driver, "Invalid User Account Creation (too long password and confirm password)");
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //capture screenshot of the unexpected test result
+        captureScreenshot(driver, "Invalid User Account Creation (the account gets created despite too long password and confirm password)");
+    }
 
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
