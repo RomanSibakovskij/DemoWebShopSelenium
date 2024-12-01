@@ -148,6 +148,31 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the test result
         captureScreenshot(driver, "Invalid User Account Creation (no last name)");
     }
+    //invalid user creation test method (no email)
+    protected void invalidUserCreationNoEmailAddressTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (no email address)
+        registerPage.invalidUserInputDataGetterNoEmail();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //do not input email into email input field
+        registerPage.inputNoEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the missing input error message is displayed
+        assertEquals("Email is required.", registerPage.getInvalidSingularInputErrorMessage(), "The invalid singular input error message doesn't match expectations.");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Creation (no email address)");
+    }
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){

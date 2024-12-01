@@ -47,6 +47,7 @@ public class RegisterPage extends BasePage {
     //no singular input
     private String noFirstName;
     private String noLastName;
+    private String noEmail;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -142,7 +143,7 @@ public class RegisterPage extends BasePage {
 
         System.out.println("Invalid user data generated for registration (no last name): " + "\n");
         logger.info("Valid first name (no last name): " + firstName);
-        logger.info("No last name (no last name): " + noLastName);
+        logger.info("No last name: " + noLastName);
         logger.info("Valid email (no last name): " + email);
         logger.info("Valid password (no last name): " + password);
         logger.info("Valid matching confirm password (no last name): " + confirmPassword);
@@ -153,6 +154,29 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
         lastNameInputField.sendKeys(noLastName);
+    }
+
+    //invalid user input data getter(no email)
+    public void invalidUserInputDataGetterNoEmail() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        noEmail = "";
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (no email address): " + "\n");
+        logger.info("Valid first name (no email address): " + firstName);
+        logger.info("Valid last name (no email address): " + noLastName);
+        logger.info("No email: " + noEmail);
+        logger.info("Valid password (no email address): " + password);
+        logger.info("Valid matching confirm password (no email address): " + confirmPassword);
+    }
+
+    //invalid input data method (no email)
+    public void inputNoEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(noEmail);
     }
 
     //register page title getter

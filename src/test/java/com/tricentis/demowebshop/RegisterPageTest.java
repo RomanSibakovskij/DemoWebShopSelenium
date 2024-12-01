@@ -13,6 +13,7 @@ public class RegisterPageTest extends TestMethods{
     void validMaleUserCreationTest(){
         HomePage homePage = new HomePage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
         userNavigationToRegisterPageTest(homePage);
         //valid user account creation test (male gender button)
         validMaleUserCreationTest(registerPage);
@@ -25,6 +26,7 @@ public class RegisterPageTest extends TestMethods{
     void validFemaleUserCreationTest(){
         HomePage homePage = new HomePage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
         userNavigationToRegisterPageTest(homePage);
         //valid user account creation test (female gender button)
         validFemaleUserCreationTest(registerPage);
@@ -40,6 +42,7 @@ public class RegisterPageTest extends TestMethods{
     void invalidMaleUserCreationNoFirstNameTest(){
         HomePage homePage = new HomePage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
         userNavigationToRegisterPageTest(homePage);
         //invalid user account creation test (no first name)
         invalidUserCreationNoFirstNameTest(registerPage);
@@ -53,8 +56,23 @@ public class RegisterPageTest extends TestMethods{
     void invalidMaleUserCreationNoLastNameTest(){
         HomePage homePage = new HomePage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
         userNavigationToRegisterPageTest(homePage);
         //invalid user account creation test (no last name)
         invalidUserCreationNoLastNameTest(registerPage);
+    }
+
+    //Test 002d -> invalid user account creation test (no email address)
+    @Test
+    @DisplayName("Invalid Male User Creation Test - No Email Address")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("No_Singular_Input")
+    void invalidMaleUserCreationNoEmailTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //invalid user account creation test (no email address)
+        invalidUserCreationNoEmailAddressTest(registerPage);
     }
 }
