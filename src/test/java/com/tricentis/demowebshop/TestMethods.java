@@ -35,6 +35,37 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Navigate To Register Page Test");
     }
 
+    //valid register tests
+    //valid user creation test method (with male gender button clicked)
+    protected void validMaleUserCreationTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //valid male user input data getter
+        registerPage.validUserInputDataGetter();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //capture screenshot of the input data
+        captureScreenshot(driver, "Valid User Input Data (male gender button)");
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the user gets success message
+        assertEquals("Your registration completed", registerPage.getRegisterSuccessMessage(), "The register success message doesn't match expectations.");
+        //click 'Continue' button
+        registerPage.clickContinueButton();
+        //capture screenshot of the final test result
+        captureScreenshot(driver, "Valid User Account Created");
+    }
+
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){
         //assert homepage community poll radio buttons are displayed (as a list)
@@ -140,12 +171,34 @@ public class TestMethods extends BaseTest{
         assertTrue(homePage.isCategoriesLinkDisplayed(), "The aside categories link isn't displayed");
     }
 
+    //register page web element assert test method
+    protected void isRegisterPageWebElementDisplayed(RegisterPage registerPage){
+        //assert register page title is displayed
+        assertTrue(registerPage.isRegisterPageTitleDisplayed(), "The register page title isn't displayed");
+        //assert gender male button is displayed
+        assertTrue(registerPage.isGenderMaleButtonDisplayed(), "The gender male button isn't displayed");
+        //assert gender female button is displayed
+        assertTrue(registerPage.isGenderFemaleButtonDisplayed(), "The gender female button isn't displayed");
+        //assert first name input field is displayed
+        assertTrue(registerPage.isFirstNameInputFieldDisplayed(), "The first name input field isn't displayed");
+        //assert last name input field is displayed
+        assertTrue(registerPage.isLastNameInputFieldDisplayed(), "The last name input field isn't displayed");
+        //assert email input field is displayed
+        assertTrue(registerPage.isEmailInputFieldDisplayed(), "The email input field isn't displayed");
+        //assert password input field is displayed
+        assertTrue(registerPage.isPasswordInputFieldDisplayed(), "The password input field isn't displayed");
+        //assert confirm password input field is displayed
+        assertTrue(registerPage.isConfirmPasswordInputFieldDisplayed(), "The confirm password input field isn't displayed");
+        //assert 'Register' button is displayed
+        assertTrue(registerPage.isRegisterButtonDisplayed(), "The 'Register' button isn't displayed");
+    }
+
     //test result screenshot method
     public void captureScreenshot(WebDriver driver, String fileName) {
         try {
             Thread.sleep(1500);//apply wait time for the right time to get the screenshot (WebDriverWait doesn't work here)
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            File destination = new File("D:\\IntelliJ Selenium projects\\DemoWebShopSelenium\\src\\test\\resources" + " " +  fileName + ".png");
+            File destination = new File("D:\\IntelliJ Selenium projects\\DemoWebShopSelenium\\src\\test\\resources\\" + " " +  fileName + ".png");
             Files.copy(screenshot.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
             logger.info("Screenshot saved at: " + destination.getAbsolutePath());
         } catch (Exception e) {

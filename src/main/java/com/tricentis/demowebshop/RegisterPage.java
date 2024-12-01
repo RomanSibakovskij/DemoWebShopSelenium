@@ -30,6 +30,12 @@ public class RegisterPage extends BasePage {
     private WebElement invalidInputErrorMessage;
     @FindBy(xpath = "//div[@class='page registration-page']//input[@id='register-button']")
     private WebElement registerButton;
+    //register success message web element
+    @FindBy(xpath = "//div[@class='result']")
+    private WebElement registerSuccessMessage;
+    //continue button web element
+    @FindBy(xpath = "//input[@class='button-1 register-continue-button']")
+    private WebElement continueButton;
 
     //valid input data
     private String firstName;
@@ -103,6 +109,12 @@ public class RegisterPage extends BasePage {
     //private data getters
     public String getEmail() {return email;}
     public String getPassword() {return password;}
+
+    //register success message getter
+    public String getRegisterSuccessMessage() {return registerSuccessMessage.getText();}
+
+    //continue button click method
+    public void clickContinueButton() {continueButton.click();}
 
     //register page web element assert methods
     public boolean isRegisterPageTitleDisplayed() {return registerPageTitle.isDisplayed();}
