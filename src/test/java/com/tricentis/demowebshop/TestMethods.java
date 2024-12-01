@@ -275,6 +275,31 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the unexpected test result
         captureScreenshot(driver, "Invalid User Account Creation (the account gets created despite too short email address name)");
     }
+    //invalid user creation test method (too short password / confirm password)
+    protected void invalidUserCreationTooShortPasswordAndConfirmTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (too short password / confirm password)
+        registerPage.invalidUserInputDataGetterTooShortPassword();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input too short password into password input field
+        registerPage.inputTooShortPasswordIntoPasswordInputField();
+        //input too short confirm password into input field
+        registerPage.inputTooShortConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the missing input error message is displayed
+        assertEquals("The password should have at least 6 characters.", registerPage.getInvalidSingularInputErrorMessage(), "The invalid input error message doesn't match expectations.");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Creation (too short password and confirm password)");
+    }
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){

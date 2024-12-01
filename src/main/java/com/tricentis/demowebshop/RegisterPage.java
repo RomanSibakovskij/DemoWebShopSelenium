@@ -55,6 +55,8 @@ public class RegisterPage extends BasePage {
     private String tooShortFirstName;
     private String tooShortLastName;
     private String tooShortEmailAddress;
+    private String tooShortPassword;
+    private String tooShortConfirmPassword;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -277,6 +279,34 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(tooShortEmailAddress);
+    }
+
+    //invalid user input data getter(too short password / confirm password)
+    public void invalidUserInputDataGetterTooShortPassword() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        tooShortPassword = "KdRGf";
+        tooShortConfirmPassword = tooShortPassword;
+
+        System.out.println("Invalid user data generated for registration (too short password and confirm password): " + "\n");
+        logger.info("Valid first name (too short password and confirm password): " + firstName);
+        logger.info("Valid last name (too short password and confirm password): " + lastName);
+        logger.info("Valid email (too short password and confirm password): " + email);
+        logger.info("Too short password: " + tooShortPassword);
+        logger.info("Too short matching confirm password: " + tooShortConfirmPassword);
+    }
+    //invalid input data method (too short password)
+    public void inputTooShortPasswordIntoPasswordInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(tooShortPassword);
+    }
+    //invalid input data method (too short confirm password)
+    public void inputTooShortConfirmPasswordIntoConfirmPasswordInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(tooShortConfirmPassword);
     }
 
     //register page title getter
