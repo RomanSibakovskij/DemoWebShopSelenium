@@ -2,8 +2,7 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
@@ -61,6 +60,7 @@ public class RegisterPage extends BasePage {
     //too long singular input
     private String tooLongFirstName;
     private String tooLongLastName;
+    private String tooLongEmailAddress;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -356,6 +356,28 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
         lastNameInputField.sendKeys(tooLongLastName);
+    }
+
+    //invalid user input data getter(too long email)
+    public void invalidUserInputDataGetterTooLongEmail() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        tooLongEmailAddress = TestDataGenerator.generateRandomEmailAddress(100);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (too long email address): " + "\n");
+        logger.info("Valid first name (too long email address): " + firstName);
+        logger.info("Valid last name (too long email address): " + lastName);
+        logger.info("Too long email: " + tooLongEmailAddress);
+        logger.info("Valid password (too long email address): " + password);
+        logger.info("Valid matching confirm password (too long email address): " + confirmPassword);
+    }
+    //invalid input data method (too long email)
+    public void inputTooLongEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(tooLongEmailAddress);
     }
 
     //register page title getter
