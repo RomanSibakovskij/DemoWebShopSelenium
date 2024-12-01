@@ -31,6 +31,16 @@ public class LoginPage extends BasePage{
 
     public LoginPage(WebDriver driver) {super(driver);}
 
+    //login page title getter
+    public String getLoginPageTitle(){return loginPageTitle.getText();}
+    //register section title getter
+    public String getRegisterSectionTitle(){return registerSectionTitle.getText();}
+    //register section description getter
+    public String getRegisterSectionDescription(){return registerSectionDescription.getText();}
+
+    //'Register' button click method
+    public void clickRegisterButton(){registerSectionButton.click();}
+
     //login page web element assert methods
     public boolean isLoginPageTitleDisplayed(){return loginPageTitle.isDisplayed();}
     public boolean isRegisterSectionTitleDisplayed(){return registerSectionTitle.isDisplayed();}

@@ -94,6 +94,44 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Valid User Account Created (female gender)");
     }
 
+    //valid user creation through login page test method (with female gender button clicked)
+    protected void validFemaleUserCreationThroughLoginPageTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //click 'Login' link
+        homePage.clickLoginHeadNavLink();
+        //register section text element assert
+        isRegisterSectionTextAsExpected(loginPage);
+        //click 'Register' button
+        loginPage.clickRegisterButton();
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //valid male user input data getter
+        registerPage.validUserInputDataGetter();
+        //click male gender button
+        registerPage.clickFemaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //capture screenshot of the input data
+        captureScreenshot(driver, "Valid User Input Data (female gender button)");
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the user gets success message
+        assertEquals("Your registration completed", registerPage.getRegisterSuccessMessage(), "The register success message doesn't match expectations.");
+        //click 'Continue' button
+        registerPage.clickContinueButton();
+        //capture screenshot of the final test result
+        captureScreenshot(driver, "Valid User Account Created (female gender)");
+    }
+
     //invalid user account creation tests
 
     //no singular input
@@ -635,6 +673,16 @@ public class TestMethods extends BaseTest{
         assertTrue(registerPage.isConfirmPasswordInputFieldDisplayed(), "The confirm password input field isn't displayed");
         //assert 'Register' button is displayed
         assertTrue(registerPage.isRegisterButtonDisplayed(), "The 'Register' button isn't displayed");
+    }
+
+    //login page register section test assert method
+    protected void isRegisterSectionTextAsExpected(LoginPage loginPage){
+        //assert the user gets onto login page
+        assertEquals("Welcome, Please Sign In!", loginPage.getLoginPageTitle(), "The login page title doesn't match expectations or the user is on the wrong page");
+        //assert the register section title is as expected
+        assertEquals("New Customer", loginPage.getRegisterSectionTitle(), "The register section title doesn't match expectations");
+        //assert the register section description is as expected
+        assertEquals("By creating an account on our website you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.", loginPage.getRegisterSectionDescription(), "The register section description doesn't match expectations");
     }
 
     //test result screenshot method

@@ -32,9 +32,19 @@ public class RegisterPageTest extends TestMethods{
         validFemaleUserCreationTest(registerPage);
     }
 
+    //Test 002b -> valid user account creation test (female)
+    @Test
+    @DisplayName("Valid Female User Creation Through Login Page Test")
+    @Tag("Valid_User_Account_Creation")
+    void validFemaleUserCreationThroughLoginPageTest(){
+        RegisterPage registerPage = new RegisterPage(driver);
+        //valid user account creation through login page test (female gender button)
+        validFemaleUserCreationThroughLoginPageTest(registerPage);
+    }
+
     //invalid tests
 
-    //Test 002b -> invalid user account creation test (no first name)
+    //Test 002c -> invalid user account creation test (no first name)
     @Test
     @DisplayName("Invalid Male User Creation Test - No First Name")
     @Tag("Invalid_User_Account_Creation")
@@ -48,7 +58,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationNoFirstNameTest(registerPage);
     }
 
-    //Test 002c -> invalid user account creation test (no last name)
+    //Test 002d -> invalid user account creation test (no last name)
     @Test
     @DisplayName("Invalid Male User Creation Test - No Last Name")
     @Tag("Invalid_User_Account_Creation")
@@ -62,7 +72,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationNoLastNameTest(registerPage);
     }
 
-    //Test 002d -> invalid user account creation test (no email address)
+    //Test 002e -> invalid user account creation test (no email address)
     @Test
     @DisplayName("Invalid Male User Creation Test - No Email Address")
     @Tag("Invalid_User_Account_Creation")
@@ -76,7 +86,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationNoEmailAddressTest(registerPage);
     }
 
-    //Test 002e -> invalid user account creation test (no password / confirm password)
+    //Test 002f -> invalid user account creation test (no password / confirm password)
     @Test
     @DisplayName("Invalid Male User Creation Test - No Password / Confirm Password")
     @Tag("Invalid_User_Account_Creation")
@@ -90,7 +100,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationNoPasswordAndConfirmTest(registerPage);
     }
 
-    //Test 002f -> invalid user account creation test (too short first name) (the user account gets created)
+    //Test 002g -> invalid user account creation test (too short first name) (the user account gets created)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Short First Name")
     @Tag("Invalid_User_Account_Creation")
@@ -104,7 +114,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooShortFirstNameTest(registerPage);
     }
 
-    //Test 002g -> invalid user account creation test (too short last name) (the user account gets created)
+    //Test 002h -> invalid user account creation test (too short last name) (the user account gets created)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Short Last Name")
     @Tag("Invalid_User_Account_Creation")
@@ -118,7 +128,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooShortLastNameTest(registerPage);
     }
 
-    //Test 002h -> invalid user account creation test (too short email address)
+    //Test 002i -> invalid user account creation test (too short email address)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Short Email Address")
     @Tag("Invalid_User_Account_Creation")
@@ -132,7 +142,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooShortEmailAddressNameTest(registerPage);
     }
 
-    //Test 002i -> invalid user account creation test (too short password / confirm password)
+    //Test 002k -> invalid user account creation test (too short password / confirm password)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Short Password / Confirm Password")
     @Tag("Invalid_User_Account_Creation")
@@ -146,7 +156,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooShortPasswordAndConfirmTest(registerPage);
     }
 
-    //Test 002j -> invalid user account creation test (too long first name) (the user account gets created)
+    //Test 002l -> invalid user account creation test (too long first name) (the user account gets created)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Long First Name")
     @Tag("Invalid_User_Account_Creation")
@@ -160,7 +170,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooLongFirstNameTest(registerPage);
     }
 
-    //Test 002k -> invalid user account creation test (too long last name) (the user account gets created)
+    //Test 002m -> invalid user account creation test (too long last name) (the user account gets created)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Long Last Name")
     @Tag("Invalid_User_Account_Creation")
@@ -174,7 +184,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooLongLastNameTest(registerPage);
     }
 
-    //Test 002l -> invalid user account creation test (too long email address)
+    //Test 002n -> invalid user account creation test (too long email address)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Long Email Address")
     @Tag("Invalid_User_Account_Creation")
@@ -188,7 +198,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooLongEmailAddressNameTest(registerPage);
     }
 
-    //Test 002m -> invalid user account creation test (too long password / confirm password) (the user account gets created)
+    //Test 002o -> invalid user account creation test (too long password / confirm password) (the user account gets created)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Long Password / Confirm Password")
     @Tag("Invalid_User_Account_Creation")
@@ -202,7 +212,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooLongPasswordAndConfirmTest(registerPage);
     }
 
-    //Test 002n -> invalid user account creation test (invalid email address (by format))
+    //Test 002p -> invalid user account creation test (invalid email address (by format))
     @Test
     @DisplayName("Invalid Male User Creation Test - Invalid Email Address")
     @Tag("Invalid_User_Account_Creation")
@@ -216,7 +226,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationInvalidEmailAddressFormatTest(registerPage);
     }
 
-    //Test 002o -> invalid user account creation test (already existing email address)
+    //Test 002q -> invalid user account creation test (already existing email address)
     @Test
     @DisplayName("Invalid Male User Creation Test - Already Existing Email Address")
     @Tag("Invalid_User_Account_Creation")
@@ -230,7 +240,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationExistingEmailAddressFormatTest(registerPage);
     }
 
-    //Test 002p -> invalid user account creation test (too long password / confirm password)
+    //Test 002r -> invalid user account creation test (too long password / confirm password)
     @Test
     @DisplayName("Invalid Male User Creation Test - Mismatching Confirm Password")
     @Tag("Invalid_User_Account_Creation")
