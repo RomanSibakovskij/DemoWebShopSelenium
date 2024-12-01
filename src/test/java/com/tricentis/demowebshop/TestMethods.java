@@ -65,6 +65,35 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the final test result
         captureScreenshot(driver, "Valid User Account Created");
     }
+    //valid user creation test method (with female gender button clicked)
+    protected void validFemaleUserCreationTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //valid male user input data getter
+        registerPage.validUserInputDataGetter();
+        //click male gender button
+        registerPage.clickFemaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //capture screenshot of the input data
+        captureScreenshot(driver, "Valid User Input Data (female gender button)");
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the user gets success message
+        assertEquals("Your registration completed", registerPage.getRegisterSuccessMessage(), "The register success message doesn't match expectations.");
+        //click 'Continue' button
+        registerPage.clickContinueButton();
+        //capture screenshot of the final test result
+        captureScreenshot(driver, "Valid User Account Created (female gender)");
+    }
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){

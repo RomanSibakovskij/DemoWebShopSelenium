@@ -48,6 +48,8 @@ public class RegisterPage extends BasePage {
 
     //male gender button click method
     public void clickMaleGenderButton() {genderMaleButton.click();}
+    //female gender button click method
+    public void clickFemaleGenderButton() {genderFemaleButton.click();}
 
     //valid user input data getter
     public void validUserInputDataGetter() {
