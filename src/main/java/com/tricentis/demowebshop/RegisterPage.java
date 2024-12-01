@@ -53,6 +53,7 @@ public class RegisterPage extends BasePage {
 
     //too short singular input
     private String tooShortFirstName;
+    private String tooShortLastName;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -153,7 +154,6 @@ public class RegisterPage extends BasePage {
         logger.info("Valid password (no last name): " + password);
         logger.info("Valid matching confirm password (no last name): " + confirmPassword);
     }
-
     //invalid input data method (no last name)
     public void inputNoLastNameIntoLastNameInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
@@ -176,7 +176,6 @@ public class RegisterPage extends BasePage {
         logger.info("Valid password (no email address): " + password);
         logger.info("Valid matching confirm password (no email address): " + confirmPassword);
     }
-
     //invalid input data method (no email)
     public void inputNoEmailIntoEmailInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
@@ -199,7 +198,6 @@ public class RegisterPage extends BasePage {
         logger.info("No password: " + noPassword);
         logger.info("No confirm password: " + noConfirmPassword);
     }
-
     //invalid input data method (no password)
     public void inputNoPasswordIntoPasswordInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
@@ -229,12 +227,33 @@ public class RegisterPage extends BasePage {
         logger.info("Valid password (too short first name): " + password);
         logger.info("Valid matching confirm password (too short first name): " + confirmPassword);
     }
-
     //invalid input data method (too short first name)
     public void inputTooShortFirstNameIntoFirstNameInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
         firstNameInputField.sendKeys(tooShortFirstName);
+    }
+
+    //invalid user input data getter(too short last name)
+    public void invalidUserInputDataGetterTooShortLastName() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        tooShortLastName = "G";
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (too short last name): " + "\n");
+        logger.info("Valid first name (too short last name): " + firstName);
+        logger.info("Too short last name: " + tooShortLastName);
+        logger.info("Valid email (too short last name): " + email);
+        logger.info("Valid password (too short last name): " + password);
+        logger.info("Valid matching confirm password (too short last name): " + confirmPassword);
+    }
+    //invalid input data method (too short last name)
+    public void inputTooShortLastNameIntoLastNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
+        lastNameInputField.sendKeys(tooShortLastName);
     }
 
     //register page title getter
