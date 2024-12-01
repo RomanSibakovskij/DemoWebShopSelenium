@@ -44,6 +44,9 @@ public class RegisterPage extends BasePage {
     private String password;
     private String confirmPassword;
 
+    //no singular input
+    private String noFirstName;
+
     public RegisterPage(WebDriver driver) {super(driver);}
 
     //male gender button click method
@@ -105,8 +108,34 @@ public class RegisterPage extends BasePage {
         registerButton.click();
     }
 
+    //invalid user input data getter(no first name)
+    public void invalidUserInputDataGetterNoFirstName() {
+        noFirstName = "";
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (no first name): " + "\n");
+        logger.info("No first name: " + noFirstName);
+        logger.info("Valid last name (no first name): " + lastName);
+        logger.info("Valid email (no first name): " + email);
+        logger.info("Valid password (no first name): " + password);
+        logger.info("Valid matching confirm password (no first name): " + confirmPassword);
+    }
+
+    //invalid input data method (no first name)
+    public void inputNoFirstNameIntoFirstNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
+        firstNameInputField.sendKeys(noFirstName);
+    }
+
     //register page title getter
     public String getRegisterPageTitle() {return registerPageTitle.getText();}
+
+    //invalid singular input error message getter
+    public String getInvalidSingularInputErrorMessage(){return invalidInputErrorMessage.getText();}
 
     //private data getters
     public String getEmail() {return email;}

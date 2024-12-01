@@ -95,6 +95,35 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Valid User Account Created (female gender)");
     }
 
+    //invalid user account creation tests
+
+    //no singular input
+    //valid user creation test method (with male gender button clicked)
+    protected void invalidUserCreationNoFirstNameTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (no first name)
+        registerPage.invalidUserInputDataGetterNoFirstName();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //do not input first name into first name input field
+        registerPage.inputNoFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the missing input error message is displayed
+        assertEquals("First name is required.", registerPage.getInvalidSingularInputErrorMessage(), "The invalid singular input error message doesn't match expectations.");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Creation (no first name)");
+    }
+
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){
         //assert homepage community poll radio buttons are displayed (as a list)
