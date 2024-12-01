@@ -27,6 +27,8 @@ public class RegisterPage extends BasePage {
     private WebElement confirmPasswordInputField;
     @FindBy(xpath = "//div[@class='page registration-page']//span[@class='field-validation-error']")
     private WebElement invalidInputErrorMessage;
+    @FindBy(xpath = "//div[@class='validation-summary-errors']")
+    private WebElement existingEmailErrorMessage;
     @FindBy(xpath = "//div[@class='page registration-page']//input[@id='register-button']")
     private WebElement registerButton;
     //register success message web element
@@ -64,8 +66,9 @@ public class RegisterPage extends BasePage {
     private String tooLongPassword;
     private String tooLongConfirmPassword;
 
-    //invalid singular input format
+    //invalid singular input
     private String invalidEmailAddressFormat;
+    private String existingEmail;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -436,11 +439,36 @@ public class RegisterPage extends BasePage {
         emailInputField.sendKeys(invalidEmailAddressFormat);
     }
 
+    //invalid user input data getter(already existing email)
+    public void invalidUserInputDataGetterExistingEmail() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        existingEmail = getEmail();
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (already existing email address): " + "\n");
+        logger.info("Valid first name (already existing email address): " + firstName);
+        logger.info("Valid last name (already existing email address): " + lastName);
+        logger.info("Already existing email: " + existingEmail);
+        logger.info("Valid password (already existing email address): " + password);
+        logger.info("Valid matching confirm password (already existing email address): " + confirmPassword);
+    }
+    //invalid input data method (already existing email)
+    public void inputExistingEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(existingEmail);
+    }
+
     //register page title getter
     public String getRegisterPageTitle() {return registerPageTitle.getText();}
 
     //invalid singular input error message getter
     public String getInvalidSingularInputErrorMessage(){return invalidInputErrorMessage.getText();}
+
+    //existing email error message getter
+    public String getExistingEmailErrorMessage(){return existingEmailErrorMessage.getText();}
 
     //private data getters
     public String getEmail() {return email;}

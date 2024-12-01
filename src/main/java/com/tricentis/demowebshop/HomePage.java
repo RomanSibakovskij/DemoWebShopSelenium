@@ -114,6 +114,13 @@ public class HomePage extends BasePage{
         registerHeadNavLink.click();
     }
 
+    //click 'Login' link method
+    public void clickLoginHeadNavLink(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.elementToBeClickable(loginHeadNavLink));
+        loginHeadNavLink.click();
+    }
+
     //categories box title getter
     public String getCategoriesAsideBoxTitle(){return categoriesSectionTitle.getText();}
     //manufacturers box title getter

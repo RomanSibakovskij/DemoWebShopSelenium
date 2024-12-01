@@ -1,12 +1,11 @@
 package com.tricentis.demowebshop;
 
-import org.openqa.selenium.support.ui.*;
+
 import org.slf4j.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.*;
 import java.io.File;
 import java.nio.file.*;
-import java.time.Duration;
 
 public class TestMethods extends BaseTest{
 
@@ -446,6 +445,62 @@ public class TestMethods extends BaseTest{
         assertEquals("Wrong email", registerPage.getInvalidSingularInputErrorMessage(), "The invalid input error message doesn't match expectations.");
         //capture screenshot of the unexpected test result
         captureScreenshot(driver, "Invalid User Account Creation (invalid email address format)");
+    }
+    //invalid user creation test method (already existing email address)
+    protected void invalidUserCreationExistingEmailAddressFormatTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //valid male user input data getter
+        registerPage.validUserInputDataGetter();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the user gets success message
+        assertEquals("Your registration completed", registerPage.getRegisterSuccessMessage(), "The register success message doesn't match expectations.");
+        //click 'Continue' button
+        registerPage.clickContinueButton();
+        //click 'Logout' link (same place as 'Login')
+        homePage.clickLoginHeadNavLink();
+        //click 'Register' header nav link => to return back to register page
+        homePage.clickRegisterHeadNavLink();
+
+
+        //second registration loop
+
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (already existing email address)
+        registerPage.invalidUserInputDataGetterExistingEmail();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input already existing email into email input field
+        registerPage.inputExistingEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the missing input error message is displayed
+        assertEquals("The specified email already exists", registerPage.getExistingEmailErrorMessage(), "The invalid input error message doesn't match expectations.");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Creation (already existing email address)");
     }
 
     //general page web element assert test method

@@ -215,4 +215,18 @@ public class RegisterPageTest extends TestMethods{
         //invalid user account creation test (invalid email address format)
         invalidUserCreationInvalidEmailAddressFormatTest(registerPage);
     }
+
+    //Test 002o -> invalid user account creation test (already existing email address)
+    @Test
+    @DisplayName("Invalid Male User Creation Test - Already Existing Email Address")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Existing_Singular_Input_Format")
+    void invalidMaleUserCreationExistingEmailTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //invalid user account creation test (already existing email address)
+        invalidUserCreationExistingEmailAddressFormatTest(registerPage);
+    }
 }
