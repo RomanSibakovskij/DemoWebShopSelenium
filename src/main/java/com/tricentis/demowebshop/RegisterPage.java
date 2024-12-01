@@ -48,6 +48,8 @@ public class RegisterPage extends BasePage {
     private String noFirstName;
     private String noLastName;
     private String noEmail;
+    private String noPassword;
+    private String noConfirmPassword;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -166,7 +168,7 @@ public class RegisterPage extends BasePage {
 
         System.out.println("Invalid user data generated for registration (no email address): " + "\n");
         logger.info("Valid first name (no email address): " + firstName);
-        logger.info("Valid last name (no email address): " + noLastName);
+        logger.info("Valid last name (no email address): " + lastName);
         logger.info("No email: " + noEmail);
         logger.info("Valid password (no email address): " + password);
         logger.info("Valid matching confirm password (no email address): " + confirmPassword);
@@ -177,6 +179,35 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(emailInputField));
         emailInputField.sendKeys(noEmail);
+    }
+
+    //invalid user input data getter(no password / confirm password)
+    public void invalidUserInputDataGetterNoPassword() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        noPassword = "";
+        noConfirmPassword = noPassword;
+
+        System.out.println("Invalid user data generated for registration (no password and confirm password): " + "\n");
+        logger.info("Valid first name (no password and confirm password): " + firstName);
+        logger.info("Valid last name (no password and confirm password): " + lastName);
+        logger.info("Valid email (no password and confirm password): " + email);
+        logger.info("No password: " + noPassword);
+        logger.info("No confirm password: " + noConfirmPassword);
+    }
+
+    //invalid input data method (no password)
+    public void inputNoPasswordIntoPasswordInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(noPassword);
+    }
+    //invalid input data method (no confirm password)
+    public void inputNoConfirmPasswordIntoConfirmPasswordInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
+        confirmPasswordInputField.sendKeys(noConfirmPassword);
     }
 
     //register page title getter
