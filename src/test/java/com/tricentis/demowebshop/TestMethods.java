@@ -421,6 +421,33 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid User Account Creation (the account gets created despite too long password and confirm password)");
     }
 
+    //invalid singular input tests
+    //invalid user creation test method (invalid email address format)
+    protected void invalidUserCreationInvalidEmailAddressFormatTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (invalid email address format)
+        registerPage.invalidUserInputDataGetterInvalidEmail();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input invalid email (by format) into email input field
+        registerPage.inputInvalidEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the missing input error message is displayed
+        assertEquals("Wrong email", registerPage.getInvalidSingularInputErrorMessage(), "The invalid input error message doesn't match expectations.");
+        //capture screenshot of the unexpected test result
+        captureScreenshot(driver, "Invalid User Account Creation (invalid email address format)");
+    }
+
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
         //assert homepage logo is displayed

@@ -188,7 +188,7 @@ public class RegisterPageTest extends TestMethods{
         invalidUserCreationTooLongEmailAddressNameTest(registerPage);
     }
 
-    //Test 002i -> invalid user account creation test (too long password / confirm password) (the user account gets created)
+    //Test 002m -> invalid user account creation test (too long password / confirm password) (the user account gets created)
     @Test
     @DisplayName("Invalid Male User Creation Test - Too Long Password / Confirm Password")
     @Tag("Invalid_User_Account_Creation")
@@ -200,5 +200,19 @@ public class RegisterPageTest extends TestMethods{
         userNavigationToRegisterPageTest(homePage);
         //invalid user account creation test (too long password / confirm password)
         invalidUserCreationTooLongPasswordAndConfirmTest(registerPage);
+    }
+
+    //Test 002n -> invalid user account creation test (invalid email address (by format))
+    @Test
+    @DisplayName("Invalid Male User Creation Test - Invalid Email Address")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Invalid_Singular_Input_Format")
+    void invalidMaleUserCreationInvalidEmailTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //invalid user account creation test (invalid email address format)
+        invalidUserCreationInvalidEmailAddressFormatTest(registerPage);
     }
 }

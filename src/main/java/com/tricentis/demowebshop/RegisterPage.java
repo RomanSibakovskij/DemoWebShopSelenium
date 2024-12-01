@@ -64,6 +64,9 @@ public class RegisterPage extends BasePage {
     private String tooLongPassword;
     private String tooLongConfirmPassword;
 
+    //invalid singular input format
+    private String invalidEmailAddressFormat;
+
     public RegisterPage(WebDriver driver) {super(driver);}
 
     //male gender button click method
@@ -408,6 +411,29 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
         confirmPasswordInputField.sendKeys(tooLongConfirmPassword);
+    }
+
+    //invalid singular inputs
+    //invalid user input data getter(invalid email format)
+    public void invalidUserInputDataGetterInvalidEmail() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        invalidEmailAddressFormat = "c2example.org";
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (invalid email address format): " + "\n");
+        logger.info("Valid first name (invalid email address format): " + firstName);
+        logger.info("Valid last name (invalid email address format): " + lastName);
+        logger.info("Invalid email address format: " + invalidEmailAddressFormat);
+        logger.info("Valid password (invalid email address format): " + password);
+        logger.info("Valid matching confirm password (invalid email address format): " + confirmPassword);
+    }
+    //invalid input data method (invalid email format)
+    public void inputInvalidEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(invalidEmailAddressFormat);
     }
 
     //register page title getter
