@@ -319,6 +319,33 @@ public class TestMethods extends BaseTest{
         assertTrue(homePage.isAddToCartProductButtonDisplayed(), "The homepage product 'add to cart' button isn't displayed");
     }
 
+    //too long singular input tests
+    //invalid user creation test method (too long first name) => 100 chars
+    protected void invalidUserCreationTooLongFirstNameTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (too long first name)
+        registerPage.invalidUserInputDataGetterTooLongFirstName();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input too long first name into first name input field
+        registerPage.inputTooLongFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //since this input field has no error message output, capture screenshot of the test result (this input field has no char limits)
+        captureScreenshot(driver, "Invalid User Account Creation (too long first name)");
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //capture screenshot of the unexpected test result
+        captureScreenshot(driver, "Invalid User Account Creation (the account gets created despite too long first name)");
+    }
+
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
         //assert homepage logo is displayed

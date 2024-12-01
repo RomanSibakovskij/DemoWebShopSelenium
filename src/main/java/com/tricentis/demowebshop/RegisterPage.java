@@ -58,6 +58,9 @@ public class RegisterPage extends BasePage {
     private String tooShortPassword;
     private String tooShortConfirmPassword;
 
+    //too long singular input
+    private String tooLongFirstName;
+
     public RegisterPage(WebDriver driver) {super(driver);}
 
     //male gender button click method
@@ -307,6 +310,29 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
         confirmPasswordInputField.sendKeys(tooShortConfirmPassword);
+    }
+
+    //too long singular input
+    //invalid user input data getter(too long first name) => 100 chars
+    public void invalidUserInputDataGetterTooLongFirstName() {
+        tooLongFirstName = "m2rRYVTDsuqXdpBVIQWfMbeSZcuwlujHdsddddddddddddddddddddasdasdsaqeqdsadsdsdvcvcvcxvxcvdxfsfsfdsfgdsfdf";
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (too long first name): " + "\n");
+        logger.info("Too long first name: " + tooLongFirstName);
+        logger.info("Valid last name (too long first name): " + lastName);
+        logger.info("Valid email (too long first name): " + email);
+        logger.info("Valid password (too long first name): " + password);
+        logger.info("Valid matching confirm password (too long first name): " + confirmPassword);
+    }
+    //invalid input data method (too long first name)
+    public void inputTooLongFirstNameIntoFirstNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
+        firstNameInputField.sendKeys(tooLongFirstName);
     }
 
     //register page title getter
