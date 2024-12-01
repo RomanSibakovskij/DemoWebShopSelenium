@@ -89,4 +89,18 @@ public class RegisterPageTest extends TestMethods{
         //invalid user account creation test (no password / confirm password)
         invalidUserCreationNoPasswordAndConfirmTest(registerPage);
     }
+
+    //Test 002f -> invalid user account creation test (too short first name) (the user account gets created)
+    @Test
+    @DisplayName("Invalid Male User Creation Test - Too Short First Name")
+    @Tag("Invalid_User_Account_Creation")
+    @Tag("Too_Short_Singular_Input")
+    void invalidMaleUserCreationTooShortFirstNameTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //invalid user account creation test (too short first name)
+        invalidUserCreationTooShortFirstNameTest(registerPage);
+    }
 }

@@ -51,6 +51,9 @@ public class RegisterPage extends BasePage {
     private String noPassword;
     private String noConfirmPassword;
 
+    //too short singular input
+    private String tooShortFirstName;
+
     public RegisterPage(WebDriver driver) {super(driver);}
 
     //male gender button click method
@@ -135,7 +138,7 @@ public class RegisterPage extends BasePage {
         firstNameInputField.sendKeys(noFirstName);
     }
 
-    //invalid user input data getter(no first name)
+    //invalid user input data getter(no last name)
     public void invalidUserInputDataGetterNoLastName() {
         firstName = TestDataGenerator.getRandomFirstName();
         noLastName = "";
@@ -208,6 +211,30 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(confirmPasswordInputField));
         confirmPasswordInputField.sendKeys(noConfirmPassword);
+    }
+
+    //too short singular input
+    //invalid user input data getter(too short first name)
+    public void invalidUserInputDataGetterTooShortFirstName() {
+        tooShortFirstName = "H";
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (too short first name): " + "\n");
+        logger.info("Too short first name: " + tooShortFirstName);
+        logger.info("Valid last name (too short first name): " + lastName);
+        logger.info("Valid email (too short first name): " + email);
+        logger.info("Valid password (too short first name): " + password);
+        logger.info("Valid matching confirm password (too short first name): " + confirmPassword);
+    }
+
+    //invalid input data method (too short first name)
+    public void inputTooShortFirstNameIntoFirstNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
+        firstNameInputField.sendKeys(tooShortFirstName);
     }
 
     //register page title getter
