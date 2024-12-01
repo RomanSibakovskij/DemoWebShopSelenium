@@ -250,6 +250,31 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the unexpected test result
         captureScreenshot(driver, "Invalid User Account Creation (the account gets created despite too short last name)");
     }
+    //invalid user creation test method (too short email address name - usually, 1 is too short)
+    protected void invalidUserCreationTooShortEmailAddressNameTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (too short email address name)
+        registerPage.invalidUserInputDataGetterTooShortEmail();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid last name into last name input field
+        registerPage.inputLastNameIntoLastNameInputField();
+        //input too short email into email input field
+        registerPage.inputTooShortEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //since this input field has no error message output, capture screenshot of the test result (this input field has no lower char limit)
+        captureScreenshot(driver, "Invalid User Account Creation (too short email address name)");
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //capture screenshot of the unexpected test result
+        captureScreenshot(driver, "Invalid User Account Creation (the account gets created despite too short email address name)");
+    }
 
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){

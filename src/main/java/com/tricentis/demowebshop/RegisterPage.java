@@ -54,6 +54,7 @@ public class RegisterPage extends BasePage {
     //too short singular input
     private String tooShortFirstName;
     private String tooShortLastName;
+    private String tooShortEmailAddress;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -254,6 +255,28 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
         lastNameInputField.sendKeys(tooShortLastName);
+    }
+
+    //invalid user input data getter(too short email)
+    public void invalidUserInputDataGetterTooShortEmail() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        tooShortEmailAddress = "c@example.org";
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (too short email address): " + "\n");
+        logger.info("Valid first name (too short email address): " + firstName);
+        logger.info("Valid last name (too short email address): " + lastName);
+        logger.info("Too short email: " + tooShortEmailAddress);
+        logger.info("Valid password (too short email address): " + password);
+        logger.info("Valid matching confirm password (too short email address): " + confirmPassword);
+    }
+    //invalid input data method (too short email)
+    public void inputTooShortEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailInputField));
+        emailInputField.sendKeys(tooShortEmailAddress);
     }
 
     //register page title getter
