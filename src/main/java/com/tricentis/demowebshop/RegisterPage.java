@@ -46,6 +46,7 @@ public class RegisterPage extends BasePage {
 
     //no singular input
     private String noFirstName;
+    private String noLastName;
 
     public RegisterPage(WebDriver driver) {super(driver);}
 
@@ -129,6 +130,29 @@ public class RegisterPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
         firstNameInputField.sendKeys(noFirstName);
+    }
+
+    //invalid user input data getter(no first name)
+    public void invalidUserInputDataGetterNoLastName() {
+        firstName = TestDataGenerator.getRandomFirstName();
+        noLastName = "";
+        email = TestDataGenerator.generateRandomEmailAddress(7);
+        password = TestDataGenerator.generateRandomPassword();
+        confirmPassword = password;
+
+        System.out.println("Invalid user data generated for registration (no last name): " + "\n");
+        logger.info("Valid first name (no last name): " + firstName);
+        logger.info("No last name (no last name): " + noLastName);
+        logger.info("Valid email (no last name): " + email);
+        logger.info("Valid password (no last name): " + password);
+        logger.info("Valid matching confirm password (no last name): " + confirmPassword);
+    }
+
+    //invalid input data method (no last name)
+    public void inputNoLastNameIntoLastNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
+        lastNameInputField.sendKeys(noLastName);
     }
 
     //register page title getter

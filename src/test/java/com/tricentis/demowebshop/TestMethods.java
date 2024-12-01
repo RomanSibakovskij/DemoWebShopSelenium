@@ -98,7 +98,7 @@ public class TestMethods extends BaseTest{
     //invalid user account creation tests
 
     //no singular input
-    //valid user creation test method (with male gender button clicked)
+    //invalid user creation test method (no first name)
     protected void invalidUserCreationNoFirstNameTest(RegisterPage registerPage){
         //register page web element assert
         isRegisterPageWebElementDisplayed(registerPage);
@@ -122,6 +122,31 @@ public class TestMethods extends BaseTest{
         assertEquals("First name is required.", registerPage.getInvalidSingularInputErrorMessage(), "The invalid singular input error message doesn't match expectations.");
         //capture screenshot of the test result
         captureScreenshot(driver, "Invalid User Account Creation (no first name)");
+    }
+    //invalid user creation test method (no last name)
+    protected void invalidUserCreationNoLastNameTest(RegisterPage registerPage){
+        //register page web element assert
+        isRegisterPageWebElementDisplayed(registerPage);
+        //invalid male user input data getter (no last name)
+        registerPage.invalidUserInputDataGetterNoLastName();
+        //click male gender button
+        registerPage.clickMaleGenderButton();
+        //input valid first name into first name input field
+        registerPage.inputFirstNameIntoFirstNameInputField();
+        //do not input last name into last name input field
+        registerPage.inputNoLastNameIntoLastNameInputField();
+        //input valid email into email input field
+        registerPage.inputEmailIntoEmailInputField();
+        //input valid password into password input field
+        registerPage.inputPasswordIntoPasswordInputField();
+        //input matching confirm password into input field
+        registerPage.inputConfirmPasswordIntoConfirmPasswordInputField();
+        //click 'Register' button
+        registerPage.clickRegisterButton();
+        //assert the missing input error message is displayed
+        assertEquals("Last name is required.", registerPage.getInvalidSingularInputErrorMessage(), "The invalid singular input error message doesn't match expectations.");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Creation (no last name)");
     }
 
     //homepage web element assert test method
