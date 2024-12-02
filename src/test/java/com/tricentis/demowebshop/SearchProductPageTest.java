@@ -23,4 +23,16 @@ public class SearchProductPageTest extends TestMethods{
         //single available product search test (as a registered user)
         searchForASingleAvailableProductTest();
     }
+
+    //Test 006a -> search for a single available product test (as a guest)
+    @Test
+    @DisplayName("Search For A Single Available Product Test (as a guest)")
+    @Tag("Single_Available_Product_Search_Guest")
+    @Tag("Single_Available_Product_Search")
+    void singleAvailableProductSearchGuestTest(){
+        //single featured product search test (as a guest)
+        searchForASingleFeaturedProductTest();
+        //single available product search test (as a guest)
+        searchForASingleAvailableProductTest();
+    }
 }
