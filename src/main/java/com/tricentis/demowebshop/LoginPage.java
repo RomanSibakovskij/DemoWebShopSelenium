@@ -42,6 +42,9 @@ public class LoginPage extends BasePage{
     private String noEmail;
     private String noPassword;
 
+    //invalid singular input data
+    private String invalidEmail;
+
     public LoginPage(WebDriver driver) {super(driver);}
 
     //valid user login data getter
@@ -69,6 +72,8 @@ public class LoginPage extends BasePage{
     }
 
     //invalid input data
+
+    //no singular input
     //invalid user login data getter (no user email address)
     public void invalidUserLoginDataGetterNoEmail(RegisterPage registerPage) {
 
@@ -100,11 +105,31 @@ public class LoginPage extends BasePage{
 
         System.out.println("\n");
     }
-    //valid user data input methods
+    //invalid user data input method (no user password)
     public void inputNoPasswordIntoPasswordInputField(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(passwordInputField));
         passwordInputField.sendKeys(noPassword);
+    }
+
+    //invalid singular input
+    //invalid user login data getter (invalid user email address)
+    public void invalidUserLoginDataGetterInvalidEmail(RegisterPage registerPage) {
+
+        invalidEmail = "kl334@example.org";
+        password = registerPage.getPassword();
+
+        System.out.println("Invalid user login data (invalid email): " + "\n");
+        logger.info("Invalid user login email address: " + invalidEmail);
+        logger.info("Valid user login password (invalid email): " + registerPage.getPassword());
+
+        System.out.println("\n");
+    }
+    //invalid user data input method (invalid email address)
+    public void inputInvalidEmailIntoEmailInputField(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(invalidEmail);
     }
 
     //login button click method
