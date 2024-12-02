@@ -61,7 +61,8 @@ public class TestDataGenerator extends BasePage{
     private static final String[] availableProductNames = {"Health Book", "1MP 60GB Hard Drive Handycam Camcorder", "Camcorder", "High Definition 3D Camcorder",
     "Smartphone", "Used phone", "Phone Cover", "50's Rockabilly Polka Dot Top JR Plus Size", "Blue Jeans", "Custom T-Shirt", "Genuine Leather Handbag with Cell Phone Holder & Many Pockets",
     "Blue and green Sneaker", "Casual Golf Belt", "Green and blue Sneaker", "Denim Short with Rhinestones", "Wool Hat", "Women's Running Shoe", "Sunglasses","Men's Wrinkle Free Long Sleeve",
-    "3rd Album", "Music 2", "Create Your Own Jewelry", "Black & White Diamond Heart", "$5 Virtual Gift Card", "$25 Virtual Gift Card", "$50 Physical Gift Card", "$100 Physical Gift Card"};
+    "3rd Album", "Music 2", "Create Your Own Jewelry", "Black & White Diamond Heart", "$5 Virtual Gift Card", "$25 Virtual Gift Card", "$50 Physical Gift Card", "$100 Physical Gift Card",
+    "Desktop PC with CDRW", "Elite Desktop PC"};
 
     //random first name picker method
     public static String getRandomFirstName() {

@@ -55,4 +55,16 @@ public class SearchProductPageTest extends TestMethods{
         //multiple available products search test (as a registered user)
         searchForMultipleAvailableProductsTest();
     }
+
+    //Test 006c -> search for multiple available products test (as a guest)
+    @Test
+    @DisplayName("Search For Multiple Available Products Test (as a guest)")
+    @Tag("Multiple_Available_Product_Search_Guest")
+    @Tag("Multiple_Available_Product_Search")
+    void multipleAvailableProductSearchGuestTest(){
+        //multiple featured products search test (as a guest)
+        searchForMultipleFeaturedProductsTest();
+        //multiple available products search test (as a guest)
+        searchForMultipleAvailableProductsTest();
+    }
 }
