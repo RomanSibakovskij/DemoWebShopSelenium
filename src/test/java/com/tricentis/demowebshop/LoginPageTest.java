@@ -21,6 +21,26 @@ public class LoginPageTest extends TestMethods{
         validUserAccountLoginTest(registerPage);
     }
 
+    //invalid user login tests
+
+    //Test 003a ->  invalid user account login test (no email address)
+    @Test
+    @DisplayName("Invalid User Account Login Test (no email address)")
+    @Tag("Invalid_User_Account_Login")
+    @Tag("No_Singular_Input")
+    void invalidUserLoginNoEmailTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //user account logout
+        userLogoutTest(registerPage);
+        //invalid user account login (no email address)
+        invalidUserAccountNoEmailLoginTest(registerPage);
+    }
+
     //Test 004 ->  user account logout test
     @Test
     @DisplayName("User Account Logout Test")

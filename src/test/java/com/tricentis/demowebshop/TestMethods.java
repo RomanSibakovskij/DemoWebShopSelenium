@@ -619,6 +619,43 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Valid User Account Login Test");
     }
 
+    //invalid login tests
+
+    //invalid user account login test method
+    protected void invalidUserAccountNoEmailLoginTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //click 'Login' nav link
+        homePage.clickLoginHeadNavLink();
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //register section text element assert
+        isRegisterSectionTextAsExpected(loginPage);
+        //login section text element assert
+        isLoginSectionTextAsExpected(loginPage);
+        //invalid user login input data getter (no email address)
+        loginPage.invalidUserLoginDataGetterNoEmail(registerPage);
+        //don't input user email address
+        loginPage.inputNoEmailIntoEmailInputField();
+        //input valid user password
+        loginPage.inputPasswordIntoPasswordInputField();
+        //click 'login' button
+        loginPage.clickLoginButton();
+        //assert the expected error message is displayed
+        assertEquals("Login was unsuccessful. Please correct the errors and try again.\n" +
+                "No customer account found", loginPage.getUnsuccessfulLoginErrorMessageText(), "The error message doesn't match expectations");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Login Test (no email address)");
+    }
+
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
         //assert homepage logo is displayed

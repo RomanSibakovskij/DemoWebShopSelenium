@@ -21,6 +21,8 @@ public class LoginPage extends BasePage{
     //login section
     @FindBy(xpath = "//div[@class='returning-wrapper']//strong")
     private WebElement loginSectionTitle;
+    @FindBy(xpath = "//div[@class='validation-summary-errors']")
+    private WebElement unsuccessfulLoginErrorMessage;
     @FindBy(xpath = "//div[@class='returning-wrapper']//input[@id='Email']")
     private WebElement emailAddressInputField;
     @FindBy(xpath = "//div[@class='returning-wrapper']//input[@id='Password']")
@@ -35,6 +37,9 @@ public class LoginPage extends BasePage{
     //valid input data
     private String email;
     private String password;
+
+    //no singular input data
+    private String noEmail;
 
     public LoginPage(WebDriver driver) {super(driver);}
 
@@ -62,6 +67,26 @@ public class LoginPage extends BasePage{
         passwordInputField.sendKeys(password);
     }
 
+    //invalid input data
+    //invalid user login data getter
+    public void invalidUserLoginDataGetterNoEmail(RegisterPage registerPage) {
+
+        noEmail = "";
+        password = registerPage.getPassword();
+
+        System.out.println("Invalid user login data (no email): " + "\n");
+        logger.info("Missing user login email address: " + noEmail);
+        logger.info("Valid user login password (no email): " + registerPage.getPassword());
+
+        System.out.println("\n");
+    }
+    //invalid user data input method (no email address)
+    public void inputNoEmailIntoEmailInputField(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(noEmail);
+    }
+
     //login button click method
     public void clickLoginButton(){loginButton.click();}
 
@@ -73,6 +98,9 @@ public class LoginPage extends BasePage{
     public String getRegisterSectionDescription(){return registerSectionDescription.getText();}
     //login section title getter
     public String getLoginSectionTitle(){return loginSectionTitle.getText();}
+
+    //unsuccessful login error message getter
+    public String getUnsuccessfulLoginErrorMessageText(){return unsuccessfulLoginErrorMessage.getText();}
 
     //'Register' button click method
     public void clickRegisterButton(){registerSectionButton.click();}
