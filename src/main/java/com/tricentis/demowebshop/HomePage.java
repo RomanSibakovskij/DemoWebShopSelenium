@@ -2,9 +2,7 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 import java.util.*;
@@ -106,6 +104,16 @@ public class HomePage extends BasePage{
         }
         return productPrice;
     }
+
+    //input the search query into search bar method
+    public void inputProductQueryIntoSearchBar(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.visibilityOf(searchInputBar));
+        searchInputBar.sendKeys(TestDataGenerator.pickRandomHomePageFeaturedProduct());
+    }
+
+    //click 'Search' button method
+    public void clickSearchButton(){searchButton.click();}
 
     //click 'Register' link method
     public void clickRegisterHeadNavLink(){
