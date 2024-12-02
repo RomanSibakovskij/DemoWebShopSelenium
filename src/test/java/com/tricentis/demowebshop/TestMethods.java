@@ -621,7 +621,7 @@ public class TestMethods extends BaseTest{
 
     //invalid login tests
 
-    //invalid user account login test method
+    //invalid user account login test method(no user email address)
     protected void invalidUserAccountNoEmailLoginTest(RegisterPage registerPage){
         HomePage homePage = new HomePage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -654,6 +654,40 @@ public class TestMethods extends BaseTest{
                 "No customer account found", loginPage.getUnsuccessfulLoginErrorMessageText(), "The error message doesn't match expectations");
         //capture screenshot of the test result
         captureScreenshot(driver, "Invalid User Account Login Test (no email address)");
+    }
+    //invalid user account login test method (no user password)
+    protected void invalidUserAccountNoPasswordLoginTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //click 'Login' nav link
+        homePage.clickLoginHeadNavLink();
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //register section text element assert
+        isRegisterSectionTextAsExpected(loginPage);
+        //login section text element assert
+        isLoginSectionTextAsExpected(loginPage);
+        //invalid user login input data getter (no password)
+        loginPage.invalidUserLoginDataGetterNoPassword(registerPage);
+        //input valid user email address
+        loginPage.inputEmailIntoEmailInputField();
+        //don't input user password
+        loginPage.inputNoPasswordIntoPasswordInputField();
+        //click 'login' button
+        loginPage.clickLoginButton();
+        //assert the expected error message is displayed
+        assertEquals("Login was unsuccessful. Please correct the errors and try again.\n" +
+                "The credentials provided are incorrect", loginPage.getUnsuccessfulLoginErrorMessageText(), "The error message doesn't match expectations");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Login Test (no password)");
     }
 
     //general page web element assert test method
