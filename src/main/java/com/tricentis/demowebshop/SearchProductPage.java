@@ -43,6 +43,13 @@ public class SearchProductPage extends BasePage{
 
     public SearchProductPage(WebDriver driver) {super(driver);}
 
+    //search page bar input query method
+    public void inputSearchQueryIntoSearchInputField(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.visibilityOf(searchKeywordBar));
+
+    }
+
     //search product page title getter
     public String getSearchProductPageTitle() {return searchPageTitle.getText();}
     //search product page keyword label getter
