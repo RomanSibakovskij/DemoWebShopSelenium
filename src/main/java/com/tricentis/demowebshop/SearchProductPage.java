@@ -41,14 +41,21 @@ public class SearchProductPage extends BasePage{
     private List<WebElement> searchProductUnitPriceElements;
     private List<WebElement> searchProductAddToCartButtonElements = driver.findElements(By.xpath("//div[@class='item-box']//input[@value='Add to cart']"));
 
+    //single available product data
+    private String singleAvailableProductName = TestDataGenerator.pickRandomAvailableProduct();
+
     public SearchProductPage(WebDriver driver) {super(driver);}
 
     //search page bar input query method
-    public void inputSearchQueryIntoSearchInputField(){
+    public void inputSingleAvailableProductSearchQueryIntoSearchBar(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
         wait.until(ExpectedConditions.visibilityOf(searchKeywordBar));
-
+        searchKeywordBar.clear();
+        searchKeywordBar.sendKeys(singleAvailableProductName);
     }
+
+    //click 'Search' button method
+    public void clickSearchButton(){searchButton.click();}
 
     //search product page title getter
     public String getSearchProductPageTitle() {return searchPageTitle.getText();}
@@ -59,6 +66,9 @@ public class SearchProductPage extends BasePage{
     public String getSingleSearchedProductName() {return singleSearchProductName.getText();}
     //single searched product unit price getter
     public String getSingleSearchedProductUnitPrice(){return singleSearchProductUnitPrice.getText();}
+
+    //single searched available product name getter
+    public String getSingleAvailableProductName(){return singleAvailableProductName;}
 
     //multiple searched product names getter
     public List<String> getSearchedProductNames() {

@@ -867,6 +867,33 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Search For Multiple Featured Product Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //search page tests
+
+    //single product search test method
+    protected void searchForASingleAvailableProductTest(){
+        HomePage homePage = new HomePage(driver);
+        SearchProductPage searchProductPage = new SearchProductPage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        isGeneralPageTextMatchExpectations(homePage);
+        //search page web element assert
+        isSearchProductPageWebElementDisplayed(searchProductPage);
+        //search page text element assert
+        isSearchProductPageTextAsExpected(searchProductPage);
+        //input single available product query
+        searchProductPage.inputSingleAvailableProductSearchQueryIntoSearchBar();
+        //click 'Search' button
+        searchProductPage.clickSearchButton();
+        //assert the searched product is displayed in the product section
+        assertEquals(searchProductPage.getSingleAvailableProductName(), searchProductPage.getSingleSearchedProductName(), "The searched product names don't match");
+        //log updated searched product data
+        logSingleSearchedProductData(searchProductPage);
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Search For A Single Available Product Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //general page web element assert test method
