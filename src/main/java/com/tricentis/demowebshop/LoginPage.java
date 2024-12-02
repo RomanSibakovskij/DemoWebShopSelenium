@@ -37,6 +37,8 @@ public class LoginPage extends BasePage{
     public String getRegisterSectionTitle(){return registerSectionTitle.getText();}
     //register section description getter
     public String getRegisterSectionDescription(){return registerSectionDescription.getText();}
+    //login section title getter
+    public String getLoginSectionTitle(){return loginSectionTitle.getText();}
 
     //'Register' button click method
     public void clickRegisterButton(){registerSectionButton.click();}

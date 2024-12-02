@@ -675,7 +675,30 @@ public class TestMethods extends BaseTest{
         assertTrue(registerPage.isRegisterButtonDisplayed(), "The 'Register' button isn't displayed");
     }
 
-    //login page register section test assert method
+    //login page web element assert test method
+    protected void isLoginPageWebElementDisplayed(LoginPage loginPage){
+        //assert login page title is displayed
+        assertTrue(loginPage.isLoginPageTitleDisplayed(), "The login page title isn't displayed");
+        //assert register section title is displayed
+        assertTrue(loginPage.isRegisterSectionTitleDisplayed(), "The register section title isn't displayed");
+        //assert register section description is displayed
+        assertTrue(loginPage.isRegisterSectionDescriptionDisplayed(), "The register section description isn't displayed");
+        //assert register section button is displayed
+        assertTrue(loginPage.isRegisterSectionButtonDisplayed(), "The register section button isn't displayed");
+        //assert login section title is displayed
+        assertTrue(loginPage.isLoginSectionTitleDisplayed(), "The login section title isn't displayed");
+        //assert email input field is displayed
+        assertTrue(loginPage.isEmailAddressInputFieldDisplayed(), "The email address input field isn't displayed");
+        //assert password input field is displayed
+        assertTrue(loginPage.isPasswordInputFieldDisplayed(), "The password input field isn't displayed");
+        //assert 'Remember me' checkbox is displayed
+        assertTrue(loginPage.isRememberMeCheckboxDisplayed(), "The 'Remember me' checkbox isn't displayed");
+        //assert 'Forgot password' link is displayed
+        assertTrue(loginPage.isForgotPasswordLinkDisplayed(), "The 'Forgot password' link isn't displayed");
+        //assert login button is displayed
+        assertTrue(loginPage.isLoginButtonDisplayed(), "The login button isn't displayed");
+    }
+    //login page register section text assert method
     protected void isRegisterSectionTextAsExpected(LoginPage loginPage){
         //assert the user gets onto login page
         assertEquals("Welcome, Please Sign In!", loginPage.getLoginPageTitle(), "The login page title doesn't match expectations or the user is on the wrong page");
@@ -683,6 +706,11 @@ public class TestMethods extends BaseTest{
         assertEquals("New Customer", loginPage.getRegisterSectionTitle(), "The register section title doesn't match expectations");
         //assert the register section description is as expected
         assertEquals("By creating an account on our website you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.", loginPage.getRegisterSectionDescription(), "The register section description doesn't match expectations");
+    }
+    //login page login section text assert method
+    protected void isLoginSectionTextAsExpected(LoginPage loginPage){
+        //assert the login section title is as expected
+        assertEquals("Returning Customer", loginPage.getLoginSectionTitle(), "The login section title doesn't match expectations");
     }
 
     //test result screenshot method
