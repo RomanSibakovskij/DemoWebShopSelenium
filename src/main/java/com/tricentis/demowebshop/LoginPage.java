@@ -47,6 +47,7 @@ public class LoginPage extends BasePage{
     //invalid singular input data
     private String invalidEmail;
     private String invalidEmailFormat;
+    private String invalidPassword;
 
     public LoginPage(WebDriver driver) {super(driver);}
 
@@ -154,6 +155,25 @@ public class LoginPage extends BasePage{
         emailAddressInputField.sendKeys(invalidEmailFormat);
     }
 
+    //invalid user login data getter (invalid login password)
+    public void invalidUserLoginDataGetterInvalidPassword(RegisterPage registerPage) {
+
+        email = registerPage.getEmail();
+        invalidPassword = "Frt343%%##@";
+
+        System.out.println("Invalid user login data (invalid password): " + "\n");
+        logger.info("Valid user login email address (invalid password): " + email);
+        logger.info("Invalid user login password: " + invalidPassword);
+
+        System.out.println("\n");
+    }
+    //invalid user data input method (invalid user password)
+    public void inputInvalidPasswordIntoPasswordInputField(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(invalidPassword);
+    }
+
     //login button click method
     public void clickLoginButton(){loginButton.click();}
 
@@ -185,5 +205,4 @@ public class LoginPage extends BasePage{
     public boolean isRememberMeCheckboxDisplayed(){return rememberMeCheckbox.isDisplayed();}
     public boolean isForgotPasswordLinkDisplayed(){return forgotPasswordLink.isDisplayed();}
     public boolean isLoginButtonDisplayed(){return loginButton.isDisplayed();}
-
 }

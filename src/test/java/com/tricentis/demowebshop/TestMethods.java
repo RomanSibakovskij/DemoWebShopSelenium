@@ -759,7 +759,40 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the test result
         captureScreenshot(driver, "Invalid User Account Login Test (invalid email address format)");
     }
-
+    //invalid user account login test method (invalid user password)
+    protected void invalidUserAccountInvalidPasswordLoginTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //click 'Login' nav link
+        homePage.clickLoginHeadNavLink();
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //register section text element assert
+        isRegisterSectionTextAsExpected(loginPage);
+        //login section text element assert
+        isLoginSectionTextAsExpected(loginPage);
+        //invalid user login input data getter (invalid password)
+        loginPage.invalidUserLoginDataGetterInvalidPassword(registerPage);
+        //input valid user email address
+        loginPage.inputEmailIntoEmailInputField();
+        //input invalid user password
+        loginPage.inputInvalidPasswordIntoPasswordInputField();
+        //click 'login' button
+        loginPage.clickLoginButton();
+        //assert the expected error message is displayed
+        assertEquals("Login was unsuccessful. Please correct the errors and try again.\n" +
+                "The credentials provided are incorrect", loginPage.getUnsuccessfulLoginErrorMessageText(), "The error message doesn't match expectations");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Login Test (invalid password)");
+    }
 
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
