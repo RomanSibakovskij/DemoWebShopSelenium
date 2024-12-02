@@ -43,7 +43,7 @@ public class HomePageTest extends TestMethods{
 
     //multiple featured product search tests
 
-    //Test 005b -> search for a single featured product test (as a registered user)
+    //Test 005b -> search for multiple featured products test (as a registered user)
     @Test
     @DisplayName("Search For Multiple Featured Products Test (as a registered user)")
     @Tag("Multiple_Featured_Products_Search_Reg_User")
@@ -56,6 +56,16 @@ public class HomePageTest extends TestMethods{
         //valid user account creation test (male gender button)
         validMaleUserCreationTest(registerPage);
         //multiple product search test (as a registered user)
+        searchForMultipleFeaturedProductsTest();
+    }
+
+    //Test 005c -> search for multiple featured products test (as a guest)
+    @Test
+    @DisplayName("Search For Multiple Featured Products Test (as a guest)")
+    @Tag("Multiple_Featured_Product_Search_Guest")
+    @Tag("Multiple_Featured_Product_Search")
+    void multipleFeaturedProductSearchGuestTest(){
+        //single product search test (as a guest)
         searchForMultipleFeaturedProductsTest();
     }
 }
