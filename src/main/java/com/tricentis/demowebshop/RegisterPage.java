@@ -92,6 +92,8 @@ public class RegisterPage extends BasePage {
         logger.info("Valid email: " + email);
         logger.info("Valid password: " + password);
         logger.info("Valid matching confirm password: " + confirmPassword);
+
+        System.out.println("\n");
     }
 
     //valid input data methods

@@ -2,6 +2,9 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.*;
+
+import java.time.Duration;
 
 public class LoginPage extends BasePage{
 
@@ -26,10 +29,41 @@ public class LoginPage extends BasePage{
     private WebElement rememberMeCheckbox;
     @FindBy(xpath = "//div[@class='returning-wrapper']//span/a")
     private WebElement forgotPasswordLink;
-    @FindBy(xpath = "//div[@class='new-wrapper register-block']//input")
+    @FindBy(xpath = "//form[@action='/login']//input[@value='Log in']")
     private WebElement loginButton;
 
+    //valid input data
+    private String email;
+    private String password;
+
     public LoginPage(WebDriver driver) {super(driver);}
+
+    //valid user login data getter
+    public void validUserLoginDataGetter(RegisterPage registerPage) {
+
+        email = registerPage.getEmail();
+        password = registerPage.getPassword();
+
+        System.out.println("Valid user login data: " + "\n");
+        logger.info("Valid user login email address: " + registerPage.getEmail());
+        logger.info("Valid user login password: " + registerPage.getPassword());
+
+        System.out.println("\n");
+    }
+    //valid user data input methods
+    public void inputEmailIntoEmailInputField(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(email);
+    }
+    public void inputPasswordIntoPasswordInputField(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(passwordInputField));
+        passwordInputField.sendKeys(password);
+    }
+
+    //login button click method
+    public void clickLoginButton(){loginButton.click();}
 
     //login page title getter
     public String getLoginPageTitle(){return loginPageTitle.getText();}

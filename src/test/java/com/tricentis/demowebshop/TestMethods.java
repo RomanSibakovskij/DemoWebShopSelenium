@@ -585,6 +585,40 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "User Account Logout Test");
     }
 
+    //valid user account login test method
+    protected void validUserAccountLoginTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //click 'Login' nav link
+        homePage.clickLoginHeadNavLink();
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //register section text element assert
+        isRegisterSectionTextAsExpected(loginPage);
+        //login section text element assert
+        isLoginSectionTextAsExpected(loginPage);
+        //valid user login input data getter
+        loginPage.validUserLoginDataGetter(registerPage);
+        //input valid user email address
+        loginPage.inputEmailIntoEmailInputField();
+        //input valid user password
+        loginPage.inputPasswordIntoPasswordInputField();
+        //click 'login' button
+        loginPage.clickLoginButton();
+        //assert the user email is displayed in the account link (the user has logged in successfully)
+        assertEquals(registerPage.getEmail(), homePage.getRegisterHeadNavLinkText(), "The user account email addresses don't match.");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Valid User Account Login Test");
+    }
+
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
         //assert homepage logo is displayed
