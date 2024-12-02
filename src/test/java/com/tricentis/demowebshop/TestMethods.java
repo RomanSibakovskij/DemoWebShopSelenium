@@ -566,6 +566,25 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid User Account Creation (mismatching confirm password)");
     }
 
+    //logout test method
+    protected void userLogoutTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //assert the user email is displayed in the account link (same place as the register head nav link)
+        assertEquals(registerPage.getEmail(), homePage.getRegisterHeadNavLinkText(), "The account emails don't match.");
+        //click 'Logout' button //it's in the same place as login head nav link
+        homePage.clickLoginHeadNavLink();
+        //capture screenshot of the test result
+        captureScreenshot(driver, "User Account Logout Test");
+    }
+
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
         //assert homepage logo is displayed

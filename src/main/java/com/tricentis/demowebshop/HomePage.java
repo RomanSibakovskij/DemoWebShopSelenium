@@ -114,6 +114,9 @@ public class HomePage extends BasePage{
         registerHeadNavLink.click();
     }
 
+    //register nav link text getter
+    public String getRegisterHeadNavLinkText(){return registerHeadNavLink.getText();}
+
     //click 'Login' link method
     public void clickLoginHeadNavLink(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
