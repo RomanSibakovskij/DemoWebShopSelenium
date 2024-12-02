@@ -29,4 +29,16 @@ public class HomePageTest extends TestMethods{
         //single product search test (as a registered user)
         searchForASingleFeaturedProductTest();
     }
+
+    //Test 005a -> search for a single featured product test (as a guest)
+    @Test
+    @DisplayName("Search For A Single Featured Product Test (as a guest)")
+    @Tag("Single_Featured_Product_Search_Guest")
+    @Tag("Single_Featured_Product_Search")
+    void singleFeaturedProductSearchGuestTest(){
+        HomePage homePage = new HomePage(driver);;
+        //single product search test (as a guest)
+        searchForASingleFeaturedProductTest();
+    }
+
 }

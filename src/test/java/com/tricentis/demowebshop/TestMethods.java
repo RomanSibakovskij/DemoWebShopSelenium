@@ -819,7 +819,7 @@ public class TestMethods extends BaseTest{
         //log the displayed product data
         logSingleSearchedProductData(searchProductPage);
         //capture screenshot of the test result
-        captureScreenshot(driver, "Search For A Single Featured Product Test (as a registered user)");
+        captureScreenshot(driver, "Search For A Single Featured Product Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
     //general page web element assert test method
