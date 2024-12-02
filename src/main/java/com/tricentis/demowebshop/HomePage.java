@@ -90,6 +90,9 @@ public class HomePage extends BasePage{
     //single product input search query
     private String singleFeaturedProduct = TestDataGenerator.pickRandomHomePageFeaturedProduct();
 
+    //multiple product input search query
+    private String multipleFeaturedProductsQuery = "Computer";
+
     public HomePage(WebDriver driver) {super(driver);}
 
     //homepage product data getters
@@ -113,6 +116,12 @@ public class HomePage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
         wait.until(ExpectedConditions.visibilityOf(searchInputBar));
         searchInputBar.sendKeys(singleFeaturedProduct);
+    }
+    //input the search query (multiple products) into search bar method
+    public void inputMultipleProductsQueryIntoSearchBar(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.visibilityOf(searchInputBar));
+        searchInputBar.sendKeys(multipleFeaturedProductsQuery);
     }
 
     //click 'Search' button method
@@ -150,6 +159,9 @@ public class HomePage extends BasePage{
 
     //single featured product query getter
     public String getSingleFeaturedProductQuery(){return singleFeaturedProduct;}
+
+    //multiple featured products query getter
+    public String getMultipleFeaturedProductsQuery(){return multipleFeaturedProductsQuery;}
 
     //footer getters
     //column info title getter

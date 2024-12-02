@@ -7,6 +7,8 @@ import org.openqa.selenium.*;
 import java.io.File;
 import java.nio.file.*;
 
+import java.util.*;
+
 public class TestMethods extends BaseTest{
 
     protected static final Logger logger = LoggerFactory.getLogger(TestMethods.class);
@@ -33,6 +35,8 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the test result
         captureScreenshot(driver, "Navigate To Register Page Test");
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //valid register tests
     //valid user creation test method (with male gender button clicked)
@@ -566,6 +570,8 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid User Account Creation (mismatching confirm password)");
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     //logout test method
     protected void userLogoutTest(RegisterPage registerPage){
         HomePage homePage = new HomePage(driver);
@@ -797,6 +803,8 @@ public class TestMethods extends BaseTest{
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage featured product search tests
+
+    //single featured product search
     protected void searchForASingleFeaturedProductTest(){
         HomePage homePage = new HomePage(driver);
         SearchProductPage searchProductPage = new SearchProductPage(driver);
@@ -821,6 +829,42 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the test result
         captureScreenshot(driver, "Search For A Single Featured Product Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
+    //single featured product search
+    protected void searchForMultipleFeaturedProductsTest(){
+        HomePage homePage = new HomePage(driver);
+        SearchProductPage searchProductPage = new SearchProductPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //input a multiple products search query (portion, since there aren't any multiple products with full queries -> this covers the partial query test too)
+        homePage.inputMultipleProductsQueryIntoSearchBar();
+        //click 'Search' button
+        homePage.clickSearchButton();
+        //assert the user gets onto search product page
+        isSearchProductPageTextAsExpected(searchProductPage);
+        //assert the searched product is displayed in the product section
+        String searchQuery = homePage.getMultipleFeaturedProductsQuery();
+        List<String> actualProductNames = searchProductPage.getSearchedProductNames().stream()
+                .map(String::trim)
+                .filter(name -> name.toLowerCase().endsWith("computer"))//verify the queries have "computer" at the end
+                .toList();
+        //list filter (ignore the case)
+        boolean isProductFound = actualProductNames.stream()
+                .anyMatch(product -> product.toLowerCase().contains(searchQuery.toLowerCase()));
+        assertTrue(isProductFound, "The search query product is not found in the search results");
+        //log the displayed products data
+        logSearchedProductsData(searchProductPage);
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Search For Multiple Featured Product Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
@@ -1011,12 +1055,16 @@ public class TestMethods extends BaseTest{
         System.out.println("Product displayed in the search product page data: " + "\n");
         logger.info("Product name (searched product page): " + searchProductPage.getSingleSearchedProductName());
         logger.info("Product unit price (searched product page): " + searchProductPage.getSingleSearchedProductUnitPrice());
+
+        System.out.println("\n");
     }
     //search product page data getter
     protected void logSearchedProductsData(SearchProductPage searchProductPage){
         System.out.println("Products displayed in the search product page data: " + "\n");
         logger.info("Product names (searched product page): " + searchProductPage.getSearchedProductNames());
         logger.info("Product unit prices (searched product page): " + searchProductPage.getSearchedProductPrices());
+
+        System.out.println("\n");
     }
 
     //test result screenshot method

@@ -2,7 +2,9 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.*;
 
 public class SearchProductPage extends BasePage{
@@ -29,7 +31,8 @@ public class SearchProductPage extends BasePage{
     private List<WebElement> searchProductCardElements;
     @FindBy(xpath = "//div[@class='item-box']//h2/a")
     private WebElement singleSearchProductName;
-    private List<WebElement> searchProductNameElements = driver.findElements(By.xpath("//div[@class='item-box']//h2/a"));
+    @FindBy(xpath = "//div[@class='item-box']//h2/a")
+    private List<WebElement> searchProductNameElements;
     @FindBy(xpath = "//div[@class='item-box']//div[@class='rating']")
     private List<WebElement> searchProductReviewStarsElements;
     @FindBy(xpath = "//div[@class='item-box']//div[@class='prices']")
@@ -53,11 +56,16 @@ public class SearchProductPage extends BasePage{
     //multiple searched product names getter
     public List<String> getSearchedProductNames() {
         List<String> productName = new ArrayList<>();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchProductNameElements));
+
         for (WebElement element : searchProductNameElements) {
             productName.add(element.getText());
         }
         return productName;
     }
+
     //multiple searched product unit prices getter
     public List<String> getSearchedProductPrices() {
         List<String> productName = new ArrayList<>();

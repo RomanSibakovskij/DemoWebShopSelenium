@@ -19,6 +19,7 @@ public class HomePageTest extends TestMethods{
     @Test
     @DisplayName("Search For A Single Featured Product Test (as a registered user)")
     @Tag("Single_Featured_Product_Search_Reg_User")
+    @Tag("Single_Featured_Product_Search")
     void singleFeaturedProductSearchRegUserTest(){
         HomePage homePage = new HomePage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
@@ -36,9 +37,25 @@ public class HomePageTest extends TestMethods{
     @Tag("Single_Featured_Product_Search_Guest")
     @Tag("Single_Featured_Product_Search")
     void singleFeaturedProductSearchGuestTest(){
-        HomePage homePage = new HomePage(driver);;
         //single product search test (as a guest)
         searchForASingleFeaturedProductTest();
     }
 
+    //multiple featured product search tests
+
+    //Test 005b -> search for a single featured product test (as a registered user)
+    @Test
+    @DisplayName("Search For Multiple Featured Products Test (as a registered user)")
+    @Tag("Multiple_Featured_Products_Search_Reg_User")
+    @Tag("Multiple_Featured_Products_Search")
+    void multipleFeaturedProductsSearchRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //multiple product search test (as a registered user)
+        searchForMultipleFeaturedProductsTest();
+    }
 }
