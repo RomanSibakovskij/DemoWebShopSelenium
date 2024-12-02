@@ -342,24 +342,6 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid User Account Creation (too short password and confirm password)");
     }
 
-    //homepage web element assert test method
-    protected void isHomePageWebElementDisplayed(HomePage homePage){
-        //assert homepage community poll radio buttons are displayed (as a list)
-        assertTrue(homePage.isCommunityPollRadioButtonDisplayed(), "The homepage community poll radio button isn't displayed");
-        //assert homepage community poll vote button is displayed
-        assertTrue(homePage.isVoteButtonDisplayed(), "The homepage community poll vote button isn't displayed");
-        //assert homepage aside tag links are displayed (as a list)
-        assertTrue(homePage.isAsideTagsLinkDisplayed(), "The homepage aside tags link isn't displayed");
-        //assert homepage product cards are displayed (as a list)
-        assertTrue(homePage.isProductCardDisplayed(), "The homepage product card isn't displayed");
-        //assert homepage product names are displayed (as a list)
-        assertTrue(homePage.isProductNameDisplayed(), "The homepage product name isn't displayed");
-        //assert homepage product prices are displayed (as a list)
-        assertTrue(homePage.isProductPriceDisplayed(), "The homepage product price isn't displayed");
-        //assert homepage product 'add to cart' buttons are displayed (as a list)
-        assertTrue(homePage.isAddToCartProductButtonDisplayed(), "The homepage product 'add to cart' button isn't displayed");
-    }
-
     //too long singular input tests
     //invalid user creation test method (too long first name) => 100 chars
     protected void invalidUserCreationTooLongFirstNameTest(RegisterPage registerPage){
@@ -864,7 +846,7 @@ public class TestMethods extends BaseTest{
         //log the displayed products data
         logSearchedProductsData(searchProductPage);
         //capture screenshot of the test result
-        captureScreenshot(driver, "Search For Multiple Featured Product Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
+        captureScreenshot(driver, "Search For Multiple Featured Products Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -877,6 +859,7 @@ public class TestMethods extends BaseTest{
         SearchProductPage searchProductPage = new SearchProductPage(driver);
         //general web element assert
         isGeneralPageWebElementDisplayed(homePage);
+        //general text element assert
         isGeneralPageTextMatchExpectations(homePage);
         //search page web element assert
         isSearchProductPageWebElementDisplayed(searchProductPage);
@@ -887,15 +870,63 @@ public class TestMethods extends BaseTest{
         //click 'Search' button
         searchProductPage.clickSearchButton();
         //assert the searched product is displayed in the product section
-        assertEquals(searchProductPage.getSingleAvailableProductName(), searchProductPage.getSingleSearchedProductName(), "The searched product names don't match");
+        assertEquals(searchProductPage.getSingleAvailableProductQuery(), searchProductPage.getSingleSearchedProductName(), "The searched product names don't match");
         //log updated searched product data
         logSingleSearchedProductData(searchProductPage);
         //capture screenshot of the test result
         captureScreenshot(driver, "Search For A Single Available Product Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
-
+    //multiple available products search test method
+    protected void searchForMultipleAvailableProductsTest(){
+        HomePage homePage = new HomePage(driver);
+        SearchProductPage searchProductPage = new SearchProductPage(driver);
+        //general web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general text element assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //search page web element assert
+        isSearchProductPageWebElementDisplayed(searchProductPage);
+        //search page text element assert
+        isSearchProductPageTextAsExpected(searchProductPage);
+        //input multiple available products query
+        searchProductPage.inputMultipleAvailableProductsQueryIntoSearchBar();
+        //click 'Search' button
+        searchProductPage.clickSearchButton();
+        //assert the searched product is displayed in the product section
+        String searchQuery = searchProductPage.getMultipleAvailableProductsQuery();
+        List<String> actualProductNames = searchProductPage.getSearchedProductNames().stream()
+                .map(String::trim)
+                .filter(name -> name.toLowerCase().endsWith("camcorder"))//verify the queries have "camcorder" at the end
+                .toList();
+        //list filter (ignore the case)
+        boolean isProductFound = actualProductNames.stream()
+                .anyMatch(product -> product.toLowerCase().contains(searchQuery.toLowerCase()));
+        assertTrue(isProductFound, "The search query product is not found in the search results");
+        //log the displayed products data
+        logSearchedProductsData(searchProductPage);
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Search For Multiple Available Products Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //homepage web element assert test method
+    protected void isHomePageWebElementDisplayed(HomePage homePage){
+        //assert homepage community poll radio buttons are displayed (as a list)
+        assertTrue(homePage.isCommunityPollRadioButtonDisplayed(), "The homepage community poll radio button isn't displayed");
+        //assert homepage community poll vote button is displayed
+        assertTrue(homePage.isVoteButtonDisplayed(), "The homepage community poll vote button isn't displayed");
+        //assert homepage aside tag links are displayed (as a list)
+        assertTrue(homePage.isAsideTagsLinkDisplayed(), "The homepage aside tags link isn't displayed");
+        //assert homepage product cards are displayed (as a list)
+        assertTrue(homePage.isProductCardDisplayed(), "The homepage product card isn't displayed");
+        //assert homepage product names are displayed (as a list)
+        assertTrue(homePage.isProductNameDisplayed(), "The homepage product name isn't displayed");
+        //assert homepage product prices are displayed (as a list)
+        assertTrue(homePage.isProductPriceDisplayed(), "The homepage product price isn't displayed");
+        //assert homepage product 'add to cart' buttons are displayed (as a list)
+        assertTrue(homePage.isAddToCartProductButtonDisplayed(), "The homepage product 'add to cart' button isn't displayed");
+    }
 
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){

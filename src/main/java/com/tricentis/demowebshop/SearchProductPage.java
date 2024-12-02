@@ -41,8 +41,11 @@ public class SearchProductPage extends BasePage{
     private List<WebElement> searchProductUnitPriceElements;
     private List<WebElement> searchProductAddToCartButtonElements = driver.findElements(By.xpath("//div[@class='item-box']//input[@value='Add to cart']"));
 
-    //single available product data
-    private String singleAvailableProductName = TestDataGenerator.pickRandomAvailableProduct();
+    //single available product input search query
+    private String singleAvailableProductQuery = TestDataGenerator.pickRandomAvailableProduct();
+
+    //multiple available product input search query
+    private String multipleAvailableProductsQuery = "camcorder";
 
     public SearchProductPage(WebDriver driver) {super(driver);}
 
@@ -51,7 +54,14 @@ public class SearchProductPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
         wait.until(ExpectedConditions.visibilityOf(searchKeywordBar));
         searchKeywordBar.clear();
-        searchKeywordBar.sendKeys(singleAvailableProductName);
+        searchKeywordBar.sendKeys(singleAvailableProductQuery);
+    }
+    //input the search query (multiple products) into search bar method
+    public void inputMultipleAvailableProductsQueryIntoSearchBar(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.visibilityOf(searchKeywordBar));
+        searchKeywordBar.clear();
+        searchKeywordBar.sendKeys(multipleAvailableProductsQuery);
     }
 
     //click 'Search' button method
@@ -67,8 +77,10 @@ public class SearchProductPage extends BasePage{
     //single searched product unit price getter
     public String getSingleSearchedProductUnitPrice(){return singleSearchProductUnitPrice.getText();}
 
-    //single searched available product name getter
-    public String getSingleAvailableProductName(){return singleAvailableProductName;}
+    //single searched available product query getter
+    public String getSingleAvailableProductQuery(){return singleAvailableProductQuery;}
+    //multiple searched available product query getter
+    public String getMultipleAvailableProductsQuery(){return multipleAvailableProductsQuery;}
 
     //multiple searched product names getter
     public List<String> getSearchedProductNames() {

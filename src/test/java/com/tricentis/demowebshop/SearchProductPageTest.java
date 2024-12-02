@@ -35,4 +35,24 @@ public class SearchProductPageTest extends TestMethods{
         //single available product search test (as a guest)
         searchForASingleAvailableProductTest();
     }
+
+    //multiple available products search tests
+
+    //Test 006b -> search for multiple available products test (as a registered user)
+    @Test
+    @DisplayName("Search For Multiple Available Products Test (as a registered user)")
+    @Tag("Multiple_Available_Products_Search_Reg_User")
+    @Tag("Multiple_Available_Products_Search")
+    void multipleAvailableProductsSearchRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //multiple featured products search test (as a registered user)
+        searchForMultipleFeaturedProductsTest();
+        //multiple available products search test (as a registered user)
+        searchForMultipleAvailableProductsTest();
+    }
 }
