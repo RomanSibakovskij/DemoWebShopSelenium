@@ -23,6 +23,8 @@ public class LoginPage extends BasePage{
     private WebElement loginSectionTitle;
     @FindBy(xpath = "//div[@class='validation-summary-errors']")
     private WebElement unsuccessfulLoginErrorMessage;
+    @FindBy(xpath = "//span[@class='field-validation-error']")
+    private WebElement invalidEmailFormatErrorMessage;
     @FindBy(xpath = "//div[@class='returning-wrapper']//input[@id='Email']")
     private WebElement emailAddressInputField;
     @FindBy(xpath = "//div[@class='returning-wrapper']//input[@id='Password']")
@@ -44,6 +46,7 @@ public class LoginPage extends BasePage{
 
     //invalid singular input data
     private String invalidEmail;
+    private String invalidEmailFormat;
 
     public LoginPage(WebDriver driver) {super(driver);}
 
@@ -132,6 +135,25 @@ public class LoginPage extends BasePage{
         emailAddressInputField.sendKeys(invalidEmail);
     }
 
+    //invalid user login data getter (invalid user email address format)
+    public void invalidUserLoginDataGetterInvalidEmailFormat(RegisterPage registerPage) {
+
+        invalidEmailFormat = "kl113example.org";
+        password = registerPage.getPassword();
+
+        System.out.println("Invalid user login data (invalid email format): " + "\n");
+        logger.info("Invalid user login email address (by format): " + invalidEmailFormat);
+        logger.info("Valid user login password (invalid email format): " + registerPage.getPassword());
+
+        System.out.println("\n");
+    }
+    //invalid user data input method (invalid email address format)
+    public void inputInvalidEmailFormatIntoEmailInputField(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(invalidEmailFormat);
+    }
+
     //login button click method
     public void clickLoginButton(){loginButton.click();}
 
@@ -146,6 +168,8 @@ public class LoginPage extends BasePage{
 
     //unsuccessful login error message getter
     public String getUnsuccessfulLoginErrorMessageText(){return unsuccessfulLoginErrorMessage.getText();}
+    //invalid email format error message getter
+    public String getInvalidEmailFormatErrorMessageText(){return invalidEmailFormatErrorMessage.getText();}
 
     //'Register' button click method
     public void clickRegisterButton(){registerSectionButton.click();}

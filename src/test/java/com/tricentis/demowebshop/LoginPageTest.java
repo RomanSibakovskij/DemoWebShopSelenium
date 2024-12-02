@@ -77,6 +77,24 @@ public class LoginPageTest extends TestMethods{
         invalidUserAccountInvalidEmailLoginTest(registerPage);
     }
 
+    //Test 003d ->  invalid user account login test (invalid email address format)
+    @Test
+    @DisplayName("Invalid User Account Login Test (invalid email address format)")
+    @Tag("Invalid_User_Account_Login")
+    @Tag("Invalid_Singular_Input")
+    void invalidUserLoginInvalidEmailFormatTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //user account logout
+        userLogoutTest(registerPage);
+        //invalid user account login (invalid email address format)
+        invalidUserAccountInvalidEmailFormatLoginTest(registerPage);
+    }
+
     //user logout test
 
     //Test 004 ->  user account logout test

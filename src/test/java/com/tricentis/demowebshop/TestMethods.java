@@ -726,6 +726,39 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the test result
         captureScreenshot(driver, "Invalid User Account Login Test (invalid email address)");
     }
+    //invalid user account login test method(invalid user email address format)
+    protected void invalidUserAccountInvalidEmailFormatLoginTest(RegisterPage registerPage){
+        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //click 'Login' nav link
+        homePage.clickLoginHeadNavLink();
+        //login page web element assert
+        isLoginPageWebElementDisplayed(loginPage);
+        //register section text element assert
+        isRegisterSectionTextAsExpected(loginPage);
+        //login section text element assert
+        isLoginSectionTextAsExpected(loginPage);
+        //invalid user login input data getter (invalid email address format)
+        loginPage.invalidUserLoginDataGetterInvalidEmailFormat(registerPage);
+        //input invalid user email address (by format)
+        loginPage.inputInvalidEmailFormatIntoEmailInputField();
+        //input valid user password
+        loginPage.inputPasswordIntoPasswordInputField();
+        //click 'login' button
+        loginPage.clickLoginButton();
+        //assert the expected error message is displayed
+        assertEquals("Please enter a valid email address.", loginPage.getInvalidEmailFormatErrorMessageText(), "The invalid email format error message doesn't match expectations");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Invalid User Account Login Test (invalid email address format)");
+    }
 
 
     //general page web element assert test method
