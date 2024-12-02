@@ -53,6 +53,10 @@ public class TestDataGenerator extends BasePage{
             "Jordan", "Owens", "Reynolds", "Fisher", "Ellis", "Harrison", "Gibson", "McDonald", "Cruz", "Marshall"
     };
 
+    //homepage product names array
+    private static final String[] homePageProductNames = {"$25 Virtual Card", "14.1-inch Laptop", "Build your own cheap computer",
+                                                          "Build your own cheap computer", "Build your own expensive computer", "Simple Computer"};
+
     //random first name picker method
     public static String getRandomFirstName() {
         Random random = new Random();
@@ -120,5 +124,12 @@ public class TestDataGenerator extends BasePage{
         password.append(shuffledNumericPart);
 
         return password.toString();
+    }
+
+    //random homepage product array item picker method
+    public static String pickRandomHomePageFeaturedProduct(){
+        Random random= new Random();
+        String randomFeaturedProduct = homePageProductNames[random.nextInt(homePageProductNames.length)];
+        return randomFeaturedProduct;
     }
 }
