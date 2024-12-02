@@ -794,6 +794,34 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid User Account Login Test (invalid password)");
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //homepage featured product search tests
+    protected void searchForASingleFeaturedProductTest(){
+        HomePage homePage = new HomePage(driver);
+        SearchProductPage searchProductPage = new SearchProductPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //input a single product search query
+        homePage.inputSingleProductQueryIntoSearchBar();
+        //click 'Search' button
+        homePage.clickSearchButton();
+        //assert the user gets onto search product page
+        isSearchProductPageTextAsExpected(searchProductPage);
+        //assert the searched product is displayed in the product section
+        assertEquals(homePage.getSingleFeaturedProductQuery(), searchProductPage.getSingleSearchedProductName(), "The searched product names don't match");
+        //log the displayed product data
+        logSingleSearchedProductData(searchProductPage);
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Search For A Single Featured Product Test (as a registered user)");
+    }
+
     //general page web element assert test method
     protected void isGeneralPageWebElementDisplayed(HomePage homePage){
         //assert homepage logo is displayed
@@ -939,6 +967,56 @@ public class TestMethods extends BaseTest{
     protected void isLoginSectionTextAsExpected(LoginPage loginPage){
         //assert the login section title is as expected
         assertEquals("Returning Customer", loginPage.getLoginSectionTitle(), "The login section title doesn't match expectations");
+    }
+
+    //search product page web element assert test method
+    protected void isSearchProductPageWebElementDisplayed(SearchProductPage searchProductPage){
+        //assert search product page title is displayed
+        assertTrue(searchProductPage.isSearchProductPageTitleDisplayed(), "The search product page title isn't displayed");
+        //assert search keyword label is displayed
+        assertTrue(searchProductPage.isSearchKeywordLabelDisplayed(), "The search keyword label isn't displayed");
+        //assert search keyword input bar is displayed
+        assertTrue(searchProductPage.isSearchKeywordInputBarDisplayed(), "The search keyword input bar isn't displayed");
+        //assert search button is displayed
+        assertTrue(searchProductPage.isSearchButtonDisplayed(), "The search button isn't displayed");
+        //assert 'Advanced search' checkbox is displayed
+        assertTrue(searchProductPage.isAdvancedSearchCheckboxDisplayed(), "The 'Advanced search' checkbox isn't displayed");
+        //assert search 'Sort by' dropdown menu is displayed
+        assertTrue(searchProductPage.isSearchSortByDropdownMenuDisplayed(), "The search 'Sort by' dropdown menu isn't displayed");
+        //assert search 'display count' dropdown menu is displayed
+        assertTrue(searchProductPage.isSearchDisplayCountDropdownMenuDisplayed(), "The search 'display count' dropdown menu isn't displayed");
+        //assert search 'page view' dropdown menu is displayed
+        assertTrue(searchProductPage.isViewAsDropdownMenuDisplayed(), "The search 'page view' dropdown menu isn't displayed");
+        //assert search product cards are displayed (as a list)
+        assertTrue(searchProductPage.isSearchProductCardDisplayed(), "The search product cards aren't displayed");
+        //assert search product names are displayed (as a list)
+        assertTrue(searchProductPage.isSearchProductNameDisplayed(), "The search product names aren't displayed");
+        //assert search product review stars are displayed (as a list)
+        assertTrue(searchProductPage.isSearchProductReviewStarsDisplayed(), "The search product review stars aren't displayed");
+        //assert search product unit prices are displayed (as a list)
+        assertTrue(searchProductPage.isSearchProductUnitPriceDisplayed(), "The search product unit prices aren't displayed");
+        //assert search product 'Add to cart' buttons are displayed (as a list)
+        assertTrue(searchProductPage.isSearchProductAddToCartButtonDisplayed(), "The search product 'Add to cart' buttons aren't displayed");
+    }
+    //search page text element assert method
+    protected void isSearchProductPageTextAsExpected(SearchProductPage searchProductPage){
+        //assert search product page title is as expected
+        assertEquals("Search", searchProductPage.getSearchProductPageTitle(), "The search product page title doesn't match expectations");
+        //assert search product page title is as expected
+        assertEquals("Search keyword:", searchProductPage.getSearchKeywordLabel(), "The search product page keyword label doesn't match expectations");
+    }
+
+    //search product page data getter (single product)
+    protected void logSingleSearchedProductData(SearchProductPage searchProductPage){
+        System.out.println("Product displayed in the search product page data: " + "\n");
+        logger.info("Product name (searched product page): " + searchProductPage.getSingleSearchedProductName());
+        logger.info("Product unit price (searched product page): " + searchProductPage.getSingleSearchedProductUnitPrice());
+    }
+    //search product page data getter
+    protected void logSearchedProductsData(SearchProductPage searchProductPage){
+        System.out.println("Products displayed in the search product page data: " + "\n");
+        logger.info("Product names (searched product page): " + searchProductPage.getSearchedProductNames());
+        logger.info("Product unit prices (searched product page): " + searchProductPage.getSearchedProductPrices());
     }
 
     //test result screenshot method

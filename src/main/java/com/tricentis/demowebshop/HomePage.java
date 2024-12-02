@@ -87,6 +87,9 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//div[@class='footer-disclaimer']")
     private WebElement disclaimerText;
 
+    //single product input search query
+    private String singleFeaturedProduct = TestDataGenerator.pickRandomHomePageFeaturedProduct();
+
     public HomePage(WebDriver driver) {super(driver);}
 
     //homepage product data getters
@@ -105,11 +108,11 @@ public class HomePage extends BasePage{
         return productPrice;
     }
 
-    //input the search query into search bar method
-    public void inputProductQueryIntoSearchBar(){
+    //input the search query (single product) into search bar method
+    public void inputSingleProductQueryIntoSearchBar(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
         wait.until(ExpectedConditions.visibilityOf(searchInputBar));
-        searchInputBar.sendKeys(TestDataGenerator.pickRandomHomePageFeaturedProduct());
+        searchInputBar.sendKeys(singleFeaturedProduct);
     }
 
     //click 'Search' button method
@@ -144,6 +147,9 @@ public class HomePage extends BasePage{
 
     //homepage products section title getter
     public String getProductsSectionTitle(){return productSectionTitle.getText();}
+
+    //single featured product query getter
+    public String getSingleFeaturedProductQuery(){return singleFeaturedProduct;}
 
     //footer getters
     //column info title getter
