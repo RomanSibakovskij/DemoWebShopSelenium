@@ -27,7 +27,7 @@ public class AddToCartProductPageTest extends TestMethods{
     @DisplayName("Add A Single Featured Product To Cart Test (as a guest)")
     @Tag("Add_Single_Featured_Product_To_Cart_Guest")
     @Tag("Add_Single_Featured_Product_To_Cart")
-    void singleFeaturedProductSearchGuestTest(){
+    void addASingleFeaturedProductToCartGuestTest(){
         //add a single featured product to cart test (as a guest)
         addASingleFeaturedProductToCartTest();
     }
@@ -50,4 +50,13 @@ public class AddToCartProductPageTest extends TestMethods{
         addASingleAvailableProductToCartTest();
     }
 
+    //Test 007c -> add a single available product to cart test (as a guest)
+    @Test
+    @DisplayName("Add A Single Available Product To Cart Test (as a guest)")
+    @Tag("Add_Single_Available_Product_To_Cart_Guest")
+    @Tag("Add_Single_Available_Product_To_Cart")
+    void addASingleAvailableProductToCartGuestTest(){
+        //add a single available product to cart test (as a guest)
+        addASingleAvailableProductToCartTest();
+    }
 }
