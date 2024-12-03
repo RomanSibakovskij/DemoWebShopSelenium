@@ -2,7 +2,10 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.*;
 
 public class SingleProductPage extends BasePage{
@@ -12,7 +15,7 @@ public class SingleProductPage extends BasePage{
     private WebElement mainProductPicture;
     @FindBy(xpath = "//div[@class='full-description']")
     private WebElement productDescription;
-    @FindBy(xpath = "//div[@class='product-name']/h1")
+    @FindBy(xpath = "//div[@class='product-name']")
     private WebElement productName;
     @FindBy(xpath = "//div[@class='short-description']")
     private WebElement productShortDescription;
@@ -35,19 +38,22 @@ public class SingleProductPage extends BasePage{
     private List <WebElement> breadcrumbPathElements;
     @FindBy(xpath = "//div[@class='picture-thumbs']//img")
     private List <WebElement> thumbProductPicturesElements;
+    //list elements
+    private List <WebElement> productProcessorRadioButtonElements = driver.findElements(By.xpath("//div[@class='attributes']//dd[1]/ul[@class='option-list']/li"));
+    private List <WebElement> productRAMRadioButtonElements = driver.findElements(By.xpath("//div[@class='attributes']//dd[2]/ul[@class='option-list']/li"));
     private List <WebElement> productHDDRadioButtonElements = driver.findElements(By.xpath("//div[@class='attributes']//dd[3]/ul[@class='option-list']/li"));
     private List <WebElement> productOSRadioButtonElements = driver.findElements(By.xpath("//div[@class='attributes']//dd[4]/ul[@class='option-list']/li"));
     private List <WebElement> productSoftwareOptionsRadioButtonElements = driver.findElements(By.xpath("//div[@class='attributes']//dd[5]/ul[@class='option-list']/li"));
     private List <WebElement> productTagElements = driver.findElements(By.xpath("//div[@class='product-tags-list']/ul/li"));
-    private List <WebElement> customersBoughtSameProductCardElements = driver.findElements(By.xpath("//div[@class='also-purchased-products-grid product-grid']/div[@class='item-box'"));
+    private List <WebElement> customersBoughtSameProductCardElements = driver.findElements(By.xpath("//div[@class='also-purchased-products-grid product-grid']/div[@class='item-box']"));
     //price element
     @FindBy(xpath = "//div[@class='product-price']/span")
     private WebElement productUnitPrice;
-    @FindBy(xpath = "//input[@id='addtocart_16_EnteredQuantity']")
+    @FindBy(xpath = "//input[@class='qty-input']")
     private WebElement productQuantityInputField;
     @FindBy(xpath = "//input[@value='Email a friend']")
     private WebElement productEmailAFriendButton;
-    @FindBy(xpath = "//input[@value='Add to compare']")
+    @FindBy(xpath = "//div[@class='compare-products']/input[@type='button']")
     private WebElement productAddToCompareButton;
     @FindBy(xpath = "//div[@class='add-to-cart']//input[@value='Add to cart']")
     private WebElement productAddToCartButton;
@@ -56,6 +62,50 @@ public class SingleProductPage extends BasePage{
 
 
     public SingleProductPage(WebDriver driver) {super(driver);}
+
+    //change the product quantity method
+    public void changeSingleProductQuantity(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOfAllElements(productQuantityInputField));
+        productQuantityInputField.clear();
+        productQuantityInputField.sendKeys(String.valueOf(3));
+    }
+
+    //click 'Add to cart' button method
+    public void clickAddToCartButton(){productAddToCartButton.click();}
+
+    //single product page data getters
+    public String getProductName() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOfAllElements(productName));
+        return productName.getText();
+    }
+
+    public String getProductDescription() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOfAllElements(productDescription));
+        return productDescription.getText();
+    }
+    public String getProductShortDescription() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOfAllElements(productShortDescription));
+        return productShortDescription.getText();
+    }
+    public String getProductAvailability() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOfAllElements(productAvailability));
+        return productAvailability.getText();
+    }
+    public String getDefaultProductQuantity() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOfAllElements(productQuantityInputField));
+        return productQuantityInputField.getDomAttribute("value");
+    }
+    public String getProductUnitPrice() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOfAllElements(productUnitPrice));
+        return productUnitPrice.getText();
+    }
 
 
     //single product page web element assert methods
@@ -99,13 +149,29 @@ public class SingleProductPage extends BasePage{
     }
 
     //elements that not all pages have
-    public boolean isProductFreShippingBadgeDisplayed() {return productFreeShippingBadge.isDisplayed();}
+    public boolean isProductFreeShippingBadgeDisplayed() {return productFreeShippingBadge.isDisplayed();}
     public boolean isProductProcessorDropdownMenuDisplayed() {return productProcessorDropdownMenu.isDisplayed();}
     public boolean isProductRAMDropdownMenuDisplayed() {return productRAMDropdownMenu.isDisplayed();}
     public boolean isProductAddToWishlistButtonDisplayed() {return productAddToWishlistButton.isDisplayed();}
 
     public boolean isProductThumbPictureDisplayed() {
         for (WebElement element : thumbProductPicturesElements) {
+            if (!element.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean isProductProcessorRadioButtonElementsDisplayed() {
+        for (WebElement element : productProcessorRadioButtonElements) {
+            if (!element.isDisplayed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean isProductRAMRadioButtonElementsDisplayed() {
+        for (WebElement element : productRAMRadioButtonElements) {
             if (!element.isDisplayed()) {
                 return false;
             }

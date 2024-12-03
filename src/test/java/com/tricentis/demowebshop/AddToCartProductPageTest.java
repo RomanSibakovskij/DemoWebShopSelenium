@@ -59,4 +59,22 @@ public class AddToCartProductPageTest extends TestMethods{
         //add a single available product to cart test (as a guest)
         addASingleAvailableProductToCartTest();
     }
+
+    //multiple featured products addition to cart tests
+
+    //Test 007d -> add multiple featured product to cart test (as a registered user)
+    @Test
+    @DisplayName("Add Multiple Featured Products To Cart Test (as a registered user)")
+    @Tag("Add_Multiple_Featured_Products_To_Cart_Reg_User")
+    @Tag("Add_Multiple_Featured_Products_To_Cart")
+    void addMultipleFeaturedProductToCartRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add multiple featured products to cart test (as a registered user)
+        addMultipleFeaturedProductToCartTest();
+    }
 }

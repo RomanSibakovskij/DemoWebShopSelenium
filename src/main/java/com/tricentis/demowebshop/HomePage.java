@@ -167,6 +167,7 @@ public class HomePage extends BasePage{
         productAddToCartButtonElements.get(productIndex).click();
     }
     public void clickAddLaptopToCartButton() {clickAddToCartButton(1);}
+    public void clickAddExpensiveComputerToCartButton() {clickAddToCartButton(4);}
 
     //categories box title getter
     public String getCategoriesAsideBoxTitle(){return categoriesSectionTitle.getText();}

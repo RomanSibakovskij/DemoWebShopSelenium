@@ -1,6 +1,7 @@
 package com.tricentis.demowebshop;
 
 
+import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.*;
@@ -972,6 +973,45 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Add A Single Available Product To Cart Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
+    //multiple featured product addition to cart test method
+    protected void addMultipleFeaturedProductToCartTest(){
+        HomePage homePage = new HomePage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //click 'Add to cart' button (expensive computer)
+        homePage.clickAddLaptopToCartButton();
+        //assert the success message is as expected (laptop addition)
+        assertEquals("The product has been added to your shopping cart", homePage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
+        //click 'Add to cart' button (expensive computer)
+        homePage.clickAddExpensiveComputerToCartButton();
+        SingleProductPage singleProductPage = new SingleProductPage(driver);
+        //assert the user gets onto a single product page (for this product)
+        assertEquals("Build your own expensive computer", singleProductPage.getProductName(), "The user didn't get onto a correct page or the product name is mismatched");
+        //single product page web element assert
+        isSingleProductPageWebElementDisplayed(singleProductPage);
+        //additional product page web element assert (since this one has them)
+        isAdditionalSinglePageWebElementDisplayed(singleProductPage);
+        //log single product page data
+        logSingleProductPageData(singleProductPage);
+        //change the single product quantity
+        singleProductPage.changeSingleProductQuantity();
+        //click 'Add to cart' button
+        singleProductPage.clickAddToCartButton();
+        //assert the success message is as expected (expensive computers addition)
+        assertEquals("The product has been added to your shopping cart", homePage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
+        //click 'Shopping cart' head nav link
+        homePage.clickShoppingCartNavLink();
+        //assert the user gets onto shopping cart page
+        assertEquals("Shopping cart", shoppingCartPage.getShoppingCartTitle(), "The shopping cart title doesn't match expectations or the user is on the wrong page");
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method
@@ -1191,6 +1231,70 @@ public class TestMethods extends BaseTest{
         logger.info("Product unit prices (searched product page): " + searchProductPage.getSearchedProductPrices());
 
         System.out.println("\n");
+    }
+
+    //single product page web element assert test method
+    protected void isSingleProductPageWebElementDisplayed(SingleProductPage singleProductPage){
+        //assert main product picture is displayed
+        assertTrue(singleProductPage.isMainProductPictureDisplayed(), "The main product picture isn't displayed");
+        //assert product description is displayed
+        assertTrue(singleProductPage.isProductDescriptionDisplayed(), "The product description isn't displayed");
+        //assert product name is displayed
+        assertTrue(singleProductPage.isProductNameDisplayed(), "The product name isn't displayed");
+        //assert product short description is displayed
+        assertTrue(singleProductPage.isProductShortDescriptionDisplayed(), "The product short description isn't displayed");
+        //assert product availability is displayed
+        assertTrue(singleProductPage.isProductAvailabilityDisplayed(), "The product availability isn't displayed");
+        //assert product review box is displayed
+        assertTrue(singleProductPage.isProductReviewBoxDisplayed(), "The product review box isn't displayed");
+        //assert product view reviews link is displayed
+        assertTrue(singleProductPage.isProductViewReviewsLinkDisplayed(), "The product view reviews link isn't displayed");
+        //assert product add review link is displayed
+        assertTrue(singleProductPage.isProductAddReviewLinkDisplayed(), "The product add review link isn't displayed");
+        //assert product price is displayed
+        assertTrue(singleProductPage.isProductPriceDisplayed(), "The product price isn't displayed");
+        //assert product quantity input field is displayed
+        assertTrue(singleProductPage.isProductQuantityInputFieldDisplayed(), "The product quantity input field isn't displayed");
+        //assert 'Email a friend' button is displayed
+        assertTrue(singleProductPage.isProductEmailAFriendButtonDisplayed(), "The 'Email a friend' button isn't displayed");
+        //assert 'Add to cart' button is displayed
+        assertTrue(singleProductPage.isProductAddToCartButtonDisplayed(), "The 'Add to cart' button isn't displayed");
+        //assert 'Add to compare' is displayed
+        assertTrue(singleProductPage.isProductAddToCompareButtonDisplayed(), "The 'Add to compare' isn't displayed");
+        //assert product breadcrumb path is displayed (as a list)
+        assertTrue(singleProductPage.isProductBreadcrumbPathDisplayed(), "The product breadcrumb path isn't displayed");
+        //assert product tags are displayed (as a list)
+        assertTrue(singleProductPage.isProductTagDisplayed(), "The product tags isn't displayed");
+        //assert 'customers who bought same product' product cards are displayed (as a list)
+        assertTrue(singleProductPage.isCustomersBoughtSameProductCardDisplayed(), "The 'customers who bought same product' product card isn't displayed");
+    }
+    //additional single product page web element assert test method
+    protected void isAdditionalSinglePageWebElementDisplayed(SingleProductPage singleProductPage){
+        //assert product free shipping badge is displayed
+        assertTrue(singleProductPage.isProductFreeShippingBadgeDisplayed(), "The product free shipping badge isn't displayed");
+        //assert product processor radio buttons aren't displayed (as a list)
+        assertTrue(singleProductPage.isProductProcessorRadioButtonElementsDisplayed(), "The product processor radio button isn't displayed");
+        //assert product RAM radio buttons aren't displayed (as a list)
+        assertTrue(singleProductPage.isProductRAMRadioButtonElementsDisplayed(), "The product RAM radio button isn't displayed");
+        //assert product thumb pictures are displayed (as a list)
+        assertTrue(singleProductPage.isProductThumbPictureDisplayed(), "The product thumb picture path isn't displayed");
+        //assert product HDD radio buttons are displayed (as a list)
+        assertTrue(singleProductPage.isProductHDDRadioButtonDisplayed(), "The product HDD radio button isn't displayed");
+        //assert product OS radio buttons are displayed (as a list)
+        assertTrue(singleProductPage.isProductOSRadioButtonDisplayed(), "The product OS radio button isn't displayed");
+        //assert product software radio buttons are displayed (as a list)
+        assertTrue(singleProductPage.isProductSoftwareRadioButtonDisplayed(), "The product software radio button isn't displayed");
+    }
+
+    //single product page data logger method
+    protected void logSingleProductPageData(SingleProductPage singleProductPage){
+        System.out.println("Product data on a single product page: " + "\n");
+        logger.info("Product name (single product page): " + singleProductPage.getProductName());
+        logger.info("Product short description (single product page): " + singleProductPage.getProductShortDescription());
+        logger.info("Product description (single product page): " + singleProductPage.getProductDescription());
+        logger.info("Product availability (single product page): " + singleProductPage.getProductAvailability());
+        logger.info("Product default quantity (single product page): " + singleProductPage.getDefaultProductQuantity());
+        logger.info("Product unit price (single product page): " + singleProductPage.getProductUnitPrice());
     }
 
     //test result screenshot method
