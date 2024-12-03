@@ -75,6 +75,9 @@ public class ShoppingCartPage extends BasePage{
 
     public ShoppingCartPage(WebDriver driver) {super(driver);}
 
+    //shopping cart page title getter
+    public String getShoppingCartTitle() {return shoppingCartPageTitle.getText();}
+
     //shopping cart page web element assert methods
     public boolean isShoppingCartPageTitleDisplayed() {return shoppingCartPageTitle.isDisplayed();}
     public boolean isUpdateShoppingCartButtonDisplayed() {return updateShoppingCartButton.isDisplayed();}

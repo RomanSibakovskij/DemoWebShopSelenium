@@ -914,6 +914,7 @@ public class TestMethods extends BaseTest{
     protected void addASingleFeaturedProductToCartTest(){
         HomePage homePage = new HomePage(driver);
         SearchProductPage searchProductPage = new SearchProductPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         //homepage web element assert
         isHomePageWebElementDisplayed(homePage);
         //homepage text assert
@@ -940,6 +941,8 @@ public class TestMethods extends BaseTest{
         assertEquals("The product has been added to your shopping cart", searchProductPage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
         //click 'Shopping cart' head nav link
         homePage.clickShoppingCartNavLink();
+        //assert the user gets onto shopping cart page
+        assertEquals("Shopping cart", shoppingCartPage.getShoppingCartTitle(), "The shopping cart title doesn't match expectations or the user is on the wrong page");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
