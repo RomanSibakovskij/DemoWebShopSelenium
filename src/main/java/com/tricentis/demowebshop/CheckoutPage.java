@@ -40,5 +40,7 @@ public class CheckoutPage extends BasePage{
 
     public CheckoutPage(WebDriver driver) {super(driver);}
 
+    //checkout page title getter
+    public String getCheckoutPageTitle() {return checkoutPageTitle.getText();}
 
 }

@@ -1091,6 +1091,9 @@ public class TestMethods extends BaseTest{
         shoppingCartPage.clickAgreeToTermsCheckbox();
         //click 'Checkout' button
         shoppingCartPage.clickCheckoutButton();
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        //assert the user gets onto checkout page
+        assertEquals("Checkout", checkoutPage.getCheckoutPageTitle(), "The checkout page title doesn't match expectations or the user is on the wrong page");
         //capture screenshot of the test result //multiple test cases use the same screenshot method
         captureScreenshot(driver, "Add Product(s) To Checkout Test (as a registered user)");
     }
@@ -1127,6 +1130,9 @@ public class TestMethods extends BaseTest{
         LoginPage loginPage = new LoginPage(driver);
         //click 'Checkout as guest' button
         loginPage.clickCheckoutAsGuestButton();
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        //assert the user gets onto checkout page
+        assertEquals("Checkout", checkoutPage.getCheckoutPageTitle(), "The checkout page title doesn't match expectations or the user is on the wrong page");
         //capture screenshot of the test result //multiple test cases use the same screenshot method
         captureScreenshot(driver, "Add Product(s) To Checkout Test (as a guest)");
     }
