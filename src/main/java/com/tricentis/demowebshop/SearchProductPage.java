@@ -26,20 +26,26 @@ public class SearchProductPage extends BasePage{
     private WebElement searchDisplayCountDropdownSelector;
     @FindBy(xpath = "//div[@class='product-viewmode']//select[@id='products-viewmode']")
     private WebElement viewAsDropdownSelector;
+    @FindBy(xpath = "//div[@class='item-box']//input[@value='Add to cart']")
+    private WebElement addSingleProductToCartButton;
+    @FindBy(xpath = "//div[@id='bar-notification']//p")
+    private WebElement productAdditionToCartSuccessMessage;
     //searched products section
-    @FindBy(xpath = "//div[@class='product-grid']/div[@class='item-box']")
-    private List<WebElement> searchProductCardElements;
     @FindBy(xpath = "//div[@class='item-box']//h2/a")
     private WebElement singleSearchProductName;
+    @FindBy(xpath = "//div[@class='item-box']//div[@class='prices']")
+    private WebElement singleSearchProductUnitPrice;
+    //list elements
+    @FindBy(xpath = "//div[@class='product-grid']/div[@class='item-box']")
+    private List<WebElement> searchProductCardElements;
+    @FindBy(xpath = "//div[@class='item-box']//div[@class='prices']")
+    private List<WebElement> searchProductUnitPriceElements;
+    private List<WebElement> searchProductAddToCartButtonElements = driver.findElements(By.xpath("//div[@class='item-box']//input[@value='Add to cart']"));
     @FindBy(xpath = "//div[@class='item-box']//h2/a")
     private List<WebElement> searchProductNameElements;
     @FindBy(xpath = "//div[@class='item-box']//div[@class='rating']")
     private List<WebElement> searchProductReviewStarsElements;
-    @FindBy(xpath = "//div[@class='item-box']//div[@class='prices']")
-    private WebElement singleSearchProductUnitPrice;
-    @FindBy(xpath = "//div[@class='item-box']//div[@class='prices']")
-    private List<WebElement> searchProductUnitPriceElements;
-    private List<WebElement> searchProductAddToCartButtonElements = driver.findElements(By.xpath("//div[@class='item-box']//input[@value='Add to cart']"));
+
 
     //single available product input search query
     private String singleAvailableProductQuery = TestDataGenerator.pickRandomAvailableProduct();
@@ -66,6 +72,12 @@ public class SearchProductPage extends BasePage{
 
     //click 'Search' button method
     public void clickSearchButton(){searchButton.click();}
+
+    public void clickAddSingleProductToCartButton() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(720));
+        wait.until(ExpectedConditions.elementToBeClickable(addSingleProductToCartButton));
+        addSingleProductToCartButton.click();
+    }
 
     //search product page title getter
     public String getSearchProductPageTitle() {return searchPageTitle.getText();}
@@ -102,6 +114,13 @@ public class SearchProductPage extends BasePage{
             productName.add(element.getText());
         }
         return productName;
+    }
+
+    //product addition to cart success message getter
+    public String getProductAddToCartSuccessMessageText(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
+        wait.until(ExpectedConditions.visibilityOf(productAdditionToCartSuccessMessage));
+        return productAdditionToCartSuccessMessage.getText();
     }
 
     //search product page web element assert methods

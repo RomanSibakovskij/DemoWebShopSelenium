@@ -123,6 +123,12 @@ public class HomePage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(searchInputBar));
         searchInputBar.sendKeys(multipleFeaturedProductsQuery);
     }
+    //input the search query (single set product) into search bar method
+    public void inputSingleSetProductQueryIntoSearchBar(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.visibilityOf(searchInputBar));
+        searchInputBar.sendKeys("Smartphone");
+    }
 
     //click 'Search' button method
     public void clickSearchButton(){searchButton.click();}
@@ -142,6 +148,13 @@ public class HomePage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
         wait.until(ExpectedConditions.elementToBeClickable(loginHeadNavLink));
         loginHeadNavLink.click();
+    }
+
+    //click 'Shopping cart' link method
+    public void clickShoppingCartNavLink(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.elementToBeClickable(shoppingCartHeadNavLink));
+        shoppingCartHeadNavLink.click();
     }
 
     //categories box title getter

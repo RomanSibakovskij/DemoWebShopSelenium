@@ -908,6 +908,40 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Search For Multiple Available Products Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //single product addition to cart test method
+    protected void addASingleFeaturedProductToCartTest(){
+        HomePage homePage = new HomePage(driver);
+        SearchProductPage searchProductPage = new SearchProductPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //input a single set product search query
+        homePage.inputSingleSetProductQueryIntoSearchBar();
+        //click 'Search' button
+        homePage.clickSearchButton();
+        //search page web element assert
+        isSearchProductPageWebElementDisplayed(searchProductPage);
+        //assert the user gets onto search product page
+        isSearchProductPageTextAsExpected(searchProductPage);
+        //assert the searched product is displayed in the product section
+        assertEquals("Smartphone", searchProductPage.getSingleSearchedProductName(), "The searched product names don't match");
+        //log the displayed product data
+        logSingleSearchedProductData(searchProductPage);
+        //click 'Add to cart' button
+        searchProductPage.clickAddSingleProductToCartButton();
+        //assert the success message is as expected
+        assertEquals("The product has been added to your shopping cart", searchProductPage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
+        //click 'Shopping cart' head nav link
+        homePage.clickShoppingCartNavLink();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method
