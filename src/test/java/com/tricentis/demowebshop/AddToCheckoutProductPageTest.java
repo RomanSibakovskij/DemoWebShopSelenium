@@ -74,7 +74,7 @@ public class AddToCheckoutProductPageTest extends TestMethods{
 
     //invalid product addition to check out method test
 
-    //Test 008c -> invalid 'Add a single available product to check out' without clicking 'Agree to Terms' checkbox test (as a guest)
+    //Test 008d -> invalid 'Add a single available product to check out' without clicking 'Agree to Terms' checkbox test (as a guest)
     @Test
     @DisplayName("Invalid Add A Single Available Product To Checkout Without Click On Agree To Terms Checkbox Test (as a guest)")
     @Tag("Add_Single_Available_Product_To_Checkout_Guest")
@@ -86,6 +86,27 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         addASingleAvailableProductToCartTest();
         //invalid 'Add a single featured product to check out' without clicking 'Agree to Terms' checkbox test (as a guest)
         invalidAddProductToCheckoutAsGuestNoAgreeToTermsTest(shoppingCartPage);
+    }
+
+    //multiple featured products addition to check out tests
+
+    //Test 008e -> add multiple featured products to check out test (as a registered user)
+    @Test
+    @DisplayName("Add Multiple Featured Products To Checkout Test (as a registered user)")
+    @Tag("Add_Multiple_Featured_Products_To_Checkout_Reg_User")
+    @Tag("Add_Multiple_Featured_Products_To_Checkout")
+    void addMultipleFeaturedProductsToCheckoutRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add multiple featured products to cart test (as a registered user)
+        addMultipleFeaturedProductToCartTest();
+        //add multiple featured product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
     }
 
 }
