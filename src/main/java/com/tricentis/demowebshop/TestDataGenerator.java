@@ -146,4 +146,9 @@ public class TestDataGenerator extends BasePage{
         String randomAvailableProduct = availableProductNames[random.nextInt(availableProductNames.length)];
         return randomAvailableProduct;
     }
+
+    // generate random postal code for Illinois
+    public static int getRandomPostalCode() {
+        return 60000 + RANDOM.nextInt(30000);
+    }
 }

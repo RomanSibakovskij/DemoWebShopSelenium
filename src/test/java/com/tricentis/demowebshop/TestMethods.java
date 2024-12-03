@@ -1,7 +1,6 @@
 package com.tricentis.demowebshop;
 
 
-import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.*;
@@ -24,7 +23,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //aside page web element assert
         isAsidePageWebElementDisplayed(homePage);
         //homepage product data logger
@@ -565,7 +564,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //assert the user email is displayed in the account link (same place as the register head nav link)
         assertEquals(registerPage.getEmail(), homePage.getRegisterHeadNavLinkText(), "The account emails don't match.");
         //click 'Logout' button //it's in the same place as login head nav link
@@ -585,7 +584,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Login' nav link
         homePage.clickLoginHeadNavLink();
         //login page web element assert
@@ -622,7 +621,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Login' nav link
         homePage.clickLoginHeadNavLink();
         //login page web element assert
@@ -656,7 +655,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Login' nav link
         homePage.clickLoginHeadNavLink();
         //login page web element assert
@@ -692,7 +691,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Login' nav link
         homePage.clickLoginHeadNavLink();
         //login page web element assert
@@ -726,7 +725,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Login' nav link
         homePage.clickLoginHeadNavLink();
         //login page web element assert
@@ -759,7 +758,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Login' nav link
         homePage.clickLoginHeadNavLink();
         //login page web element assert
@@ -798,7 +797,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //input a single product search query
         homePage.inputSingleProductQueryIntoSearchBar();
         //click 'Search' button
@@ -825,7 +824,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //input a multiple products search query (portion, since there aren't any multiple products with full queries -> this covers the partial query test too)
         homePage.inputMultipleProductsQueryIntoSearchBar();
         //click 'Search' button
@@ -861,7 +860,7 @@ public class TestMethods extends BaseTest{
         //general web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general text element assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //search page web element assert
         isSearchProductPageWebElementDisplayed(searchProductPage);
         //search page text element assert
@@ -884,7 +883,7 @@ public class TestMethods extends BaseTest{
         //general web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general text element assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //search page web element assert
         isSearchProductPageWebElementDisplayed(searchProductPage);
         //search page text element assert
@@ -922,7 +921,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Add to cart' button
         homePage.clickAddLaptopToCartButton();
         //assert the success message is as expected
@@ -948,7 +947,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //input a single set product search query
         homePage.inputSingleSetProductQueryIntoSearchBar();
         //click 'Search' button
@@ -984,7 +983,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //click 'Add to cart' button (expensive computer)
         homePage.clickAddLaptopToCartButton();
         //assert the success message is as expected (laptop addition)
@@ -1026,7 +1025,7 @@ public class TestMethods extends BaseTest{
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
-        isGeneralPageTextMatchExpectations(homePage);
+        isGeneralPageTextElementAsExpected(homePage);
         //input a single set product search query
         homePage.inputSingleSetProductQueryIntoSearchBar();
         //click 'Search' button
@@ -1057,6 +1056,43 @@ public class TestMethods extends BaseTest{
         assertEquals("Shopping cart", shoppingCartPage.getShoppingCartTitle(), "The shopping cart title doesn't match expectations or the user is on the wrong page");
         //capture screenshot of the test result
         captureScreenshot(driver, "Add Multiple Available Products To Cart Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //product addition to check out tests
+
+    //add single featured product to check out test method
+    protected void addSingleFeaturedProductToCheckoutTest(ShoppingCartPage shoppingCartPage){
+        HomePage homePage = new HomePage(driver);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text element assert
+        isGeneralPageTextElementAsExpected(homePage);
+        //shopping cart page web element assert
+        isShoppingCartPageWebElementDisplayed(shoppingCartPage);
+        //shopping cart page text element assert
+        isShoppingCartTextElementAsExpected(shoppingCartPage);
+        //click estimate shipping section country dropdown menu
+        shoppingCartPage.clickEstimateShippingCountryDropdownMenu();
+        //select 'United States' option
+        shoppingCartPage.selectUsOption();
+        //click estimate shipping section state dropdown menu
+        shoppingCartPage.clickEstimateShippingStateDropdownMenu();
+        //select 'Illinois' option
+        shoppingCartPage.selectIllinoisOption();
+        //input Illinois are zip code
+        shoppingCartPage.inputIllinoisAreaZipCode();
+        //click 'Estimate shipping' button
+        shoppingCartPage.clickEstimateShippingButton();
+        //log shopping cart data
+        logShoppingCartProductData(shoppingCartPage);
+        //click 'Agree to terms' checkbox
+        shoppingCartPage.clickAgreeToTermsCheckbox();
+        //click 'Checkout' button
+        shoppingCartPage.clickCheckoutButton();
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Add Single Featured Products To Checkout Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1141,7 +1177,7 @@ public class TestMethods extends BaseTest{
     }
 
     //general page text assert test method
-    protected void isGeneralPageTextMatchExpectations(HomePage homePage){
+    protected void isGeneralPageTextElementAsExpected(HomePage homePage){
         //assert footer column info title matches expectations
         assertEquals("INFORMATION", homePage.getColumnInfoTitle(), "The column info title text doesn't match expectations");
         //assert footer customer service title matches expectations
@@ -1343,6 +1379,106 @@ public class TestMethods extends BaseTest{
         logger.info("Product default quantity (single product page): " + singleProductPage.getDefaultProductQuantity());
         logger.info("Product unit price (single product page): " + singleProductPage.getProductUnitPrice());
     }
+
+    //shopping cart page web element assert test method
+    protected void isShoppingCartPageWebElementDisplayed(ShoppingCartPage shoppingCartPage){
+        //assert shopping cart page title is displayed
+        assertTrue(shoppingCartPage.isShoppingCartPageTitleDisplayed(), "The shopping cart page title isn't displayed");
+        //assert 'Update shopping cart' button is displayed
+        assertTrue(shoppingCartPage.isUpdateShoppingCartButtonDisplayed(), "The 'Update shopping cart' button isn't displayed");
+        //assert 'Continue shopping' button is displayed
+        assertTrue(shoppingCartPage.isContinueShoppingButtonDisplayed(), "The 'Continue shopping' button isn't displayed");
+        //assert shopping cart page discount section title is displayed
+        assertTrue(shoppingCartPage.isDiscountCodeSectionTitleDisplayed(), "The discount section title isn't displayed");
+        //assert shopping cart page discount section hint is displayed
+        assertTrue(shoppingCartPage.isDiscountCodeSectionHintDisplayed(), "The discount section hint isn't displayed");
+        //assert shopping cart page discount code input field is displayed
+        assertTrue(shoppingCartPage.isDiscountCodeInputFieldDisplayed(), "The discount code input field isn't displayed");
+        //assert shopping cart page 'Apply discount' button is displayed
+        assertTrue(shoppingCartPage.isApplyDiscountCouponButtonDisplayed(), "The 'Apply discount' button isn't displayed");
+        //assert shopping cart page gift card section title is displayed
+        assertTrue(shoppingCartPage.isGiftCardSectionTitleDisplayed(), "The gift card section title isn't displayed");
+        //assert shopping cart page gift card section hint is displayed
+        assertTrue(shoppingCartPage.isGiftCardSectionHintDisplayed(), "The gift card section hint isn't displayed");
+        //assert shopping cart page gift card code input field is displayed
+        assertTrue(shoppingCartPage.isGiftCardCodeInputFieldDisplayed(), "The gift card code input field isn't displayed");
+        //assert shopping cart page 'Add gift card' button is displayed
+        assertTrue(shoppingCartPage.isAddGiftCardButtonDisplayed(), "The 'Add gift card' button isn't displayed");
+        //assert shopping cart page estimate shipping section title is displayed
+        assertTrue(shoppingCartPage.isEstimateShippingSectionTitleDisplayed(), "The estimate shipping section title isn't displayed");
+        //assert shopping cart page estimate shipping section hint is displayed
+        assertTrue(shoppingCartPage.isEstimateShippingSectionHintDisplayed(), "The estimate shipping section hint isn't displayed");
+        //assert shopping cart page shipping country dropdown menu is displayed
+        assertTrue(shoppingCartPage.isShippingCountryDropdownMenuDisplayed(), "The shipping country dropdown menu isn't displayed");
+        //assert shopping cart page shipping state dropdown menu is displayed
+        assertTrue(shoppingCartPage.isShippingStateDropdownMenuDisplayed(), "The shipping state dropdown menu isn't displayed");
+        //assert shopping cart page zip code input field is displayed
+        assertTrue(shoppingCartPage.isZipCodeInputFieldDisplayed(), "The zip code input field isn't displayed");
+        //assert shopping cart page estimate shipping button is displayed
+        assertTrue(shoppingCartPage.isEstimateShippingButtonDisplayed(), "The 'Estimate shipping' button isn't displayed");
+        //assert shopping cart page product sub-total price is displayed
+        assertTrue(shoppingCartPage.isProductSubTotalPriceDisplayed(), "The product sub total price isn't displayed");
+        //assert shopping cart page product shipping price is displayed
+        assertTrue(shoppingCartPage.isProductShippingPriceDisplayed(), "The product shipping price isn't displayed");
+        //assert shopping cart page product tax is displayed
+        assertTrue(shoppingCartPage.isProductTaxDisplayed(), "The product tax isn't displayed");
+        //assert shopping cart page product total price is displayed
+        assertTrue(shoppingCartPage.isProductTotalPriceDisplayed(), "The product total price isn't displayed");
+        //assert shopping cart page 'Agree to terms' checkbox is displayed
+        assertTrue(shoppingCartPage.isAgreeToTermsCheckBoxDisplayed(), "The 'Agree to terms' checkbox isn't displayed");
+        //assert shopping cart page 'Checkout' button is displayed
+        assertTrue(shoppingCartPage.isCheckoutButtonDisplayed(), "The 'Checkout' button isn't displayed");
+        //assert shopping cart table remove product checkboxes are displayed (as a list)
+        assertTrue(shoppingCartPage.isShoppingCartProductRemoveCheckboxDisplayed(), "The shopping cart table product remove checkbox isn't displayed");
+        //assert shopping cart table product images are displayed (as a list)
+        assertTrue(shoppingCartPage.isShoppingCartProductImageDisplayed(), "The shopping cart table product image isn't displayed");
+        //assert shopping cart table product name are displayed (as a list)
+        assertTrue(shoppingCartPage.isShoppingCartProductNameDisplayed(), "The shopping cart table product name isn't displayed");
+        //assert shopping cart table product unit prices are displayed (as a list)
+        assertTrue(shoppingCartPage.isShoppingCartProductUnitPriceDisplayed(), "The shopping cart table product unit price isn't displayed");
+        //assert shopping cart table product quantity input fields are displayed (as a list)
+        assertTrue(shoppingCartPage.isShoppingCartProductQtyInputFieldDisplayed(), "The shopping cart table product quantity input fields isn't displayed");
+        //assert shopping cart table product total price are displayed (as a list)
+        assertTrue(shoppingCartPage.isShoppingCartProductTotalPriceDisplayed(), "The shopping cart table product total price isn't displayed");
+    }
+
+    //shopping cart page text element assert test method
+    protected void isShoppingCartTextElementAsExpected(ShoppingCartPage shoppingCartPage){
+        //assert discount code section title as expected
+        assertEquals("Discount Code", shoppingCartPage.getDiscountSectionTitle(), "The shopping cart discount section title doesn't match expectations");
+        //assert discount code section hint as expected
+        assertEquals("Enter your coupon here", shoppingCartPage.getDiscountSectionHint(), "The shopping cart discount section hint doesn't match expectations");
+        //assert gift card section title as expected
+        assertEquals("Gift Cards", shoppingCartPage.getGiftCardSectionTitle(), "The shopping cart gift card title doesn't match expectations");
+        //assert gift card section hint as expected
+        assertEquals("Enter gift card code", shoppingCartPage.getGiftCardSectionHint(), "The shopping cart gift card hint doesn't match expectations");
+        //assert estimate shipping section title as expected
+        assertEquals("Estimate shipping", shoppingCartPage.getEstimateShippingSectionTitle(), "The shopping cart estimate shipping title doesn't match expectations");
+        //assert estimate shipping section hint as expected
+        assertEquals("Enter your destination to get a shipping estimate", shoppingCartPage.getEstimateShippingSectionHint(), "The shopping cart estimate shipping hint doesn't match expectations");
+    }
+
+    //shopping cart product data logger
+    protected void logShoppingCartProductData(ShoppingCartPage shoppingCartPage){
+        System.out.println("Shopping cart product available data: " + "\n");
+        System.out.println("Shopping cart table product data: " + "\n");
+
+        logger.info("Product name(s): " + shoppingCartPage.getShoppingCartTableProductName());
+        logger.info("Product unit price(s): " + shoppingCartPage.getShoppingCartTableProductUnitPrice());
+        logger.info("Product quantity(ies): " + shoppingCartPage.getShoppingCartTableProductQuantity());
+        logger.info("Product total price(s): " + shoppingCartPage.getShoppingCartTableProductTotalPrice());
+
+        System.out.println("Shopping cart lower table product data: " + "\n");
+
+        logger.info("Product(s) sub-total price: " + shoppingCartPage.getProductSubTotalPrice());
+        logger.info("Product(s) shipping price: " + shoppingCartPage.getProductShippingPrice());
+        logger.info("Product(s) tax: " + shoppingCartPage.getProductTax());
+        logger.info("Product(s) total price: " + shoppingCartPage.getProductTotalPrice());
+
+        System.out.println("\n");
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //test result screenshot method
     public void captureScreenshot(WebDriver driver, String fileName) {
