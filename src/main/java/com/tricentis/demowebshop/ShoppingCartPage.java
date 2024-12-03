@@ -26,6 +26,8 @@ public class ShoppingCartPage extends BasePage{
     @FindBy(xpath = "//table[@class='cart']/tbody/tr/td[6]")
     private List <WebElement> shoppingCartProductTotalPriceElements;
     //singular elements
+    @FindBy(xpath = "//table[@class='cart']/tbody/tr[1]/td[@class='remove-from-cart']/input[@name='removefromcart']")
+    private WebElement removeProductFromShoppingCartCheckbox;
     @FindBy(xpath = "//input[@name='updatecart']")
     private WebElement updateShoppingCartButton;
     @FindBy(xpath = "//input[@name='continueshopping']")
@@ -114,6 +116,19 @@ public class ShoppingCartPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
         wait.until(ExpectedConditions.elementToBeClickable(estimateShippingButton));
         estimateShippingButton.click();
+    }
+
+    public void clickRemoveASingleProductFromCartCheckbox() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(720));
+        wait.until(ExpectedConditions.elementToBeClickable(removeProductFromShoppingCartCheckbox));
+        removeProductFromShoppingCartCheckbox.click();
+    }
+
+    //click update shipping button method
+    public void clickUpdateShippingButton(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.elementToBeClickable(updateShoppingCartButton));
+        updateShoppingCartButton.click();
     }
 
     //click 'Agree to terms' checkbox method

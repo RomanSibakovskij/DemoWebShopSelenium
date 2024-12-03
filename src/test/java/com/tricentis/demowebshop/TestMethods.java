@@ -1137,6 +1137,53 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Add Product(s) To Checkout Test (as a guest)");
     }
 
+    //add product / products to check out test method [with product removal test](as a guest)
+    protected void addProductToCheckoutAsGuestWithProductRemovalTest(ShoppingCartPage shoppingCartPage){
+        HomePage homePage = new HomePage(driver);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text element assert
+        isGeneralPageTextElementAsExpected(homePage);
+        //shopping cart page web element assert
+        isShoppingCartPageWebElementDisplayed(shoppingCartPage);
+        //shopping cart page text element assert
+        isShoppingCartTextElementAsExpected(shoppingCartPage);
+        //capture screenshot of the test result (before)
+        captureScreenshot(driver, "Products List Before Removal (as a guest)");
+        //click 'Remove product from cart' checkbox
+        shoppingCartPage.clickRemoveASingleProductFromCartCheckbox();
+        //click 'Update shopping cart' button
+        shoppingCartPage.clickUpdateShippingButton();
+        //capture screenshot of the test result (after)
+        captureScreenshot(driver, "Products List After Removal (as a guest)");
+        //click estimate shipping section country dropdown menu
+        shoppingCartPage.clickEstimateShippingCountryDropdownMenu();
+        //select 'United States' option
+        shoppingCartPage.selectUsOption();
+        //click estimate shipping section state dropdown menu
+        shoppingCartPage.clickEstimateShippingStateDropdownMenu();
+        //select 'Illinois' option
+        shoppingCartPage.selectIllinoisOption();
+        //input Illinois are zip code
+        shoppingCartPage.inputIllinoisAreaZipCode();
+        //click 'Estimate shipping' button
+        shoppingCartPage.clickEstimateShippingButton();
+        //log shopping cart data
+        logShoppingCartProductData(shoppingCartPage);
+        //click 'Agree to terms' checkbox
+        shoppingCartPage.clickAgreeToTermsCheckbox();
+        //click 'Checkout' button
+        shoppingCartPage.clickCheckoutButton();
+        LoginPage loginPage = new LoginPage(driver);
+        //click 'Checkout as guest' button
+        loginPage.clickCheckoutAsGuestButton();
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        //assert the user gets onto checkout page
+        assertEquals("Checkout", checkoutPage.getCheckoutPageTitle(), "The checkout page title doesn't match expectations or the user is on the wrong page");
+        //capture screenshot of the test result //multiple test cases use the same screenshot method
+        captureScreenshot(driver, "Add Product(s) To Checkout Test (as a guest)");
+    }
+
     //invalid add product / products to check out test method (as a guest) (without clicking 'Agree to Terms' checkbox)
     protected void invalidAddProductToCheckoutAsGuestNoAgreeToTermsTest(ShoppingCartPage shoppingCartPage){
         HomePage homePage = new HomePage(driver);
