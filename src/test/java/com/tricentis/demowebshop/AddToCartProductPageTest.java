@@ -77,4 +77,14 @@ public class AddToCartProductPageTest extends TestMethods{
         //add multiple featured products to cart test (as a registered user)
         addMultipleFeaturedProductToCartTest();
     }
+
+    //Test 007e -> add multiple featured product to cart test (as a guest)
+    @Test
+    @DisplayName("Add Multiple Featured Products To Cart Test (as a guest)")
+    @Tag("Add_Multiple_Featured_Products_To_Cart_Guest")
+    @Tag("Add_Multiple_Featured_Products_To_Cart")
+    void addMultipleFeaturedProductsToCartGuestTest(){
+        //add multiple featured products to cart test (as a guest)
+        addMultipleFeaturedProductToCartTest();
+    }
 }

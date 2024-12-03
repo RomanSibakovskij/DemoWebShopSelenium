@@ -76,7 +76,7 @@ public class SingleProductPage extends BasePage{
 
     //single product page data getters
     public String getProductName() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
         wait.until(ExpectedConditions.visibilityOfAllElements(productName));
         return productName.getText();
     }
