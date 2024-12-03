@@ -143,4 +143,16 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         addProductToCheckoutTest(shoppingCartPage);
     }
 
+    //Test 008h -> add multiple available products to check out test (as a guest)
+    @Test
+    @DisplayName("Add Multiple Available Products To Checkout Test (as a guest)")
+    @Tag("Add_Multiple_Available_Products_To_Checkout_Guest")
+    @Tag("Add_Multiple_Available_Products_To_Checkout")
+    void addMultipleAvailableProductsToCheckoutGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple available products to cart test (as a guest)
+        addMultipleAvailableProductsToCartTest();
+        //add multiple available products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+    }
 }
