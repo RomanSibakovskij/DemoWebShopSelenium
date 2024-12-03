@@ -16,6 +16,8 @@ public class LoginPage extends BasePage{
     private WebElement registerSectionTitle;
     @FindBy(xpath = "//div[@class='new-wrapper register-block']//div[@class='text']")
     private WebElement registerSectionDescription;
+    @FindBy(xpath = "//div[@class='customer-blocks']//input[@value='Checkout as Guest']")
+    private WebElement checkoutAsGuestButton;
     @FindBy(xpath = "//div[@class='new-wrapper register-block']//input[@class='button-1 register-button']")
     private WebElement registerSectionButton;
     //login section
@@ -193,6 +195,9 @@ public class LoginPage extends BasePage{
 
     //'Register' button click method
     public void clickRegisterButton(){registerSectionButton.click();}
+
+    //'Checkout as guest' button click method
+    public void clickCheckoutAsGuestButton(){checkoutAsGuestButton.click();}
 
     //login page web element assert methods
     public boolean isLoginPageTitleDisplayed(){return loginPageTitle.isDisplayed();}

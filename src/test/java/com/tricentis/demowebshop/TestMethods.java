@@ -1062,7 +1062,7 @@ public class TestMethods extends BaseTest{
 
     //product addition to check out tests
 
-    //add single featured product to check out test method
+    //add single featured product to check out test method (as a registered user)
     protected void addSingleFeaturedProductToCheckoutTest(ShoppingCartPage shoppingCartPage){
         HomePage homePage = new HomePage(driver);
         //general page web element assert
@@ -1092,7 +1092,43 @@ public class TestMethods extends BaseTest{
         //click 'Checkout' button
         shoppingCartPage.clickCheckoutButton();
         //capture screenshot of the test result
-        captureScreenshot(driver, "Add Single Featured Products To Checkout Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
+        captureScreenshot(driver, "Add Single Featured Products To Checkout Test (as a registered user)");
+    }
+
+    //add single featured product to check out test method (as a guest)
+    protected void addSingleFeaturedProductToCheckoutAsGuestTest(ShoppingCartPage shoppingCartPage){
+        HomePage homePage = new HomePage(driver);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text element assert
+        isGeneralPageTextElementAsExpected(homePage);
+        //shopping cart page web element assert
+        isShoppingCartPageWebElementDisplayed(shoppingCartPage);
+        //shopping cart page text element assert
+        isShoppingCartTextElementAsExpected(shoppingCartPage);
+        //click estimate shipping section country dropdown menu
+        shoppingCartPage.clickEstimateShippingCountryDropdownMenu();
+        //select 'United States' option
+        shoppingCartPage.selectUsOption();
+        //click estimate shipping section state dropdown menu
+        shoppingCartPage.clickEstimateShippingStateDropdownMenu();
+        //select 'Illinois' option
+        shoppingCartPage.selectIllinoisOption();
+        //input Illinois are zip code
+        shoppingCartPage.inputIllinoisAreaZipCode();
+        //click 'Estimate shipping' button
+        shoppingCartPage.clickEstimateShippingButton();
+        //log shopping cart data
+        logShoppingCartProductData(shoppingCartPage);
+        //click 'Agree to terms' checkbox
+        shoppingCartPage.clickAgreeToTermsCheckbox();
+        //click 'Checkout' button
+        shoppingCartPage.clickCheckoutButton();
+        LoginPage loginPage = new LoginPage(driver);
+        //click 'Checkout as guest' button
+        loginPage.clickCheckoutAsGuestButton();
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Add Single Featured Products To Checkout Test (as a guest)");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
