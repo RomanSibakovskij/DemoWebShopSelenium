@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 
 public class AddToCheckoutProductPageTest extends TestMethods{
 
-    //single featured product tests
+    //single featured product addition to check out tests
 
     //Test 008 -> add a single featured product to check out test (as a registered user)
     @Test
@@ -38,7 +38,7 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         addProductToCheckoutAsGuestTest(shoppingCartPage);
     }
 
-    //single available product tests
+    //single available product addition to check out tests
 
     //Test 008b -> add a single available product to check out test (as a registered user)
     @Test
@@ -105,7 +105,7 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         validMaleUserCreationTest(registerPage);
         //add multiple featured products to cart test (as a registered user)
         addMultipleFeaturedProductToCartTest();
-        //add multiple featured product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        //add multiple featured products to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
         addProductToCheckoutTest(shoppingCartPage);
     }
 
@@ -120,6 +120,27 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         addMultipleFeaturedProductToCartTest();
         //add multiple featured products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
         addProductToCheckoutAsGuestTest(shoppingCartPage);
+    }
+
+    //multiple available products addition to check out tests
+
+    //Test 008g -> add multiple available products to check out test (as a registered user)
+    @Test
+    @DisplayName("Add Multiple Available Products To Checkout Test (as a registered user)")
+    @Tag("Add_Multiple_Available_Products_To_Checkout_Reg_User")
+    @Tag("Add_Multiple_Available_Products_To_Checkout")
+    void addMultipleAvailableProductsToCheckoutRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add multiple available products to cart test (as a registered user)
+        addMultipleAvailableProductsToCartTest();
+        //add multiple available products to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
     }
 
 }
