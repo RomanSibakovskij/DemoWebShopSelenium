@@ -28,8 +28,6 @@ public class SearchProductPage extends BasePage{
     private WebElement viewAsDropdownSelector;
     @FindBy(xpath = "//div[@class='item-box']//input[@value='Add to cart']")
     private WebElement addSingleProductToCartButton;
-    @FindBy(xpath = "//div[@id='bar-notification']//p")
-    private WebElement productAdditionToCartSuccessMessage;
     //searched products section
     @FindBy(xpath = "//div[@class='item-box']//h2/a")
     private WebElement singleSearchProductName;
@@ -68,6 +66,13 @@ public class SearchProductPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(searchKeywordBar));
         searchKeywordBar.clear();
         searchKeywordBar.sendKeys(multipleAvailableProductsQuery);
+    }
+    //search page bar input query method(single set available product)
+    public void inputSingleSetAvailableProductSearchQueryIntoSearchBar(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
+        wait.until(ExpectedConditions.visibilityOf(searchKeywordBar));
+        searchKeywordBar.clear();
+        searchKeywordBar.sendKeys();
     }
 
     //click 'Search' button method
@@ -114,13 +119,6 @@ public class SearchProductPage extends BasePage{
             productName.add(element.getText());
         }
         return productName;
-    }
-
-    //product addition to cart success message getter
-    public String getProductAddToCartSuccessMessageText(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
-        wait.until(ExpectedConditions.visibilityOf(productAdditionToCartSuccessMessage));
-        return productAdditionToCartSuccessMessage.getText();
     }
 
     //search product page web element assert methods

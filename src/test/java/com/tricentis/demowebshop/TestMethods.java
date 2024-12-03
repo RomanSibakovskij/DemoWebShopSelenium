@@ -910,10 +910,9 @@ public class TestMethods extends BaseTest{
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //single product addition to cart test method
+    //single featured product addition to cart test method
     protected void addASingleFeaturedProductToCartTest(){
         HomePage homePage = new HomePage(driver);
-        SearchProductPage searchProductPage = new SearchProductPage(driver);
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         //homepage web element assert
         isHomePageWebElementDisplayed(homePage);
@@ -923,22 +922,12 @@ public class TestMethods extends BaseTest{
         isGeneralPageWebElementDisplayed(homePage);
         //general page text assert
         isGeneralPageTextMatchExpectations(homePage);
-        //input a single set product search query
-        homePage.inputSingleSetProductQueryIntoSearchBar();
-        //click 'Search' button
-        homePage.clickSearchButton();
-        //search page web element assert
-        isSearchProductPageWebElementDisplayed(searchProductPage);
-        //assert the user gets onto search product page
-        isSearchProductPageTextAsExpected(searchProductPage);
-        //assert the searched product is displayed in the product section
-        assertEquals("Smartphone", searchProductPage.getSingleSearchedProductName(), "The searched product names don't match");
-        //log the displayed product data
-        logSingleSearchedProductData(searchProductPage);
         //click 'Add to cart' button
-        searchProductPage.clickAddSingleProductToCartButton();
+        homePage.clickAddLaptopToCartButton();
         //assert the success message is as expected
-        assertEquals("The product has been added to your shopping cart", searchProductPage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
+        assertEquals("The product has been added to your shopping cart", homePage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
+        //wait until the message disappears before clicking
+        homePage.waitTillProductAddToCartSuccessMessageDisappears();
         //click 'Shopping cart' head nav link
         homePage.clickShoppingCartNavLink();
         //assert the user gets onto shopping cart page

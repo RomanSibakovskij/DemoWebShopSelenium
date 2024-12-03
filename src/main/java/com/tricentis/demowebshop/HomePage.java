@@ -70,7 +70,7 @@ public class HomePage extends BasePage{
     private List<WebElement> productNameElements;
     @FindBy(xpath = "//div[@class='page-body']//span[@class='price actual-price']")
     private List<WebElement> productPriceElements;
-    private List<WebElement> productAddToCartButtonElements = driver.findElements(By.xpath("//div[@class='page-body']//input[@type='button']"));
+    private List<WebElement> productAddToCartButtonElements = driver.findElements(By.xpath("//div[@class='page-body']//input[@value='Add to cart']"));
     //footer elements (general page elements)
     @FindBy(xpath = "//div[@class='column information']/h3")
     private WebElement columnInfoTitle;
@@ -86,6 +86,9 @@ public class HomePage extends BasePage{
     private List<WebElement> socialMediaLinkElements = driver.findElements(By.xpath("//div[@class='column follow-us']//ul/li"));
     @FindBy(xpath = "//div[@class='footer-disclaimer']")
     private WebElement disclaimerText;
+    //addition to cart success message element (general element)
+    @FindBy(xpath = "//div[@id='bar-notification']//p")
+    private WebElement productAdditionToCartSuccessMessage;
 
     //single product input search query
     private String singleFeaturedProduct = TestDataGenerator.pickRandomHomePageFeaturedProduct();
@@ -157,6 +160,14 @@ public class HomePage extends BasePage{
         shoppingCartHeadNavLink.click();
     }
 
+    //listed 'Add to cart' button click method
+    public void clickAddToCartButton(int productIndex) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(720));
+        wait.until(ExpectedConditions.elementToBeClickable(productAddToCartButtonElements.get(productIndex)));
+        productAddToCartButtonElements.get(productIndex).click();
+    }
+    public void clickAddLaptopToCartButton() {clickAddToCartButton(1);}
+
     //categories box title getter
     public String getCategoriesAsideBoxTitle(){return categoriesSectionTitle.getText();}
     //manufacturers box title getter
@@ -187,6 +198,19 @@ public class HomePage extends BasePage{
     public String getSocialMediaTitle(){return socialMediaTitle.getText();}
     //disclaimer text getter
     public String getDisclaimerText(){return disclaimerText.getText();}
+
+    //product addition to cart success message getter
+    public String getProductAddToCartSuccessMessageText(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
+        wait.until(ExpectedConditions.visibilityOf(productAdditionToCartSuccessMessage));
+        return productAdditionToCartSuccessMessage.getText();
+    }
+
+    //wait for addition to cart success message to disappear method
+    public void waitTillProductAddToCartSuccessMessageDisappears(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(4300));
+        wait.until(ExpectedConditions.invisibilityOf(productAdditionToCartSuccessMessage));
+    }
 
     //general page web elements assert methods (elements that all pages have - header / footer)
     public boolean isHomePageLogoDisplayed(){return homePageLogo.isDisplayed();}
