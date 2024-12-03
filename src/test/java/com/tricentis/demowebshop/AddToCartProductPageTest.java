@@ -19,4 +19,14 @@ public class AddToCartProductPageTest extends TestMethods{
         //add a single featured product search test (as a registered user)
         addASingleFeaturedProductToCartTest();
     }
+
+    //Test 007a -> add a single featured product to cart test (as a guest)
+    @Test
+    @DisplayName("Add A Single Featured Product To Cart Test (as a guest)")
+    @Tag("Add_Single_Featured_Product_To_Cart_Guest")
+    @Tag("Add_Single_Featured_Product_To_Cart")
+    void singleAvailableProductSearchGuestTest(){
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+    }
 }

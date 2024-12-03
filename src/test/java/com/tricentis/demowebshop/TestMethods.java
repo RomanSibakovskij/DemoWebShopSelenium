@@ -943,6 +943,8 @@ public class TestMethods extends BaseTest{
         homePage.clickShoppingCartNavLink();
         //assert the user gets onto shopping cart page
         assertEquals("Shopping cart", shoppingCartPage.getShoppingCartTitle(), "The shopping cart title doesn't match expectations or the user is on the wrong page");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Add A Single Featured Product To Cart Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
