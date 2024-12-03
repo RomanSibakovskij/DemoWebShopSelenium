@@ -936,6 +936,42 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Add A Single Featured Product To Cart Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
     }
 
+    protected void addASingleAvailableProductToCartTest(){
+        HomePage homePage = new HomePage(driver);
+        SearchProductPage searchProductPage = new SearchProductPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //homepage web element assert
+        isHomePageWebElementDisplayed(homePage);
+        //homepage text assert
+        isHomePageTextMatchExpectations(homePage);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text assert
+        isGeneralPageTextMatchExpectations(homePage);
+        //input a single set product search query
+        homePage.inputSingleSetProductQueryIntoSearchBar();
+        //click 'Search' button
+        homePage.clickSearchButton();
+        //search page web element assert
+        isSearchProductPageWebElementDisplayed(searchProductPage);
+        //assert the user gets onto search product page
+        isSearchProductPageTextAsExpected(searchProductPage);
+        //assert the searched product is displayed in the product section
+        assertEquals("Smartphone", searchProductPage.getSingleSearchedProductName(), "The searched product names don't match");
+        //log the displayed product data
+        logSingleSearchedProductData(searchProductPage);
+        //click 'Add to cart' button
+        searchProductPage.clickAddSingleProductToCartButton();
+        //assert the success message is as expected
+        assertEquals("The product has been added to your shopping cart", homePage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
+        //click 'Shopping cart' head nav link
+        homePage.clickShoppingCartNavLink();
+        //assert the user gets onto shopping cart page
+        assertEquals("Shopping cart", shoppingCartPage.getShoppingCartTitle(), "The shopping cart title doesn't match expectations or the user is on the wrong page");
+        //capture screenshot of the test result
+        captureScreenshot(driver, "Add A Single Available Product To Cart Test"); //since registered user and guest use the same test method, specification of the screenshot is pointless as it gets overwritten
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method
