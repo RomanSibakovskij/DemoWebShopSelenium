@@ -76,6 +76,8 @@ public class ShoppingCartPage extends BasePage{
     private WebElement productTotalPrice;
     @FindBy(xpath = "//div[@class='totals']//input[@id='termsofservice']")
     private WebElement agreeToTermsCheckbox;
+    @FindBy(xpath = "//div[@id='terms-of-service-warning-box']")
+    private WebElement agreeToTermsCheckboxNotSelectedError;
     @FindBy(xpath = "//div[@class='totals']//button[@id='checkout']")
     private WebElement checkoutButton;
 
@@ -174,6 +176,13 @@ public class ShoppingCartPage extends BasePage{
     public String getEstimateShippingSectionTitle() {return estimateShippingSectionTitle.getText();}
     //shopping cart page estimate shipping section hint getter
     public String getEstimateShippingSectionHint() {return estimateShippingSectionHint.getText();}
+
+    //'Agree to Terms' error message box text getter
+    public String getAgreeToTermsNotClickedErrorMessageText(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOf(agreeToTermsCheckboxNotSelectedError));
+        return agreeToTermsCheckboxNotSelectedError.getText();
+    }
 
     //shopping cart page web element assert methods
     public boolean isShoppingCartPageTitleDisplayed() {return shoppingCartPageTitle.isDisplayed();}

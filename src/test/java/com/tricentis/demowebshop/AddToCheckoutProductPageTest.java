@@ -21,8 +21,8 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         validMaleUserCreationTest(registerPage);
         //add a single featured product to cart test (as a registered user)
         addASingleFeaturedProductToCartTest();
-        //add a single featured product to checkout test (as a registered user)
-        addSingleFeaturedProductToCheckoutTest(shoppingCartPage);
+        //add a single featured product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
     }
 
     //Test 008a -> add a single featured product to check out test (as a guest)
@@ -34,8 +34,29 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         //add a single featured product to cart test (as a guest)
         addASingleFeaturedProductToCartTest();
-        //add a single featured product to check out test (as a guest)
-        addSingleFeaturedProductToCheckoutAsGuestTest(shoppingCartPage);
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+    }
+
+    //single available product tests
+
+    //Test 008b -> add a single available product to check out test (as a registered user)
+    @Test
+    @DisplayName("Add A Single Available Product To Checkout Test (as a registered user)")
+    @Tag("Add_Single_Available_Product_To_Checkout_Reg_User")
+    @Tag("Add_Single_Available_Product_To_Checkout")
+    void addSingleAvailableProductToCheckoutRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add a single available product to cart test (as a registered user)
+        addASingleAvailableProductToCartTest();
+        //add a single available product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
     }
 
 }

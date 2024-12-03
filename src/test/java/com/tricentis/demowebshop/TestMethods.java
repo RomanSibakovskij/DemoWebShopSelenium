@@ -1062,8 +1062,8 @@ public class TestMethods extends BaseTest{
 
     //product addition to check out tests
 
-    //add single featured product to check out test method (as a registered user)
-    protected void addSingleFeaturedProductToCheckoutTest(ShoppingCartPage shoppingCartPage){
+    //add product / products to check out test method (as a registered user)
+    protected void addProductToCheckoutTest(ShoppingCartPage shoppingCartPage){
         HomePage homePage = new HomePage(driver);
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
@@ -1091,12 +1091,12 @@ public class TestMethods extends BaseTest{
         shoppingCartPage.clickAgreeToTermsCheckbox();
         //click 'Checkout' button
         shoppingCartPage.clickCheckoutButton();
-        //capture screenshot of the test result
-        captureScreenshot(driver, "Add Single Featured Products To Checkout Test (as a registered user)");
+        //capture screenshot of the test result //multiple test cases use the same screenshot method
+        captureScreenshot(driver, "Add Product(s) To Checkout Test (as a registered user)");
     }
 
-    //add single featured product to check out test method (as a guest)
-    protected void addSingleFeaturedProductToCheckoutAsGuestTest(ShoppingCartPage shoppingCartPage){
+    //add product / products to check out test method (as a guest)
+    protected void addProductToCheckoutAsGuestTest(ShoppingCartPage shoppingCartPage){
         HomePage homePage = new HomePage(driver);
         //general page web element assert
         isGeneralPageWebElementDisplayed(homePage);
@@ -1127,8 +1127,46 @@ public class TestMethods extends BaseTest{
         LoginPage loginPage = new LoginPage(driver);
         //click 'Checkout as guest' button
         loginPage.clickCheckoutAsGuestButton();
+        //capture screenshot of the test result //multiple test cases use the same screenshot method
+        captureScreenshot(driver, "Add Product(s) To Checkout Test (as a guest)");
+    }
+
+    //invalid add product / products to check out test method (as a guest) (without clicking 'Agree to Terms' checkbox)
+    protected void invalidAddProductToCheckoutAsGuestNoAgreeToTermsTest(ShoppingCartPage shoppingCartPage){
+        HomePage homePage = new HomePage(driver);
+        //general page web element assert
+        isGeneralPageWebElementDisplayed(homePage);
+        //general page text element assert
+        isGeneralPageTextElementAsExpected(homePage);
+        //shopping cart page web element assert
+        isShoppingCartPageWebElementDisplayed(shoppingCartPage);
+        //shopping cart page text element assert
+        isShoppingCartTextElementAsExpected(shoppingCartPage);
+        //click estimate shipping section country dropdown menu
+        shoppingCartPage.clickEstimateShippingCountryDropdownMenu();
+        //select 'United States' option
+        shoppingCartPage.selectUsOption();
+        //click estimate shipping section state dropdown menu
+        shoppingCartPage.clickEstimateShippingStateDropdownMenu();
+        //select 'Illinois' option
+        shoppingCartPage.selectIllinoisOption();
+        //input Illinois are zip code
+        shoppingCartPage.inputIllinoisAreaZipCode();
+        //click 'Estimate shipping' button
+        shoppingCartPage.clickEstimateShippingButton();
+        //log shopping cart data
+        logShoppingCartProductData(shoppingCartPage);
+        //click 'Agree to terms' checkbox
+        shoppingCartPage.clickAgreeToTermsCheckbox();
+        //click 'Checkout' button
+        shoppingCartPage.clickCheckoutButton();
+        LoginPage loginPage = new LoginPage(driver);
+        //click 'Checkout as guest' button
+        loginPage.clickCheckoutAsGuestButton();
+        //assert the user gets the expected error
+        assertEquals("Please accept the terms of service before the next step.", shoppingCartPage.getAgreeToTermsNotClickedErrorMessageText(), "The 'Agree to Terms' error message doesn't match expectations");
         //capture screenshot of the test result
-        captureScreenshot(driver, "Add Single Featured Products To Checkout Test (as a guest)");
+        captureScreenshot(driver, "Invalid 'Add Product(s) To Checkout' Test (as a guest (without clicking 'Agree to Terms' checkbox))");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
