@@ -72,7 +72,7 @@ public class SearchProductPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(550));
         wait.until(ExpectedConditions.visibilityOf(searchKeywordBar));
         searchKeywordBar.clear();
-        searchKeywordBar.sendKeys();
+        searchKeywordBar.sendKeys("Black & White Diamond Heart");
     }
 
     //click 'Search' button method

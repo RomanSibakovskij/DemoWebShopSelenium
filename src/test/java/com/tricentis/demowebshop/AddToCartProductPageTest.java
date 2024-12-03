@@ -62,12 +62,12 @@ public class AddToCartProductPageTest extends TestMethods{
 
     //multiple featured products addition to cart tests
 
-    //Test 007d -> add multiple featured product to cart test (as a registered user)
+    //Test 007d -> add multiple featured products to cart test (as a registered user)
     @Test
     @DisplayName("Add Multiple Featured Products To Cart Test (as a registered user)")
     @Tag("Add_Multiple_Featured_Products_To_Cart_Reg_User")
     @Tag("Add_Multiple_Featured_Products_To_Cart")
-    void addMultipleFeaturedProductToCartRegUserTest(){
+    void addMultipleFeaturedProductsToCartRegUserTest(){
         HomePage homePage = new HomePage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
         //user navigation to register page
@@ -78,7 +78,7 @@ public class AddToCartProductPageTest extends TestMethods{
         addMultipleFeaturedProductToCartTest();
     }
 
-    //Test 007e -> add multiple featured product to cart test (as a guest)
+    //Test 007e -> add multiple featured products to cart test (as a guest)
     @Test
     @DisplayName("Add Multiple Featured Products To Cart Test (as a guest)")
     @Tag("Add_Multiple_Featured_Products_To_Cart_Guest")
@@ -86,5 +86,23 @@ public class AddToCartProductPageTest extends TestMethods{
     void addMultipleFeaturedProductsToCartGuestTest(){
         //add multiple featured products to cart test (as a guest)
         addMultipleFeaturedProductToCartTest();
+    }
+
+    //multiple available products addition to cart tests
+
+    //Test 007f -> add multiple available products to cart test (as a registered user)
+    @Test
+    @DisplayName("Add Multiple Available Products To Cart Test (as a registered user)")
+    @Tag("Add_Multiple_Available_Products_To_Cart_Reg_User")
+    @Tag("Add_Multiple_Available_Products_To_Cart")
+    void addMultipleAvailableProductsToCartRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add multiple available products to cart test (as a registered user)
+        addMultipleAvailableProductsToCartTest();
     }
 }
