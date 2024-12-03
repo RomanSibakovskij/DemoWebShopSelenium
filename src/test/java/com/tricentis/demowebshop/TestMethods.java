@@ -1156,13 +1156,8 @@ public class TestMethods extends BaseTest{
         shoppingCartPage.clickEstimateShippingButton();
         //log shopping cart data
         logShoppingCartProductData(shoppingCartPage);
-        //click 'Agree to terms' checkbox
-        shoppingCartPage.clickAgreeToTermsCheckbox();
         //click 'Checkout' button
         shoppingCartPage.clickCheckoutButton();
-        LoginPage loginPage = new LoginPage(driver);
-        //click 'Checkout as guest' button
-        loginPage.clickCheckoutAsGuestButton();
         //assert the user gets the expected error
         assertEquals("Please accept the terms of service before the next step.", shoppingCartPage.getAgreeToTermsNotClickedErrorMessageText(), "The 'Agree to Terms' error message doesn't match expectations");
         //capture screenshot of the test result

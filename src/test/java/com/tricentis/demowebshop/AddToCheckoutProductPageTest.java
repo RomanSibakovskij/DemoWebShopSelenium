@@ -72,4 +72,20 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         addProductToCheckoutAsGuestTest(shoppingCartPage);
     }
 
+    //invalid product addition to check out method test
+
+    //Test 008c -> invalid 'Add a single available product to check out' without clicking 'Agree to Terms' checkbox test (as a guest)
+    @Test
+    @DisplayName("Invalid Add A Single Available Product To Checkout Without Click On Agree To Terms Checkbox Test (as a guest)")
+    @Tag("Add_Single_Available_Product_To_Checkout_Guest")
+    @Tag("Add_Single_Available_Product_To_Checkout")
+    @Tag("Invalid_Add_Product_To_Checkout")
+    void addASingleAvailableProductToCheckoutWithoutAgreeToTermsGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single available product to cart test (as a guest)
+        addASingleAvailableProductToCartTest();
+        //invalid 'Add a single featured product to check out' without clicking 'Agree to Terms' checkbox test (as a guest)
+        invalidAddProductToCheckoutAsGuestNoAgreeToTermsTest(shoppingCartPage);
+    }
+
 }
