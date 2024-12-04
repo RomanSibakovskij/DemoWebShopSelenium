@@ -156,7 +156,7 @@ public class AddToCheckoutProductPageTest extends TestMethods{
         addProductToCheckoutAsGuestTest(shoppingCartPage);
     }
 
-    //Test 008i -> add multiple available products to check out test (as a guest)
+    //Test 008i -> add multiple available products to check out test (as a guest => with Remove product from checkout function test)
     @Test
     @DisplayName("Add Multiple Available Products To Checkout [with Remove Product From Cart] Test (as a guest)")
     @Tag("Add_Multiple_Available_Products_To_Checkout_Guest")

@@ -142,4 +142,19 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //check out confirmation of a multiple available products test (as a registered user) //this test method is universal for all product types
         validRegUserCheckoutConfirmationTest();
     }
+
+    //Test 009g -> check out confirmation of multiple available products test (as a guest)
+    @Test
+    @DisplayName("Checkout Confirmation Of Multiple Available Products Test (as a guest)")
+    @Tag("Multiple_Available_Products_Checkout_Confirmation_Guest")
+    @Tag("Multiple_Available_Products_Checkout_Confirmation")
+    void multipleAvailableProductsCheckoutConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple available products to cart test (as a guest)
+        addMultipleAvailableProductsToCartTest();
+        //add multiple available products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of multiple available products test (as a guest) //this test method is universal for all product types
+        validGuestCheckoutConfirmationTest();
+    }
 }
