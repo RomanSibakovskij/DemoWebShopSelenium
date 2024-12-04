@@ -26,4 +26,19 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //check out confirmation of a single featured product test (as a registered user)
         validRegUserCheckoutConfirmationTest();
     }
+
+    //Test 009a -> check out confirmation of a single featured product test (as a guest)
+    @Test
+    @DisplayName("Checkout Confirmation Of A Single Featured Product Test (as a guest)")
+    @Tag("Single_Featured_Product_Checkout_Confirmation_Guest")
+    @Tag("Single_Featured_Product_Checkout_Confirmation")
+    void addASingleFeaturedProductToCheckoutGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of a single featured product test (as a guest)
+        validGuestCheckoutConfirmationTest();
+    }
 }

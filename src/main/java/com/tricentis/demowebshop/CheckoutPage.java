@@ -149,17 +149,17 @@ public class CheckoutPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(cityInputField));
         cityInputField.sendKeys(city);
     }
-    public void inputValidUserAddressIntoCityInputField() {
+    public void inputValidUserAddressIntoAddress1InputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(address1InputField));
         address1InputField.sendKeys(address1);
     }
-    public void inputValidUserZipCodeIntoCityInputField() {
+    public void inputValidUserZipCodeIntoPostCodeInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(postalCodeInputField));
         postalCodeInputField.sendKeys(zipCode);
     }
-    public void inputValidUserPhoneIntoCityInputField() {
+    public void inputValidUserPhoneIntoPhoneNumberInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
         phoneNumberInputField.sendKeys(phoneNumber);
@@ -194,11 +194,6 @@ public class CheckoutPage extends BasePage{
 
     //checkout page title getter
     public String getCheckoutPageTitle() {return checkoutPageTitle.getText();}
-
-    //user data getters for validation
-    public String getUserFirstName() {return firstNameInputField.getText();}
-    public String getUserLastName() {return lastNameInputField.getText();}
-    public String getUserEmail() {return emailAddressInputField.getText();}
 
 
     //shipping address section
