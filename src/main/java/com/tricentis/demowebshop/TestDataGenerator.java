@@ -197,4 +197,59 @@ public class TestDataGenerator extends BasePage{
         }
         return phoneNumber;
     }
+
+    //random credit card number generator
+    public static String generateCreditCardNumber() {
+        //random 15-digit base
+        Random rand = new Random();
+        StringBuilder base = new StringBuilder();
+        for (int i = 0; i < 15; i++) {
+            base.append(rand.nextInt(10));
+        }
+
+        //calculate the Luhn checksum digit
+        String cardWithoutCheckDigit = base.toString();
+        int checksum = calculateLuhnChecksum(cardWithoutCheckDigit);
+
+        //append the checksum to form a valid 16-digit credit card number
+        return cardWithoutCheckDigit + checksum;
+    }
+
+    //[Luhn Algorithm] for credit card number validation
+    public static int calculateLuhnChecksum(String cardWithoutCheckDigit) {
+        int sum = 0;
+        boolean shouldDouble = false;
+        for (int i = cardWithoutCheckDigit.length() - 1; i >= 0; i--) {
+            int digit = Character.getNumericValue(cardWithoutCheckDigit.charAt(i));
+
+            if (shouldDouble) {
+                digit *= 2;
+                if (digit > 9) {
+                    digit -= 9;
+                }
+            }
+
+            sum += digit;
+            shouldDouble = !shouldDouble;
+        }
+
+        //checksum is the number needed to make the sum a multiple of 10
+        return (10 - (sum % 10)) % 10;
+    }
+
+    //CVC code(usually it's 3 digits) generator
+    public static String generateCVC(String cardNumber) {
+        if (cardNumber.startsWith("34") || cardNumber.startsWith("37")) {
+            // American Express cards use a 4-digit CVC
+            return String.format("%04d", new Random().nextInt(10000)); //4 digit CVC
+        } else {
+            //other cards use a 3-digit CVC
+            return String.format("%03d", new Random().nextInt(1000)); //3 digit CVC
+        }
+    }
+
+    // random postal order number generator
+    public static int getRandomPostalOrderNumber() {
+        return 20000 + RANDOM.nextInt(30000);
+    }
 }
