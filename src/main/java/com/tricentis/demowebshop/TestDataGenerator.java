@@ -64,6 +64,39 @@ public class TestDataGenerator extends BasePage{
     "3rd Album", "Music 2", "Create Your Own Jewelry", "Black & White Diamond Heart", "$5 Virtual Gift Card", "$25 Virtual Gift Card", "$50 Physical Gift Card", "$100 Physical Gift Card",
     "Desktop PC with CDRW", "Elite Desktop PC"};
 
+    // array of Illinois state cities
+    private static final String[] ILLINOIS_CITIES = {
+            "Chicago", "Aurora", "Naperville", "Joliet", "Rockford", "Springfield",
+            "Elgin", "Peoria", "Champaign", "Waukegan", "Cicero", "Bloomington",
+            "Arlington Heights", "Evanston", "Decatur", "Schaumburg", "Bolingbrook",
+            "Palatine", "Skokie", "Des Plaines", "Orland Park", "Tinley Park",
+            "Oak Lawn", "Berwyn", "Mount Prospect", "Normal", "Wheaton", "Hoffman Estates",
+            "Oak Park", "Downers Grove", "Elmhurst", "Glenview", "DeKalb", "Lombard",
+            "Moline", "Buffalo Grove", "Bartlett", "Urbana", "Crystal Lake", "Quincy",
+            "Streamwood", "Carol Stream", "Romeoville", "Plainfield", "Hanover Park",
+            "Carpentersville", "Wheeling", "Park Ridge", "Addison", "Calumet City"
+    };
+
+    //Illinois street types array
+    private static final String[] STREET_TYPES = {"St.", "Ave.", "Blvd.", "Rd.", "Ln.", "Dr.", "Ct.", "Pl."};
+
+    //generate a random address with a given length for the street name
+    public static String generateRandomAddress(int length) {
+        int streetNumber = RANDOM.nextInt(9999) + 1; // street number between 1 and 9999
+        String streetName = generateRandomString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", length);
+        String streetType = STREET_TYPES[RANDOM.nextInt(STREET_TYPES.length)];
+        return streetNumber + " " + streetName + " " + streetType;
+    }
+
+    // cities rnd instance
+    private static final Random rndIllinoisCities = new Random();
+
+    // method to get a random city from the array
+    public static String getRandomCity() {
+        int index = rndIllinoisCities.nextInt(ILLINOIS_CITIES.length);
+        return ILLINOIS_CITIES[index];
+    }
+
     //random first name picker method
     public static String getRandomFirstName() {
         Random random = new Random();
@@ -150,5 +183,18 @@ public class TestDataGenerator extends BasePage{
     // generate random postal code for Illinois
     public static int getRandomPostalCode() {
         return 60000 + RANDOM.nextInt(30000);
+    }
+
+    //random phone number generator
+    public static String generatePhoneNumber(int length) {
+        if (length < 1) {throw new IllegalArgumentException("Phone number length must be at least 1.");}
+
+        Random random = new Random();
+        String phoneNumber = "";
+        //generate the specified number of random digits
+        for (int i = 0; i < length; i++) {
+            phoneNumber += random.nextInt(10); //generate a random digit (0-9)
+        }
+        return phoneNumber;
     }
 }
