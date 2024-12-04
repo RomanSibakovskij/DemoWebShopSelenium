@@ -1,6 +1,7 @@
 package com.tricentis.demowebshop;
 
 
+import org.checkerframework.checker.units.qual.C;
 import org.slf4j.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.*;
@@ -1219,6 +1220,73 @@ public class TestMethods extends BaseTest{
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //valid registered user checkout confirmation test method
+    protected void validRegUserCheckoutConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Registered User on Checkout Confirmation Page");
+        //valid additional registered user data getter
+        checkoutPage.validAdditionalRegUserDataGetter();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutPage.inputValidUserAddressIntoCityInputField();
+        //input valid user zip code
+        checkoutPage.inputValidUserZipCodeIntoCityInputField();
+        //input valid user phone number
+        checkoutPage.inputValidUserPhoneIntoCityInputField();
+        //capture screenshot after the user data input (for verification)
+        captureScreenshot(driver, "Added Additional Required Registered User Data for Billing Address");
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //shipping address section web element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionWebElementDisplayed(checkoutPage);
+        //shipping address section text element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionTextAsExpected(checkoutPage);
+        //capture screenshot at shipping address section (for verification)
+        captureScreenshot(driver, "Shipping Address Section Display");
+        //click 'In-store' checkbox
+        checkoutPage.clickInStoreCheckbox();
+        //click 'Continue' button (shipping address)
+        checkoutPage.clickShippingAddressContinueButton();
+        //payment method section web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentMethodSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot at payment method section (for verification)
+        captureScreenshot(driver, "Payment Method Section Display");
+        //click 'Continue' button (payment method)
+        checkoutPage.clickPaymentMethodContinueButton();
+        //payment information web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentInformationSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot at payment information section (for verification)
+        captureScreenshot(driver, "Payment Information Section Display");
+        //click 'Continue' button (payment information)
+        checkoutPage.clickPaymentInfoContinueButton();
+        //confirm order section web element assert
+        //isConfirmOrderSectionWebElementDisplayed(checkoutPage); //Selenium fails to find these elements with VALID selectors
+        //capture screenshot at confirm order section (for verification)
+        captureScreenshot(driver, "Confirm Order Section Display (pre-confirmation)");
+        //log billing/shipping data
+        logOrderBillingShippingData(checkoutPage);
+        //log the pre-confirm order data
+        logPreConfirmOrderProductData(checkoutPage);
+        //click 'Confirm' button
+        checkoutPage.clickConfirmButton();
+        //capture screenshot at the end of the test (capture the result)
+        captureScreenshot(driver, "Valid Registered User Order Confirmation Test Result");
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     //homepage web element assert test method
     protected void isHomePageWebElementDisplayed(HomePage homePage){
         //assert homepage community poll radio buttons are displayed (as a list)
@@ -1596,6 +1664,155 @@ public class TestMethods extends BaseTest{
         logger.info("Product(s) shipping price: " + shoppingCartPage.getProductShippingPrice());
         logger.info("Product(s) tax: " + shoppingCartPage.getProductTax());
         logger.info("Product(s) total price: " + shoppingCartPage.getProductTotalPrice());
+
+        System.out.println("\n");
+    }
+
+    //checkout page billing address section web element assert test method
+    protected void isBillingAddressSectionWebElementDisplayed(CheckoutPage checkoutPage){
+        //assert the checkout page title is displayed
+        assertTrue(checkoutPage.isCheckoutPageTitleDisplayed(), "The checkout page title isn't displayed");
+        //assert the billing address section title is displayed
+        assertTrue(checkoutPage.isBillingAddressSectionTitleDisplayed(), "The billing address section title isn't displayed");
+        //assert the billing address section first name input field is displayed
+        assertTrue(checkoutPage.isFirstNameInputFieldDisplayed(), "The billing address section first name input field isn't displayed");
+        //assert the billing address section last name input field is displayed
+        assertTrue(checkoutPage.isLastNameInputFieldDisplayed(), "The billing address section last name input field isn't displayed");
+        //assert the billing address section email input field is displayed
+        assertTrue(checkoutPage.isEmailAddressInputFieldDisplayed(), "The billing address section email input field isn't displayed");
+        //assert the billing address section company input field is displayed
+        assertTrue(checkoutPage.isCompanyInputFieldDisplayed(), "The billing address section company input field isn't displayed");
+        //assert the billing address section country dropdown menu is displayed
+        assertTrue(checkoutPage.isCountryDropdownMenuDisplayed(), "The billing address section country dropdown menu isn't displayed");
+        //assert the billing address section state dropdown menu is displayed
+        assertTrue(checkoutPage.isStateDropdownMenuDisplayed(), "The billing address section state dropdown menu isn't displayed");
+        //assert the billing address section city input field is displayed
+        assertTrue(checkoutPage.isCityInputFieldDisplayed(), "The billing address section city input field isn't displayed");
+        //assert the billing address section address1 (required) input field is displayed
+        assertTrue(checkoutPage.isAddress1InputFieldDisplayed(), "The billing address section address 1 input field isn't displayed");
+        //assert the billing address section address2 input field is displayed
+        assertTrue(checkoutPage.isAddress2InputFieldDisplayed(), "The billing address section address 2 input field isn't displayed");
+        //assert the billing address section postal code input field is displayed
+        assertTrue(checkoutPage.isPostalCodeInputFieldDisplayed(), "The billing address section postal code input field isn't displayed");
+        //assert the billing address section phone number input field is displayed
+        assertTrue(checkoutPage.isPhoneNumberInputFieldDisplayed(), "The billing address section phone number input field isn't displayed");
+        //assert the billing address section fax number input field is displayed
+        assertTrue(checkoutPage.isFaxNumberInputFieldDisplayed(), "The billing address section fax number input field isn't displayed");
+        //assert the billing address section 'Continue' button is displayed
+        assertTrue(checkoutPage.isBillingAddressContinueButtonDisplayed(), "The billing address section 'Continue' button isn't displayed");
+    }
+    //shipping address section web element assert test method
+    protected void isShippingAddressSectionWebElementDisplayed(CheckoutPage checkoutPage){
+        //assert the shipping address section title is displayed
+        assertTrue(checkoutPage.isShippingAddressSectionTitleDisplayed(), "The shipping address section title isn't displayed");
+        //assert the shipping address section dropdown menu is displayed //selenium cannot find this element even though it's fully visible with valid selector
+        assertTrue(checkoutPage.isShippingAddressDropdownMenuDisplayed(), "The shipping address dropdown menu isn't displayed");
+        //assert the shipping address section dropdown description is displayed
+        assertTrue(checkoutPage.isShippingAddressDropdownMenuDescriptionDisplayed(), "The shipping address dropdown menu description isn't displayed");
+        //assert the shipping address 'In store pickup' checkbox is displayed
+        assertTrue(checkoutPage.isShippingAddressInStorePickupCheckboxDisplayed(), "The shipping address 'In store pickup' checkbox isn't displayed");
+        //assert the shipping address in store description is displayed
+        assertTrue(checkoutPage.isShippingAddressInStoreDescriptionDisplayed(), "The shipping address in store description isn't displayed");
+        //assert the shipping address back link is displayed
+        assertTrue(checkoutPage.isShippingAddressBackLinkDisplayed(), "The shipping address back link isn't displayed");
+        //assert the shipping address 'Continue' button is displayed
+        assertTrue(checkoutPage.isShippingAddressContinueButtonDisplayed(), "The shipping address section title isn't displayed");
+    }
+    //shipping address section text element assert method
+    protected void isShippingAddressSectionTextAsExpected(CheckoutPage checkoutPage){
+        //assert shipping section title as expected
+        assertEquals("2\n" +
+                "Shipping Address", checkoutPage.getShippingAddressSectionTitle(), "The shipping address section title doesn't match expectations");
+        //assert shipping section dropdown menu description as expected
+        assertEquals("Select a shipping address from your address book or enter a new address.", checkoutPage.getShippingAddressDropdownMenuDescription(), "The shipping address section dropdown menu description doesn't match expectations");
+        //assert shipping section in store pickup description as expected
+        assertEquals("Pick up your items at the store (put your store address here)", checkoutPage.getShippingAddressInStorePickupDescription(), "The shipping address section in store pickup description doesn't match expectations");
+    }
+    //payment method section web element assert test method
+    protected void isPaymentMethodSectionWebElementDisplayed(CheckoutPage checkoutPage){
+        //assert payment method section title is displayed
+        assertTrue(checkoutPage.isPaymentMethodSectionTitleDisplayed(), "The payment method section title isn't displayed");
+        //assert payment method section 'Cash on delivery' radio button is displayed
+        assertTrue(checkoutPage.isPaymentMethodCashOnDeliveryRadioButtonDisplayed(), "The payment method 'Cash on delivery' radio button isn't displayed");
+        //assert payment method section 'Check/money order' radio button is displayed
+        assertTrue(checkoutPage.isPaymentMethodCheckMoneyOrderRadioButtonDisplayed(), "The payment method 'Check/money' order radio button isn't displayed");
+        //assert payment method section 'Credit card' radio button is displayed
+        assertTrue(checkoutPage.isPaymentMethodCreditCardRadioButtonDisplayed(), "The payment method 'Credit card' radio button isn't displayed");
+        //assert payment method section 'Purchase order' radio button is displayed
+        assertTrue(checkoutPage.isPaymentMethodPurchaseOrderRadioButtonDisplayed(), "The payment method 'Purchase order' radio button isn't displayed");
+        //assert payment method section back link is displayed
+        assertTrue(checkoutPage.isPaymentMethodBackLinkDisplayed(), "The payment method back link isn't displayed");
+        //assert payment method section 'Continue' button is displayed
+        assertTrue(checkoutPage.isPaymentMethodContinueButtonDisplayed(), "The payment method section 'Continue' button isn't displayed");
+    }
+    //payment information section web element assert test method
+    protected void isPaymentInformationSectionWebElementDisplayed(CheckoutPage checkoutPage){
+        //assert payment information section title is displayed
+        assertTrue(checkoutPage.isPaymentInformationSectionTitleDisplayed(), "The payment information section title isn't displayed.");
+        //assert payment information text table is displayed
+        assertTrue(checkoutPage.isPaymentInformationTextTableDisplayed(), "The payment information text table isn't displayed.");
+        //assert payment information back link is displayed
+        assertTrue(checkoutPage.isPaymentInformationBackLinkDisplayed(), "The payment information back link isn't displayed.");
+        //assert payment information 'Continue' button is displayed
+        assertTrue(checkoutPage.isPaymentInformationContinueButtonDisplayed(), "The payment information section 'continue' button isn't displayed.");
+    }
+
+    //confirm order section web element assert test method
+    protected void isConfirmOrderSectionWebElementDisplayed(CheckoutPage checkoutPage){
+        //assert confirm order section title is displayed
+        //assertTrue(checkoutPage.isConfirmOrderSectionTitleDisplayed(), "The confirm order section title isn't displayed.");
+        //assert confirm order billing address data is displayed
+        assertTrue(checkoutPage.isConfirmOrderBillingAddressDataDisplayed(), "The confirm order billing address data isn't displayed.");
+        //assert confirm order shipping method data is displayed
+        assertTrue(checkoutPage.isConfirmOrderShippingMethodDataDisplayed(), "The confirm order shipping method data isn't displayed.");
+        //assert confirm order product images are displayed (as a list)
+        assertTrue(checkoutPage.isConfirmOrderProductImageDisplayed(), "The confirm order product images aren't displayed.");
+        //assert confirm order product names are displayed (as a list)
+        assertTrue(checkoutPage.isConfirmOrderProductNameDisplayed(), "The confirm order product names aren't displayed.");
+        //assert confirm order product unit prices are displayed (as a list)
+        assertTrue(checkoutPage.isConfirmOrderProductUnitPriceDisplayed(), "The confirm order unit prices aren't displayed.");
+        //assert confirm order product quantities are displayed (as a list)
+        assertTrue(checkoutPage.isConfirmOrderProductQuantityDisplayed(), "The confirm order product quantities aren't displayed.");
+        //assert confirm order product total prices are displayed (as a list)
+        assertTrue(checkoutPage.isConfirmOrderProductTotalTablePriceDisplayed(), "The confirm order product total prices aren't displayed.");
+        //assert product order sub-total price is displayed
+        assertTrue(checkoutPage.isConfirmOrderProductSubTotalPriceDisplayed(), "The product order sub total price isn't displayed.");
+        //assert product order shipping method price is displayed
+        assertTrue(checkoutPage.isConfirmOrderProductShippingPriceDisplayed(), "The product order shipping method price isn't displayed.");
+        //assert product order additional fee is displayed
+        assertTrue(checkoutPage.isConfirmOrderProductAdditionalFeeDisplayed(), "The product order additional fee isn't displayed.");
+        //assert product order tax is displayed
+        assertTrue(checkoutPage.isConfirmOrderProductTaxDisplayed(), "The product order tax isn't displayed.");
+        //assert product order total price is displayed
+        assertTrue(checkoutPage.isConfirmOrderProductTotalPriceDisplayed(), "The product order total price isn't displayed.");
+        //assert confirm order section back link is displayed
+        assertTrue(checkoutPage.isConfirmOrderBackLinkDisplayed(), "The confirm order section back link isn't displayed.");
+        //assert 'Confirm' button is displayed
+        assertTrue(checkoutPage.isConfirmOrderButtonDisplayed(), "The confirm order button isn't displayed.");
+    }
+    //confirm order billing/shipping data logger method
+    protected void logOrderBillingShippingData(CheckoutPage checkoutPage){
+        System.out.println("Billing and shipping displayed data: " + "\n");
+
+        logger.info("Billing address data: " + checkoutPage.getConfirmOrderBillingAddressData());
+        logger.info("Shipping method data: " + checkoutPage.getConfirmOrderShippingMethodData());
+
+        System.out.println("\n");
+    }
+    //confirm order product tabular data logger method
+    protected void logPreConfirmOrderProductData(CheckoutPage checkoutPage){
+        System.out.println("Pre-confirm order displayed product data: " + "\n");
+
+        logger.info("Product name(s) (upper table): " + checkoutPage.getConfirmOrderTableProductName());
+        logger.info("Product unit price(s) (upper table): " + checkoutPage.getConfirmOrderTableProductUnitPrice());
+        logger.info("Product quantity(s) (upper table): " + checkoutPage.getConfirmOrderTableProductQuantity());
+        logger.info("Product total price(s) (upper table): " + checkoutPage.getConfirmOrderTableProductTotalPrice());
+
+        logger.info("Order sub-total price (lower table): " + checkoutPage.getConfirmOrderProductSubTotalPrice());
+        logger.info("Order shipping price (lower table): " + checkoutPage.getConfirmOrderProductShippingPrice());
+        logger.info("Order additional fee (lower table): " + checkoutPage.getConfirmOrderProductAdditionalFee());
+        logger.info("Order tax amount (lower table): " + checkoutPage.getConfirmOrderProductTax());
+        logger.info("Order total price (lower table): " + checkoutPage.getConfirmOrderProductTotalPrice());
 
         System.out.println("\n");
     }

@@ -497,6 +497,8 @@ public class RegisterPage extends BasePage {
     public String getExistingEmailErrorMessage(){return existingEmailErrorMessage.getText();}
 
     //private data getters
+    public String getFirstName() {return firstName;}
+    public String getLastName() {return lastName;}
     public String getEmail() {return email;}
     public String getPassword() {return password;}
 
