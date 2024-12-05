@@ -39,6 +39,7 @@ public class CheckoutGuestDataPage extends BasePage{
 
     //no singular guest input data
     private String noFirstName;
+    private String noLastName;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -108,7 +109,7 @@ public class CheckoutGuestDataPage extends BasePage{
 
     //invalid guest input data getter - no first name
     public void invalidAdditionalGuestNoFirstNameDataGetter(CheckoutGuestDataPage checkoutGuestDataPage){
-        System.out.println("Valid guest user data generated: " + "\n");
+        System.out.println("Invalid guest user data generated (no first name): " + "\n");
 
         noFirstName = "";
         lastName = TestDataGenerator.getRandomLastName();
@@ -133,6 +134,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
         firstNameInputField.sendKeys(noFirstName);
+    }
+
+    //invalid guest input data getter - no last name
+    public void invalidAdditionalGuestNoLastNameDataGetter(CheckoutGuestDataPage checkoutGuestDataPage){
+        System.out.println("Invalid guest user data generated (no last name): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        noLastName = "";
+        email = TestDataGenerator.generateRandomEmailAddress(12);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (no last name): " + firstName);
+        logger.info("No guest last name: " + noLastName);
+        logger.info("Valid guest email (no last name): " + email);
+        logger.info("Valid guest city (no last name): " + city);
+        logger.info("Valid guest address (no last name): " + address1);
+        logger.info("Valid guest zip code (no last name): " + zipCode);
+        logger.info("Valid guest phone number (no last name): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - no last name
+    public void inputNoLastNameIntoLastNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
+        lastNameInputField.sendKeys(noLastName);
     }
 
     //guest first/last name getters
