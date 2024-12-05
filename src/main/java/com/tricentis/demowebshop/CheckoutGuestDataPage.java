@@ -58,6 +58,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooShortAddress1;
     private String tooLongAddress1;
     private String tooShortZipCode;
+    private String tooLongZipCode;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -615,7 +616,7 @@ public class CheckoutGuestDataPage extends BasePage{
         address1InputField.sendKeys(tooLongAddress1);
     }
 
-    //invalid guest input data getter - no user zip code
+    //invalid guest input data getter - too short user zip code (2 chars)
     public void invalidAdditionalGuestTooShortZipCodeDataGetter(){
         System.out.println("Invalid guest user data generated (too short user zip code): " + "\n");
 
@@ -642,6 +643,34 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(postalCodeInputField));
         postalCodeInputField.sendKeys(tooShortZipCode);
+    }
+    //invalid guest input data getter - too long user zip code (75 chars)
+    public void invalidAdditionalGuestTooLongZipCodeDataGetter(){
+        System.out.println("Invalid guest user data generated (too long user zip code): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(6);
+        tooLongZipCode = "121232423121323455467658678576534231234234565768798956756443542342343453463";
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (too long user zip code): " + firstName);
+        logger.info("Valid guest last name (too long user zip code): " + lastName);
+        logger.info("Valid guest email (too long user zip code): " + email);
+        logger.info("Valid guest city (too long user zip code): " + city);
+        logger.info("Valid guest address (too long user zip code): " + address1);
+        logger.info("Too long guest zip code: " + tooLongZipCode);
+        logger.info("Valid guest phone number (too long user zip code): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too long zip code (75 chars)
+    public void inputTooLongZipCodeIntoPostCodeInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(postalCodeInputField));
+        postalCodeInputField.sendKeys(tooLongZipCode);
     }
 
     //guest first/last name getters
