@@ -102,7 +102,11 @@ public class ShoppingCartPage extends BasePage{
         shippingStateDropdownMenu.click();
     }
     //select 'Illinois' state option method
-    public void selectIllinoisOption(){shippingStateIllinois.click();}
+    public void selectIllinoisOption(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1500));
+        wait.until(ExpectedConditions.elementToBeClickable(shippingStateIllinois));
+        shippingStateIllinois.click();
+    }
 
     //input Illinois area zip code method
     public void inputIllinoisAreaZipCode(){

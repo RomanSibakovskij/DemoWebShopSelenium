@@ -254,5 +254,21 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooShortLastNameConfirmationTest();
     }
 
+    //Test 009ac -> invalid check out confirmation test - too long last name (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Too Long Last Name (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Too_Long_Billing_Address_Singular_Input")
+    @Tag("Too_Long_Singular_Input")
+    void invalidCheckoutTooLongLastNameConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - too long last name (as a guest) (125 chars is usually too long)
+        invalidGuestCheckoutTooLongLastNameConfirmationTest();
+    }
+
 
 }
