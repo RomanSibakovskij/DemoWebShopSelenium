@@ -1828,6 +1828,51 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Valid Guest Order Confirmation Test Result (with 'Purchase Order' payment method)");
     }
 
+    //negative checkout confirmation tests (guest branch only since it has all input fields empty before each test)
+
+    //no singular input
+
+    //invalid guest checkout confirmation test method - no first name
+    protected void invalidGuestCheckoutNoFirstNameConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //invalid guest input data getter (no first name)
+        checkoutGuestDataPage.invalidAdditionalGuestNoFirstNameDataGetter(checkoutGuestDataPage);
+        //don't input first name
+        checkoutGuestDataPage.inputNoFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears
+        assertEquals("First name is required.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
+        //capture screenshot of the invalid test result (no first name)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no first name)");
+
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method

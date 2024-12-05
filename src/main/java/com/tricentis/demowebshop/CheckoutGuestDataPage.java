@@ -23,6 +23,10 @@ public class CheckoutGuestDataPage extends BasePage{
     private WebElement postalCodeInputField;
     @FindBy(xpath = "//ol[@id='checkout-steps']/li[@id='opc-billing']//div[@class='enter-address-body']//input[@id='BillingNewAddress_PhoneNumber']")
     private WebElement phoneNumberInputField;
+    //invalid input error message element
+    @FindBy(xpath = "//div[@id='checkout-step-billing']//span[@class='field-validation-error']")
+    private WebElement invalidInputErrorMessage;
+
 
     //valid guest input data
     private String firstName;
@@ -32,6 +36,9 @@ public class CheckoutGuestDataPage extends BasePage{
     private String address1;
     private String zipCode;
     private String phoneNumber;
+
+    //no singular guest input data
+    private String noFirstName;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -95,7 +102,47 @@ public class CheckoutGuestDataPage extends BasePage{
         phoneNumberInputField.sendKeys(phoneNumber);
     }
 
+    //invalid data methods
+
+    //no singular input
+
+    //invalid guest input data getter - no first name
+    public void invalidAdditionalGuestNoFirstNameDataGetter(CheckoutGuestDataPage checkoutGuestDataPage){
+        System.out.println("Valid guest user data generated: " + "\n");
+
+        noFirstName = "";
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(12);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("No guest first name: " + noFirstName);
+        logger.info("Valid guest last name (no first name): " + lastName);
+        logger.info("Valid guest email (no first name): " + email);
+        logger.info("Valid guest city (no first name): " + city);
+        logger.info("Valid guest address (no first name): " + address1);
+        logger.info("Valid guest zip code (no first name): " + zipCode);
+        logger.info("Valid guest phone number (no first name): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - no first name
+    public void inputNoFirstNameIntoFirstNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
+        firstNameInputField.sendKeys(noFirstName);
+    }
+
     //guest first/last name getters
     public String getGuestFirstName(){return firstName;}
     public String getGuestLastName(){return lastName;}
+
+    //invalid singular input error message getter
+    public String getInvalidInputErrorMessage(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
+        wait.until(ExpectedConditions.visibilityOf(invalidInputErrorMessage));
+        return invalidInputErrorMessage.getText();
+    }
 }

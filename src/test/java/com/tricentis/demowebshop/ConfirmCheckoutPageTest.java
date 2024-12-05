@@ -277,4 +277,23 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //check out confirmation of a single featured product test (as a guest - with 'Purchase Order' payment method)
         validGuestCheckoutPurchaseOrderConfirmationTest();
     }
+
+    //negative checkout confirmation tests (since guest starts with all empty input fields, it's more prudent to test guest branch only -> reg user will have the same output)
+
+    //Test 009n -> invalid check out confirmation test - no first name (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - No First Name (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Singular_Input")
+    void invalidSingleProductCheckoutNoFirstNameConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - no first name (as a guest)
+        invalidGuestCheckoutNoFirstNameConfirmationTest();
+    }
+
+
 }
