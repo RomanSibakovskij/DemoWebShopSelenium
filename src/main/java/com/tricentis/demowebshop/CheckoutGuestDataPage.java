@@ -37,7 +37,7 @@ public class CheckoutGuestDataPage extends BasePage{
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
 
     //valid guest input data getter
-    public void validAdditionalGuestDataGetter(){
+    public void validAdditionalGuestDataGetter(CheckoutGuestDataPage checkoutGuestDataPage){
         System.out.println("Valid guest user data generated: " + "\n");
 
         firstName = TestDataGenerator.getRandomFirstName();
@@ -94,4 +94,8 @@ public class CheckoutGuestDataPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
         phoneNumberInputField.sendKeys(phoneNumber);
     }
+
+    //guest first/last name getters
+    public String getGuestFirstName(){return firstName;}
+    public String getGuestLastName(){return lastName;}
 }

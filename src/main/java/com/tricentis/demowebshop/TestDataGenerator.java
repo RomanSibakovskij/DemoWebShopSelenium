@@ -14,8 +14,8 @@ public class TestDataGenerator extends BasePage{
 
     private static final Random RANDOM = new SecureRandom();
 
-    private static String firstName;
-    private static String lastName;
+    private static String storedFirstName;
+    private static String storedLastName;
     private static String emailAddress;
     private static String password;
 
@@ -99,15 +99,19 @@ public class TestDataGenerator extends BasePage{
 
     //random first name picker method
     public static String getRandomFirstName() {
-        Random random = new Random();
-        String firstName = firstNames[random.nextInt(firstNames.length)];
-        return firstName;
+        if (storedFirstName == null) {
+            Random random = new Random();
+            storedFirstName = firstNames[random.nextInt(firstNames.length)];
+        }
+        return storedFirstName;
     }
     //random last name picker method
     public static String getRandomLastName() {
-        Random random = new Random();
-        String lastName = lastNames[random.nextInt(lastNames.length)];
-        return lastName;
+        if (storedLastName == null) {
+            Random random = new Random();
+            storedLastName = firstNames[random.nextInt(firstNames.length)];
+        }
+        return storedLastName;
     }
 
     //generate random string methods
@@ -198,27 +202,29 @@ public class TestDataGenerator extends BasePage{
         return phoneNumber;
     }
 
-    //random credit card number generator
+    // Random credit card number generator
     public static String generateCreditCardNumber() {
-        //random 15-digit base
         Random rand = new Random();
+
+        // Generate the first 15 digits randomly
         StringBuilder base = new StringBuilder();
         for (int i = 0; i < 15; i++) {
             base.append(rand.nextInt(10));
         }
 
-        //calculate the Luhn checksum digit
+        // Calculate the Luhn checksum digit
         String cardWithoutCheckDigit = base.toString();
         int checksum = calculateLuhnChecksum(cardWithoutCheckDigit);
 
-        //append the checksum to form a valid 16-digit credit card number
+        // Append the checksum digit to make a valid credit card number
         return cardWithoutCheckDigit + checksum;
     }
 
-    //[Luhn Algorithm] for credit card number validation
+    // Luhn algorithm for credit card number validation
     public static int calculateLuhnChecksum(String cardWithoutCheckDigit) {
         int sum = 0;
-        boolean shouldDouble = false;
+        boolean shouldDouble = true; // Start doubling from the rightmost digit
+
         for (int i = cardWithoutCheckDigit.length() - 1; i >= 0; i--) {
             int digit = Character.getNumericValue(cardWithoutCheckDigit.charAt(i));
 
@@ -233,7 +239,7 @@ public class TestDataGenerator extends BasePage{
             shouldDouble = !shouldDouble;
         }
 
-        //checksum is the number needed to make the sum a multiple of 10
+        // Return the checksum digit that makes the sum a multiple of 10
         return (10 - (sum % 10)) % 10;
     }
 
@@ -252,4 +258,8 @@ public class TestDataGenerator extends BasePage{
     public static int getRandomPostalOrderNumber() {
         return 20000 + RANDOM.nextInt(30000);
     }
+
+    //valid user first/last name getters
+    public String getFirstName() {return storedFirstName;}
+    public String getLastName() {return storedLastName;}
 }

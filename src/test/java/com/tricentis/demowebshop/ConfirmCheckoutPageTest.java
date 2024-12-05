@@ -158,7 +158,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         validGuestCheckoutConfirmationTest();
     }
 
-    // 'Check Money' order payment method test
+    // 'Check Money' order payment method tests
 
     //Test 009h -> check out confirmation of a single product test - with 'Check/Money Order' payment method (as a registered user)
     @Test
@@ -198,7 +198,28 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         validGuestCheckoutCheckMoneyConfirmationTest();
     }
 
-    //Credit card payment method
+    //'Credit Card' payment method tests
 
+    //Test 009j -> check out confirmation of a single product test (as a registered user - with 'Credit Card' payment method)
+    @Test
+    @DisplayName("Checkout Confirmation Of A Single Product Test (as a registered user)")
+    @Tag("Single_Product_Checkout_Confirmation_Reg_User")
+    @Tag("Single_Product_Checkout_Confirmation")
+    @Tag("Credit_Card_Payment_Method")
+    void singleProductCheckoutWithCreditCardConfirmationRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add a single available product to cart test (as a registered user)
+        addASingleAvailableProductToCartTest();
+        //add a single available product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
+        //check out confirmation of a single product test (as a registered user - with 'Credit Card' payment method)
+        validRegUserCheckoutCreditCardConfirmationTest();
+    }
 
 }

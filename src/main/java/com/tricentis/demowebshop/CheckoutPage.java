@@ -83,7 +83,7 @@ public class CheckoutPage extends BasePage{
     private WebElement paymentInformationTextTable;
     @FindBy(xpath = "//ol[@id='checkout-steps']/li[@id='opc-payment_info']//p[@class='back-link']/a")
     private WebElement paymentInformationBackLink;
-    @FindBy(xpath = "//ol[@id='checkout-steps']/li[@id='opc-payment_info']//input")
+    @FindBy(xpath = "//ol[@id='checkout-steps']/li[@id='opc-payment_info']//input[@class='button-1 payment-info-next-step-button']")
     private WebElement paymentInformationContinueButton;
     //confirm order section
     @FindBy(xpath = "//ol[@id='checkout-steps']/li[@id='opc-payment_info']//div[@class='step-title']")
@@ -129,7 +129,7 @@ public class CheckoutPage extends BasePage{
     public CheckoutPage(WebDriver driver) {super(driver);}
 
     //valid registered user input data getter
-    public void validAdditionalRegUserDataGetter(){
+    public void validAdditionalRegUserDataGetter(CheckoutPage checkoutPage){
         System.out.println("Valid additional registered user data generated: " + "\n");
 
         city = TestDataGenerator.getRandomCity();
@@ -164,6 +164,10 @@ public class CheckoutPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
         phoneNumberInputField.sendKeys(phoneNumber);
     }
+
+    //registered user first / last name getters
+    public String getUserFirstName() {return firstNameInputField.getText();}
+    public String getUserLastName() {return lastNameInputField.getText();}
 
     //billing address section country dropdown menu click method
     public void clickBillingAddressCountryDropdownMenu() {
@@ -322,7 +326,7 @@ public class CheckoutPage extends BasePage{
         return confirmOrderProductTax.getText();
     }
     public String getConfirmOrderProductTotalPrice(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(600));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1400));
         wait.until(ExpectedConditions.visibilityOf(confirmOrderProductTotalPrice));
         return confirmOrderProductTotalPrice.getText();
     }
