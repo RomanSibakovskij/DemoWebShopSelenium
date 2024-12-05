@@ -44,6 +44,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
 
     //no singular credit data input data
     private String noGuestCardHolderName;
+    private String noCardNumber;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -137,7 +138,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
         cardCVCNumber = TestDataGenerator.generateCVC(cardNumber);
         System.out.println("Invalid generated user credit card data (guest - no cardholder name): " + "\n");
 
-        logger.info("Credit card holder name: " + noGuestCardHolderName);
+        logger.info("No guest credit card holder name: " + noGuestCardHolderName);
         logger.info("Credit card number (guest - no cardholder name)): " + cardNumber);
         logger.info("Credit card CVC number (guest - no cardholder name): " + cardCVCNumber);
 
@@ -149,6 +150,30 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
         wait.until(ExpectedConditions.visibilityOf(creditCardNameInputField));
         creditCardNameInputField.sendKeys(noGuestCardHolderName);
+    }
+
+    //invalid guest credit card data getter - no guest card number
+    public void invalidGuestCreditCardNoCardNumberDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
+        noCardNumber = "";
+        cardCVCNumber = "334";
+        System.out.println("Invalid generated user credit card data (guest - no card number): " + "\n");
+
+        logger.info("Credit card holder name (guest - no card number): " + guestCardHolderName);
+        logger.info("No credit card number: " + noCardNumber);
+        logger.info("Credit card CVC number (guest - no card number): " + cardCVCNumber);
+
+        System.out.println("\n");
+    }
+
+    //valid credit card data input methods
+    public void inputNoCreditCardNumberIntoCardNumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
+        creditCardNumberInputField.sendKeys(noCardNumber);
     }
 
     //invalid credit card error message getter (no singular input)

@@ -427,4 +427,20 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //invalid check out confirmation test - no credit card holder name (as a guest)
         invalidGuestCheckoutCreditCardNoCardNameConfirmationTest();
     }
+
+    //Test 009w -> invalid check out confirmation test - no credit card number (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - No Credit Card Number (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Credit_Card_Singular_Input")
+    @Tag("No_Singular_Input")
+    void invalidCheckoutNoCardNumberConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - no credit card number (as a guest)
+        invalidGuestCheckoutCreditCardNoCardNumberConfirmationTest();
+    }
 }
