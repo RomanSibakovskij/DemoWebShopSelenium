@@ -53,6 +53,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooLongLastName;
     private String tooShortEmail;
     private String tooLongEmail;
+    private String tooShortCity;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -497,6 +498,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
         emailAddressInputField.sendKeys(tooLongEmail);
+    }
+
+    //invalid guest input data getter - too short city (1 char)
+    public void invalidAdditionalGuestTooShortCityDataGetter(){
+        System.out.println("Invalid guest user data generated (too short city): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        tooShortCity = "Y";
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (too short city): " + firstName);
+        logger.info("Valid guest last name (too short city)): " + lastName);
+        logger.info("Valid guest email (too short city): " + email);
+        logger.info("Too short guest city: " + tooShortCity);
+        logger.info("Valid guest address (too short city): " + address1);
+        logger.info("Valid guest zip code (too short city): " + zipCode);
+        logger.info("Valid guest phone number (too short city): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too short city
+    public void inputTooShortCityIntoCityInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(cityInputField));
+        cityInputField.sendKeys(tooShortCity);
     }
 
     //guest first/last name getters
