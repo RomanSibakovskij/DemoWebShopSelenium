@@ -56,6 +56,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooShortCity;
     private String tooLongCity;
     private String tooShortAddress1;
+    private String tooLongAddress1;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -583,6 +584,34 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(address1InputField));
         address1InputField.sendKeys(tooShortAddress1);
+    }
+    //invalid guest input data getter - too long user address (address1) (120 chars)
+    public void invalidAdditionalGuestTooLongAddressDataGetter(){
+        System.out.println("Invalid guest user data generated (too long user address): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        tooLongAddress1 = TestDataGenerator.generateRandomEmailAddress(115);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (too long user address): " + firstName);
+        logger.info("Valid guest last name (too long user address): " + lastName);
+        logger.info("Valid guest email (too long user address): " + email);
+        logger.info("Valid guest city (too long user address): " + city);
+        logger.info("Too long guest address: " + tooLongAddress1);
+        logger.info("Valid guest zip code (too long user address): " + zipCode);
+        logger.info("Valid guest phone number (too long user address): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too long address (address1 is required input field)
+    public void inputTooLongAddressIntoAddress1InputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(address1InputField));
+        address1InputField.sendKeys(tooLongAddress1);
     }
 
     //guest first/last name getters
