@@ -1841,7 +1841,7 @@ public class TestMethods extends BaseTest{
         //capture screenshot before the test (for user verification)
         captureScreenshot(driver, "Guest on Checkout Confirmation Page");
         //invalid guest input data getter (no first name)
-        checkoutGuestDataPage.invalidAdditionalGuestNoFirstNameDataGetter(checkoutGuestDataPage);
+        checkoutGuestDataPage.invalidAdditionalGuestNoFirstNameDataGetter();
         //don't input first name
         checkoutGuestDataPage.inputNoFirstNameIntoFirstNameInputField();
         //input valid last name
@@ -1880,7 +1880,7 @@ public class TestMethods extends BaseTest{
         //capture screenshot before the test (for user verification)
         captureScreenshot(driver, "Guest on Checkout Confirmation Page");
         //invalid guest input data getter (no last name)
-        checkoutGuestDataPage.invalidAdditionalGuestNoLastNameDataGetter(checkoutGuestDataPage);
+        checkoutGuestDataPage.invalidAdditionalGuestNoLastNameDataGetter();
         //input valid first name
         checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
         //don't input last name
@@ -1907,7 +1907,7 @@ public class TestMethods extends BaseTest{
         checkoutPage.clickBillingAddressContinueButton();
         //assert the expected error message appears
         assertEquals("Last name is required.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
-        //capture screenshot of the invalid test result (no first name)
+        //capture screenshot of the invalid test result (no last name)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no last name)");
     }
     //invalid guest checkout confirmation test method - no email address
@@ -1919,7 +1919,7 @@ public class TestMethods extends BaseTest{
         //capture screenshot before the test (for user verification)
         captureScreenshot(driver, "Guest on Checkout Confirmation Page");
         //invalid guest input data getter (no email address)
-        checkoutGuestDataPage.invalidAdditionalGuestNoEmailDataGetter(checkoutGuestDataPage);
+        checkoutGuestDataPage.invalidAdditionalGuestNoEmailDataGetter();
         //input valid first name
         checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
         //input valid last name
@@ -1946,7 +1946,7 @@ public class TestMethods extends BaseTest{
         checkoutPage.clickBillingAddressContinueButton();
         //assert the expected error message appears
         assertEquals("Email is required.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
-        //capture screenshot of the invalid test result (no first name)
+        //capture screenshot of the invalid test result (no user email address)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no email address)");
     }
     //invalid guest checkout confirmation test method - no country and state (since they're inseparable)
@@ -1977,7 +1977,7 @@ public class TestMethods extends BaseTest{
         checkoutPage.clickBillingAddressContinueButton();
         //assert the expected error message appears
         assertEquals("Country is required.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
-        //capture screenshot of the invalid test result (no first name)
+        //capture screenshot of the invalid test result (no user country/state)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no country or state selected)");
     }
     //invalid guest checkout confirmation test method - no city
@@ -1989,7 +1989,7 @@ public class TestMethods extends BaseTest{
         //capture screenshot before the test (for user verification)
         captureScreenshot(driver, "Guest on Checkout Confirmation Page");
         //invalid guest input data getter (no city)
-        checkoutGuestDataPage.invalidAdditionalGuestNoCityDataGetter(checkoutGuestDataPage);
+        checkoutGuestDataPage.invalidAdditionalGuestNoCityDataGetter();
         //input valid first name
         checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
         //input valid last name
@@ -2016,8 +2016,47 @@ public class TestMethods extends BaseTest{
         checkoutPage.clickBillingAddressContinueButton();
         //assert the expected error message appears
         assertEquals("City is required", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
-        //capture screenshot of the invalid test result (no first name)
+        //capture screenshot of the invalid test result (no user city)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no user city)");
+    }
+    //invalid guest checkout confirmation test method - no user address (address1)
+    protected void invalidGuestCheckoutNoAddressConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //invalid guest input data getter (no user address)
+        checkoutGuestDataPage.invalidAdditionalGuestNoAddressDataGetter();
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //don't input address (address 1 is required only)
+        checkoutGuestDataPage.inputNoAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears
+        assertEquals("Street address is required", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
+        //capture screenshot of the invalid test result (no user address)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no user address)");
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
