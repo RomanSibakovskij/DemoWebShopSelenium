@@ -44,6 +44,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String noCity;
     private String noAddress1;
     private String noZipCode;
+    private String noPhone;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -283,6 +284,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(postalCodeInputField));
         postalCodeInputField.sendKeys(noZipCode);
+    }
+
+    //invalid guest input data getter - no user phone number
+    public void invalidAdditionalGuestNoPhoneDataGetter(){
+        System.out.println("Invalid guest user data generated (no user phone number): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(6);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        noPhone = "";
+
+        logger.info("Valid guest first name (no user phone number): " + firstName);
+        logger.info("Valid guest last name (no user phone number): " + lastName);
+        logger.info("Valid guest email (no user phone number): " + email);
+        logger.info("Valid guest city (no user phone number): " + city);
+        logger.info("Valid guest address (no user phone number): " + address1);
+        logger.info("Valid guest zip code (no user phone number): " + zipCode);
+        logger.info("No guest phone number: " + noPhone);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - no zip code
+    public void inputNoPhoneIntoPhoneNumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
+        phoneNumberInputField.sendKeys(noPhone);
     }
 
     //guest first/last name getters
