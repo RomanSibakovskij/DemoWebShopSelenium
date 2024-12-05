@@ -59,6 +59,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooLongAddress1;
     private String tooShortZipCode;
     private String tooLongZipCode;
+    private String tooShortPhone;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -322,7 +323,7 @@ public class CheckoutGuestDataPage extends BasePage{
 
         System.out.println("\n");
     }
-    //invalid guest data input method - no zip code
+    //invalid guest data input method - no phone number
     public void inputNoPhoneIntoPhoneNumberInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
@@ -671,6 +672,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(postalCodeInputField));
         postalCodeInputField.sendKeys(tooLongZipCode);
+    }
+
+    //invalid guest input data getter - too short phone number (6 chars)
+    public void invalidAdditionalGuestTooShortPhoneDataGetter(){
+        System.out.println("Invalid guest user data generated (too short user phone number): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(6);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        tooShortPhone = "+98548";
+
+        logger.info("Valid guest first name (too short user phone number): " + firstName);
+        logger.info("Valid guest last name (too short user phone number): " + lastName);
+        logger.info("Valid guest email (too short user phone number): " + email);
+        logger.info("Valid guest city (too short user phone number): " + city);
+        logger.info("Valid guest address (too short user phone number): " + address1);
+        logger.info("Valid guest zip code (too short user phone number): " + zipCode);
+        logger.info("Too short guest phone number: " + tooShortPhone);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too short phone number
+    public void inputTooShortPhoneIntoPhoneNumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
+        phoneNumberInputField.sendKeys(tooShortPhone);
     }
 
     //guest first/last name getters
