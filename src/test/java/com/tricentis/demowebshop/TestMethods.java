@@ -2058,6 +2058,45 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the invalid test result (no user address)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no user address)");
     }
+    //invalid guest checkout confirmation test method - no user zip code
+    protected void invalidGuestCheckoutNoZipCodeConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //invalid guest input data getter (no user zip code)
+        checkoutGuestDataPage.invalidAdditionalGuestNoZipCodeDataGetter();
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //don't input zip code
+        checkoutGuestDataPage.inputNoZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears
+        assertEquals("Zip / postal code is required", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
+        //capture screenshot of the invalid test result (no user zip code)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no user zip code)");
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -369,4 +369,19 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //invalid check out confirmation test - no user address (as a guest)
         invalidGuestCheckoutNoAddressConfirmationTest();
     }
+
+    //Test 009t -> invalid check out confirmation test - no user zip code (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - No User Zip Code (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Singular_Input")
+    void invalidCheckoutNoZipCodeConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - no user zip code (as a guest)
+        invalidGuestCheckoutNoZipCodeConfirmationTest();
+    }
 }

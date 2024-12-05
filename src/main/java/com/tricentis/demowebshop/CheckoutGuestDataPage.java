@@ -43,6 +43,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String noEmail;
     private String noCity;
     private String noAddress1;
+    private String noZipCode;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -253,6 +254,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(address1InputField));
         address1InputField.sendKeys(noAddress1);
+    }
+
+    //invalid guest input data getter - no user zip code
+    public void invalidAdditionalGuestNoZipCodeDataGetter(){
+        System.out.println("Invalid guest user data generated (no user zip code): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(6);
+        noZipCode = "";
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (no user zip code): " + firstName);
+        logger.info("Valid guest last name (no user zip code): " + lastName);
+        logger.info("Valid guest email (no user zip code): " + email);
+        logger.info("Valid guest city (no user zip code): " + city);
+        logger.info("Valid guest address (no user zip code): " + address1);
+        logger.info("No guest zip code (no user zip code): " + noZipCode);
+        logger.info("Valid guest phone number (no user zip code): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - no zip code
+    public void inputNoZipCodeIntoPostCodeInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(postalCodeInputField));
+        postalCodeInputField.sendKeys(noZipCode);
     }
 
     //guest first/last name getters
