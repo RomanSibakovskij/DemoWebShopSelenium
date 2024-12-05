@@ -2827,6 +2827,54 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too long user city)");
     }
 
+    //invalid guest checkout confirmation test method - too short user address (address1)
+    protected void invalidGuestCheckoutTooShortAddressConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //invalid guest input data getter (too short user address)
+        checkoutGuestDataPage.invalidAdditionalGuestTooShortAddressDataGetter();
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input too short address (address 1 is required only) (3 chars)
+        checkoutGuestDataPage.inputTooShortAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //capture screenshot of the invalid input (too short user address)
+        captureScreenshot(driver, "Too short user address");
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears, if it doesn't, log the issue
+        try {
+            assertEquals("User address is too short.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
+        } catch (TimeoutException e) {
+            // log the issue if error message didn't appear without crashing the test
+            logger.error("The address1 input field doesn't have an error on 'too short' input.");
+        }
+        //capture screenshot of the invalid test result (too short user address)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too short user address)");
+    }
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method

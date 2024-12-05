@@ -55,6 +55,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooLongEmail;
     private String tooShortCity;
     private String tooLongCity;
+    private String tooShortAddress1;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -553,6 +554,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(cityInputField));
         cityInputField.sendKeys(tooLongCity);
+    }
+
+    //invalid guest input data getter - too short user address (address1) (3 chars)
+    public void invalidAdditionalGuestTooShortAddressDataGetter(){
+        System.out.println("Invalid guest user data generated (too short user address): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        tooShortAddress1 = "3rd";
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (too short user address): " + firstName);
+        logger.info("Valid guest last name (too short user address): " + lastName);
+        logger.info("Valid guest email (too short user address): " + email);
+        logger.info("Valid guest city (too short user address): " + city);
+        logger.info("Too short guest address: " + tooShortAddress1);
+        logger.info("Valid guest zip code (too short user address): " + zipCode);
+        logger.info("Valid guest phone number (too short user address): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too short address (address1 is required input field)
+    public void inputTooShortAddressIntoAddress1InputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(address1InputField));
+        address1InputField.sendKeys(tooShortAddress1);
     }
 
     //guest first/last name getters
