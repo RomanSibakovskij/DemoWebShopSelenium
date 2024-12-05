@@ -187,7 +187,11 @@ public class CheckoutPage extends BasePage{
     }
 
     //select 'Illinois' option
-    public void selectIllinoisOption(){stateIllinoisOption.click();}
+    public void selectIllinoisOption(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1500));
+        wait.until(ExpectedConditions.elementToBeClickable(stateIllinoisOption));
+        stateIllinoisOption.click();
+    }
 
     //click 'Continue' button method (billing address section)
     public void clickBillingAddressContinueButton(){

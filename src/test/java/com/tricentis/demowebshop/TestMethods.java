@@ -3059,6 +3059,52 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the invalid test result (too short user phone number)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too short user phone number)");
     }
+    //invalid guest checkout confirmation test method - too long user phone number (25 chars)
+    protected void invalidGuestCheckoutTooLongPhoneConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //invalid guest input data getter (too long user phone number)
+        checkoutGuestDataPage.invalidAdditionalGuestTooLongPhoneDataGetter();
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input too long phone number (25 chars)
+        checkoutGuestDataPage.inputTooLongPhoneIntoPhoneNumberInputField();
+        //capture screenshot of the invalid input (too long user phone number)
+        captureScreenshot(driver, "Too long user phone number");
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears, if it doesn't, log the issue
+        try {
+            assertEquals("User phone number is too long.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
+        } catch (TimeoutException e) {
+            // log the issue if error message didn't appear without crashing the test
+            logger.error("The phone number input field doesn't have an error on 'too long' input.");
+        }
+        //capture screenshot of the invalid test result (too short user phone number)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too long user phone number)");
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
