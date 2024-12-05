@@ -280,10 +280,13 @@ public class ConfirmCheckoutPageTest extends TestMethods {
 
     //negative checkout confirmation tests (since guest starts with all empty input fields, it's more prudent to test guest branch only -> reg user will have the same output)
 
+    //no singular billing address input tests
+
     //Test 009n -> invalid check out confirmation test - no first name (as a guest)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No First Name (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoFirstNameConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -299,6 +302,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No Last Name (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoLastNameConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -314,6 +318,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No Email (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoEmailConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -329,6 +334,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No Country/State Selection (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoCountryStateConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -344,6 +350,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No User City (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoCityConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -359,6 +366,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No User Address (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoAddressConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -374,6 +382,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No User Zip Code (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoZipCodeConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -389,6 +398,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - No User Phone (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
     @Tag("No_Singular_Input")
     void invalidCheckoutNoPhoneConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -398,5 +408,23 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         addProductToCheckoutAsGuestTest(shoppingCartPage);
         //invalid check out confirmation test - no user phone number (as a guest)
         invalidGuestCheckoutNoPhoneConfirmationTest();
+    }
+
+    //no singular 'Credit Card' payment method input tests
+
+    //Test 009v -> invalid check out confirmation test - no credit card holder name (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - No Credit Card Name (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Credit_Card_Singular_Input")
+    @Tag("No_Singular_Input")
+    void invalidCheckoutNoCardNameConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - no credit card holder name (as a guest)
+        invalidGuestCheckoutCreditCardNoCardNameConfirmationTest();
     }
 }

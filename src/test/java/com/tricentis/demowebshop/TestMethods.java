@@ -2137,6 +2137,89 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no user phone number)");
     }
 
+    //no singular 'Credit Card' payment option input
+
+    //invalid guest checkout confirmation test method ('Credit Card' - missing cardholder name)
+    protected void invalidGuestCheckoutCreditCardNoCardNameConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        CheckoutPaymentMethodPage checkoutPaymentMethodPage = new CheckoutPaymentMethodPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //valid guest input data getter
+        checkoutGuestDataPage.validAdditionalGuestDataGetter(checkoutGuestDataPage);
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //capture screenshot after the user data input (for verification)
+        captureScreenshot(driver, "Added Additional Required Guest Data for Billing Address");
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //shipping address section web element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionWebElementDisplayed(checkoutPage);
+        //shipping address section text element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionTextAsExpected(checkoutPage);
+        //capture screenshot at shipping address section (for verification)
+        captureScreenshot(driver, "Shipping Address Section Display (guest)");
+        //click 'In-store' checkbox
+        checkoutPage.clickInStoreCheckbox();
+        //click 'Continue' button (shipping address)
+        checkoutPage.clickShippingAddressContinueButton();
+        //payment method section web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentMethodSectionWebElementDisplayed(checkoutPage);
+        //click 'Credit Card' radio button
+        checkoutPage.clickCreditCardRadioButton();
+        //capture screenshot at payment method section (for verification)
+        captureScreenshot(driver, "Payment Method Section Display (guest ('Credit Card' payment method))");
+        //click 'Continue' button (payment method)
+        checkoutPage.clickPaymentMethodContinueButton();
+        //payment information web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentInformationSectionWebElementDisplayed(checkoutPage);
+        //invalid guest credit card data getter (no cardholder name)
+        checkoutPaymentMethodPage.invalidGuestCreditCardNoCardNameDataGetter();
+        //don't input guest card holder name
+        checkoutPaymentMethodPage.inputNoCreditCardNameIntoNameInputField();
+        //input valid user credit card number
+        checkoutPaymentMethodPage.inputValidCreditCardNumberIntoCardNumberInputField();
+        //click credit card month dropdown menu
+        checkoutPaymentMethodPage.clickCreditCardMonthDropdownMenu();
+        //select valid month
+        checkoutPaymentMethodPage.selectCreditCardValidMonthOption();
+        //click credit card year dropdown menu
+        checkoutPaymentMethodPage.clickCreditCardYearDropdownMenu();
+        //select valid year
+        checkoutPaymentMethodPage.selectCreditCardValidYearOption();
+        //input valid user credit card CVC number
+        checkoutPaymentMethodPage.inputValidCreditCardCVCIntoCVCInputField();
+        //click 'Continue' button (payment information)
+        checkoutPage.clickPaymentInfoContinueButton();
+        //assert the expected error message appears
+        assertEquals("Enter cardholder name", checkoutPaymentMethodPage.getMissingCreditCardInputErrorMessage(), "The error message doesn't match expectations.");
+        //capture screenshot at the end of the test (capture the result)
+        captureScreenshot(driver, "Invalid Guest Payment Information Test Result (with 'Credit Card' payment method - no cardholder name)");
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method
