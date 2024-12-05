@@ -218,7 +218,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         addASingleFeaturedProductToCartTest();
         //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
         addProductToCheckoutAsGuestTest(shoppingCartPage);
-        //invalid check out confirmation test - too short first name (as a guest)
+        //invalid check out confirmation test - too short first name (as a guest) (1 char is usually too short)
         invalidGuestCheckoutTooShortFirstNameConfirmationTest();
     }
 
@@ -234,8 +234,24 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         addASingleFeaturedProductToCartTest();
         //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
         addProductToCheckoutAsGuestTest(shoppingCartPage);
-        //invalid check out confirmation test - too long first name (as a guest)
+        //invalid check out confirmation test - too long first name (as a guest) (125 chars is usually too short)
         invalidGuestCheckoutTooLongFirstNameConfirmationTest();
+    }
+
+    //Test 009ab -> invalid check out confirmation test - too short last name (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Too Short Last Name (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Too_Short_Billing_Address_Singular_Input")
+    @Tag("Too_Short_Singular_Input")
+    void invalidCheckoutTooShortLastNameConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - too short last name (as a guest) (1 char is usually too short)
+        invalidGuestCheckoutTooShortLastNameConfirmationTest();
     }
 
 

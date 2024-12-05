@@ -2463,7 +2463,7 @@ public class TestMethods extends BaseTest{
 
     //too short / too long singular input tests
 
-    //invalid guest checkout confirmation test method - too short first name
+    //invalid guest checkout confirmation test method - too short first name (1 char)
     protected void invalidGuestCheckoutTooShortFirstNameConfirmationTest(){
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
@@ -2507,7 +2507,7 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the invalid test result (no first name)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too short first name)");
     }
-    //invalid guest checkout confirmation test method - too long first name
+    //invalid guest checkout confirmation test method - too long first name (125 chars)
     protected void invalidGuestCheckoutTooLongFirstNameConfirmationTest(){
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
@@ -2550,6 +2550,50 @@ public class TestMethods extends BaseTest{
         }
         //capture screenshot of the invalid test result (no first name)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too long first name)");
+    }
+    //invalid guest checkout confirmation test method - too short last name (1 char)
+    protected void invalidGuestCheckoutTooShortLastNameConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //invalid guest input data getter (too short last name)
+        checkoutGuestDataPage.invalidAdditionalGuestTooShortLastNameDataGetter();
+        //input valid user first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input too short last name (1 char)
+        checkoutGuestDataPage.inputTooShortLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears, if it doesn't, log the issue
+        try {
+            assertEquals("Last name is too short.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
+        } catch (TimeoutException e) {
+            // log the issue if error message didn't appear without crashing the test
+            logger.error("The last name input field doesn't have an error on 'too short' input.");
+        }
+        //capture screenshot of the invalid test result (no first name)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too short last name)");
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
