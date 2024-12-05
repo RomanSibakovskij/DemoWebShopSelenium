@@ -1949,6 +1949,37 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the invalid test result (no first name)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no email address)");
     }
+    //invalid guest checkout confirmation test method - no country and state (since they're inseparable)
+    protected void invalidGuestCheckoutNoCountryStateConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //valid guest input data getter (do not select country nor state)
+        checkoutGuestDataPage.validAdditionalGuestDataGetter(checkoutGuestDataPage);
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears
+        assertEquals("Country is required.", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message text doesn't match expectations.");
+        //capture screenshot of the invalid test result (no first name)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (no country or state selected)");
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

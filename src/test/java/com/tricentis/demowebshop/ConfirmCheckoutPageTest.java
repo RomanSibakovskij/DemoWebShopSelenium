@@ -285,7 +285,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @DisplayName("Invalid Checkout Confirmation Test - No First Name (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
     @Tag("No_Singular_Input")
-    void invalidSingleProductCheckoutNoFirstNameConfirmationGuestTest(){
+    void invalidCheckoutNoFirstNameConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         //add a single featured product to cart test (as a guest)
         addASingleFeaturedProductToCartTest();
@@ -300,7 +300,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @DisplayName("Invalid Checkout Confirmation Test - No Last Name (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
     @Tag("No_Singular_Input")
-    void invalidSingleProductCheckoutNoLastNameConfirmationGuestTest(){
+    void invalidCheckoutNoLastNameConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         //add a single featured product to cart test (as a guest)
         addASingleFeaturedProductToCartTest();
@@ -315,7 +315,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @DisplayName("Invalid Checkout Confirmation Test - No Email (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
     @Tag("No_Singular_Input")
-    void invalidSingleProductCheckoutNoEmailConfirmationGuestTest(){
+    void invalidCheckoutNoEmailConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         //add a single featured product to cart test (as a guest)
         addASingleFeaturedProductToCartTest();
@@ -323,5 +323,20 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         addProductToCheckoutAsGuestTest(shoppingCartPage);
         //invalid check out confirmation test - no email (as a guest)
         invalidGuestCheckoutNoEmailConfirmationTest();
+    }
+
+    //Test 009q -> invalid check out confirmation test - no country / state selected (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - No Country/State Selection (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Singular_Input")
+    void invalidCheckoutNoCountryStateConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - no country/state selection (as a guest)
+        invalidGuestCheckoutNoCountryStateConfirmationTest();
     }
 }
