@@ -242,7 +242,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
 
     //Test 009l -> check out confirmation of a single product test (as a registered user - with 'Purchase Order' payment method)
     @Test
-    @DisplayName("Checkout Confirmation Of A Single Available Product Test (as a registered user ('Purchase Order' payment method))")
+    @DisplayName("Checkout Confirmation Of A Single Product Test (as a registered user ('Purchase Order' payment method))")
     @Tag("Single_Product_Checkout_Confirmation_Reg_User")
     @Tag("Single_Product_Checkout_Confirmation")
     @Tag("Purchase_Order_Payment_Method")
@@ -262,4 +262,19 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         validRegUserCheckoutPurchaseOrderConfirmationTest();
     }
 
+    //Test 009m -> check out confirmation of a single product test (as a guest - with 'Purchase Order' payment method)
+    @Test
+    @DisplayName("Checkout Confirmation Of A Single Product Test (as a guest ('Purchase Order' payment method))")
+    @Tag("Single_Product_Checkout_Confirmation_Guest")
+    @Tag("Single_Product_Checkout_Confirmation")
+    @Tag("Purchase_Order_Payment_Method")
+    void singleProductCheckoutPurchaseOrderConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of a single featured product test (as a guest - with 'Purchase Order' payment method)
+        validGuestCheckoutPurchaseOrderConfirmationTest();
+    }
 }
