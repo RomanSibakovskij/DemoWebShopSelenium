@@ -57,6 +57,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooLongCity;
     private String tooShortAddress1;
     private String tooLongAddress1;
+    private String tooShortZipCode;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -612,6 +613,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(address1InputField));
         address1InputField.sendKeys(tooLongAddress1);
+    }
+
+    //invalid guest input data getter - no user zip code
+    public void invalidAdditionalGuestTooShortZipCodeDataGetter(){
+        System.out.println("Invalid guest user data generated (too short user zip code): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(6);
+        tooShortZipCode = "22";
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (too short user zip code): " + firstName);
+        logger.info("Valid guest last name (too short user zip code): " + lastName);
+        logger.info("Valid guest email (too short user zip code): " + email);
+        logger.info("Valid guest city (too short user zip code): " + city);
+        logger.info("Valid guest address (too short user zip code): " + address1);
+        logger.info("Too short guest zip code: " + tooShortZipCode);
+        logger.info("Valid guest phone number (too short user zip code): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too short zip code (2 chars)
+    public void inputTooShortZipCodeIntoPostCodeInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(postalCodeInputField));
+        postalCodeInputField.sendKeys(tooShortZipCode);
     }
 
     //guest first/last name getters
