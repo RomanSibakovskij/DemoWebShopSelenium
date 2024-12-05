@@ -45,6 +45,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
     //no singular credit data input data
     private String noGuestCardHolderName;
     private String noCardNumber;
+    private String noCardCVCNumber;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -145,7 +146,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
         System.out.println("\n");
     }
 
-    //valid credit card data input methods
+    //invalid credit card data input methods - no card holder name
     public void inputNoCreditCardNameIntoNameInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
         wait.until(ExpectedConditions.visibilityOf(creditCardNameInputField));
@@ -163,17 +164,41 @@ public class CheckoutPaymentMethodPage extends BasePage{
         System.out.println("Invalid generated user credit card data (guest - no card number): " + "\n");
 
         logger.info("Credit card holder name (guest - no card number): " + guestCardHolderName);
-        logger.info("No credit card number: " + noCardNumber);
+        logger.info("No guest credit card number: " + noCardNumber);
         logger.info("Credit card CVC number (guest - no card number): " + cardCVCNumber);
 
         System.out.println("\n");
     }
 
-    //valid credit card data input methods
+    //invalid credit card data input method - no credit card number
     public void inputNoCreditCardNumberIntoCardNumberInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
         wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
         creditCardNumberInputField.sendKeys(noCardNumber);
+    }
+
+    //invalid guest credit card data getter - no guest credit card CVC number
+    public void invalidGuestCreditCardNoCardCVCNumberDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
+        cardNumber = TestDataGenerator.generateCreditCardNumber();
+        noCardCVCNumber = "";
+        System.out.println("Invalid generated user credit card data (guest - no card CVC number): " + "\n");
+
+        logger.info("Credit card holder name (guest - no card CVC number): " + noGuestCardHolderName);
+        logger.info("Credit card number (guest - no card CVC number): " + cardNumber);
+        logger.info("No guest credit card CVC number: " + cardCVCNumber);
+
+        System.out.println("\n");
+    }
+
+    //invalid credit card data input methods - no credit card CVC number
+    public void inputNoCreditCardCVCIntoCVCInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
+        wait.until(ExpectedConditions.visibilityOf(creditCardCVCInputField));
+        creditCardCVCInputField.sendKeys(noCardCVCNumber);
     }
 
     //invalid credit card error message getter (no singular input)
