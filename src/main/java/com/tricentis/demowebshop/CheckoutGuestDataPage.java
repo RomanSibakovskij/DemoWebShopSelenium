@@ -54,6 +54,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooShortEmail;
     private String tooLongEmail;
     private String tooShortCity;
+    private String tooLongCity;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -354,7 +355,6 @@ public class CheckoutGuestDataPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
         firstNameInputField.sendKeys(tooShortFirstName);
     }
-
     //invalid guest input data getter - too long first name (125 chars)
     public void invalidAdditionalGuestTooLongFirstNameDataGetter(){
         System.out.println("Invalid guest user data generated (too long first name): " + "\n");
@@ -412,7 +412,6 @@ public class CheckoutGuestDataPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
         lastNameInputField.sendKeys(tooShortLastName);
     }
-
     //invalid guest input data getter - too long last name (125 chars)
     public void invalidAdditionalGuestTooLongLastNameDataGetter(){
         System.out.println("Invalid guest user data generated (too long last name): " + "\n");
@@ -470,7 +469,6 @@ public class CheckoutGuestDataPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
         emailAddressInputField.sendKeys(tooShortEmail);
     }
-
     //invalid guest input data getter - too long email address name (125 chars total)
     public void invalidAdditionalGuestTooLongEmailDataGetter(){
         System.out.println("Invalid guest user data generated (too long email address): " + "\n");
@@ -513,7 +511,7 @@ public class CheckoutGuestDataPage extends BasePage{
         phoneNumber = TestDataGenerator.generatePhoneNumber(6);
 
         logger.info("Valid guest first name (too short city): " + firstName);
-        logger.info("Valid guest last name (too short city)): " + lastName);
+        logger.info("Valid guest last name (too short city): " + lastName);
         logger.info("Valid guest email (too short city): " + email);
         logger.info("Too short guest city: " + tooShortCity);
         logger.info("Valid guest address (too short city): " + address1);
@@ -527,6 +525,34 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(cityInputField));
         cityInputField.sendKeys(tooShortCity);
+    }
+    //invalid guest input data getter - too long city (75 chars)
+    public void invalidAdditionalGuestTooLongCityDataGetter(){
+        System.out.println("Invalid guest user data generated (too long city): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        tooLongCity = "addddddddddddddsdddddfffffffffffffffffffffssssssssssssssscxvcfhfgjhgjfgbvdd";
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (too long city): " + firstName);
+        logger.info("Valid guest last name (too long city): " + lastName);
+        logger.info("Valid guest email (too long city): " + email);
+        logger.info("Too long guest city: " + tooLongCity);
+        logger.info("Valid guest address (too long city): " + address1);
+        logger.info("Valid guest zip code (too long city): " + zipCode);
+        logger.info("Valid guest phone number (too long city): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too long city
+    public void inputTooLongCityIntoCityInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(cityInputField));
+        cityInputField.sendKeys(tooLongCity);
     }
 
     //guest first/last name getters
