@@ -40,6 +40,7 @@ public class CheckoutGuestDataPage extends BasePage{
     //no singular guest input data
     private String noFirstName;
     private String noLastName;
+    private String noEmail;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -163,6 +164,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
         lastNameInputField.sendKeys(noLastName);
+    }
+
+    //invalid guest input data getter - no email address
+    public void invalidAdditionalGuestNoEmailDataGetter(CheckoutGuestDataPage checkoutGuestDataPage){
+        System.out.println("Invalid guest user data generated (no email address): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        noEmail = "";
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (no email address): " + firstName);
+        logger.info("Valid guest last name (no email address): " + lastName);
+        logger.info("No guest email: " + noEmail);
+        logger.info("Valid guest city (no email address): " + city);
+        logger.info("Valid guest address (no email address): " + address1);
+        logger.info("Valid guest zip code (no email address): " + zipCode);
+        logger.info("Valid guest phone number (no email address): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - no email address
+    public void inputNoEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(noEmail);
     }
 
     //guest first/last name getters

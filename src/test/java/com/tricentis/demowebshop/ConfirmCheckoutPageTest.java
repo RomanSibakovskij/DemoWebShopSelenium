@@ -309,4 +309,19 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //invalid check out confirmation test - no last name (as a guest)
         invalidGuestCheckoutNoLastNameConfirmationTest();
     }
+
+    //Test 009p -> invalid check out confirmation test - no email address (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - No Email (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Singular_Input")
+    void invalidSingleProductCheckoutNoEmailConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - no email (as a guest)
+        invalidGuestCheckoutNoEmailConfirmationTest();
+    }
 }
