@@ -51,6 +51,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooLongFirstName;
     private String tooShortLastName;
     private String tooLongLastName;
+    private String tooShortEmail;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -437,6 +438,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(lastNameInputField));
         lastNameInputField.sendKeys(tooLongLastName);
+    }
+
+    //invalid guest input data getter - too short email address name (1 char)
+    public void invalidAdditionalGuestTooShortEmailDataGetter(){
+        System.out.println("Invalid guest user data generated (no email address): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        tooShortEmail = "m@b.com";
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (too short email address): " + firstName);
+        logger.info("Valid guest last name (too short email address): " + lastName);
+        logger.info("Too short guest email address: " + tooShortEmail);
+        logger.info("Valid guest city (too short email address): " + city);
+        logger.info("Valid guest address (too short email address): " + address1);
+        logger.info("Valid guest zip code (too short email address): " + zipCode);
+        logger.info("Valid guest phone number (too short email address): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too short email address
+    public void inputTooShortEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(tooShortEmail);
     }
 
     //guest first/last name getters
