@@ -206,11 +206,11 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
 
     //too short / too long singular input tests
 
-    //Test 009z -> invalid check out confirmation test - too short first name (as a guest)
+    //Test 009z -> invalid check out confirmation test - too short first name (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short First Name (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
-    @Tag("No_Billing_Address_Singular_Input")
+    @Tag("Too_Short_Billing_Address_Singular_Input")
     @Tag("Too_Short_Singular_Input")
     void invalidCheckoutTooShortFirstNameConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -220,6 +220,22 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         addProductToCheckoutAsGuestTest(shoppingCartPage);
         //invalid check out confirmation test - too short first name (as a guest)
         invalidGuestCheckoutTooShortFirstNameConfirmationTest();
+    }
+
+    //Test 009aa -> invalid check out confirmation test - too long first name (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Too Long First Name (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Too_Long_Billing_Address_Singular_Input")
+    @Tag("Too_Long_Singular_Input")
+    void invalidCheckoutTooLongFirstNameConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - too long first name (as a guest)
+        invalidGuestCheckoutTooLongFirstNameConfirmationTest();
     }
 
 
