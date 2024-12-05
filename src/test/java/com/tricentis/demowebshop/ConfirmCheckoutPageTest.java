@@ -182,7 +182,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         validRegUserCheckoutCheckMoneyConfirmationTest();
     }
 
-    //Test 009e -> check out confirmation of multiple products test (as a guest - with selected 'Check/Money Order' payment method)
+    //Test 009i -> check out confirmation of multiple products test (as a guest - with selected 'Check/Money Order' payment method)
     @Test
     @DisplayName("Checkout Confirmation Of Multiple Products Test (as a guest - 'Check/Money Order' payment method)")
     @Tag("Multiple_Products_Checkout_Confirmation_Guest")
@@ -197,4 +197,8 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //check out confirmation of multiple products test (as a guest - with selected 'Check/Money Order' payment method)
         validGuestCheckoutCheckMoneyConfirmationTest();
     }
+
+    //Credit card payment method
+
+
 }
