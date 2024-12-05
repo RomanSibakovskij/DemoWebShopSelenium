@@ -26,12 +26,18 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private WebElement creditCardValidYearOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[5]/td[2]/input")
     private WebElement creditCardCVCInputField;
+    //purchase order number input field element
+    @FindBy(xpath = "//div[@class='section payment-info']//input[@id='PurchaseOrderNumber']")
+    private WebElement purchaseOrderNumberInputField;
 
     //valid credit card data
     private String regUserCardHolderName;
     private String guestCardHolderName;
     private String cardNumber;
     private String cardCVCNumber;
+
+    //valid purchase order number data
+    private String purchaseOrderNumber = String.valueOf(TestDataGenerator.getRandomPostalOrderNumber());
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -108,4 +114,10 @@ public class CheckoutPaymentMethodPage extends BasePage{
         creditCardNameInputField.sendKeys(regUserCardHolderName);
     }
 
+    //'Purchase Order' number input method
+    public void inputValidPurchaseOrderNumberIntoPONumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(purchaseOrderNumberInputField));
+        purchaseOrderNumberInputField.sendKeys(purchaseOrderNumber);
+    }
 }

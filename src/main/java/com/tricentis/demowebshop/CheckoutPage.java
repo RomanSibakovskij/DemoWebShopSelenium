@@ -237,6 +237,13 @@ public class CheckoutPage extends BasePage{
         paymentMethodCreditCardRadioButton.click();
     }
 
+    //click 'Purchase Order' radio button method (payment method)
+    public void clickPurchaseOrderRadioButton(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.elementToBeClickable(paymentMethodPurchaseOrderRadioButton));
+        paymentMethodPurchaseOrderRadioButton.click();
+    }
+
     //click 'Continue' button method (payment method)
     public void clickPaymentMethodContinueButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
