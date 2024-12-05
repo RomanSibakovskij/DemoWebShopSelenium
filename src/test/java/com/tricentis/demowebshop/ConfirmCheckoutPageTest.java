@@ -166,7 +166,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
     @Tag("Single_Product_Checkout_Confirmation_Reg_User")
     @Tag("Single_Product_Checkout_Confirmation")
     @Tag("Check_Money_Payment_Method")
-    void singleFeaturedProductCheckoutCheckMoneyConfirmationRegUserTest(){
+    void singleProductCheckoutCheckMoneyConfirmationRegUserTest(){
         HomePage homePage = new HomePage(driver);
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
@@ -178,7 +178,23 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         addASingleFeaturedProductToCartTest();
         //add a single featured product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
         addProductToCheckoutTest(shoppingCartPage);
-        //check out confirmation of a single featured product test (as a registered user - with selected 'Check/Money Order' payment method)
+        //check out confirmation of a single product test (as a registered user - with selected 'Check/Money Order' payment method)
         validRegUserCheckoutCheckMoneyConfirmationTest();
+    }
+
+    //Test 009e -> check out confirmation of multiple products test (as a guest - with selected 'Check/Money Order' payment method)
+    @Test
+    @DisplayName("Checkout Confirmation Of Multiple Products Test (as a guest - 'Check/Money Order' payment method)")
+    @Tag("Multiple_Products_Checkout_Confirmation_Guest")
+    @Tag("Multiple_Products_Checkout_Confirmation")
+    @Tag("Check_Money_Payment_Method")
+    void multipleProductsCheckoutCheckMoneyConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple featured products to cart test (as a guest)
+        addMultipleFeaturedProductToCartTest();
+        //add multiple featured products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of multiple products test (as a guest - with selected 'Check/Money Order' payment method)
+        validGuestCheckoutCheckMoneyConfirmationTest();
     }
 }

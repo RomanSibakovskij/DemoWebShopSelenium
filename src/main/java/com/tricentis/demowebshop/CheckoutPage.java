@@ -219,7 +219,7 @@ public class CheckoutPage extends BasePage{
 
     //payment method section
 
-    //click 'Continue' button method (payment method)
+    //click 'Check/Money Order' radio button method (payment method)
     public void clickCheckMoneyOrderRadioButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
         wait.until(ExpectedConditions.elementToBeClickable(paymentMethodCheckMoneyOrderRadioButton));
@@ -234,6 +234,13 @@ public class CheckoutPage extends BasePage{
     }
 
     //payment information section
+
+    //payment information table data getter
+    public String getPaymentInformationSectionData(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOf(paymentInformationTextTable));
+        return paymentInformationTextTable.getText();
+    }
 
     //click 'Continue' button method (payment method)
     public void clickPaymentInfoContinueButton(){
