@@ -37,9 +37,11 @@ public class CheckoutPaymentMethodPage extends BasePage{
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
 
     //valid guest credit card data getter
-    public void validGuestCreditCardDataGetter(CheckoutGuestDataPage checkoutGuestDataPage){
+    public void validGuestCreditCardDataGetter(){
 
-        guestCardHolderName = checkoutGuestDataPage.getGuestFirstName() + " " + checkoutGuestDataPage.getGuestLastName();
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
         cardNumber = TestDataGenerator.generateCreditCardNumber();
         cardCVCNumber = TestDataGenerator.generateCVC(cardNumber);
         System.out.println("Valid generated user credit card data (guest): " + "\n");
@@ -53,7 +55,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
 
     //valid credit card data input methods
     public void inputValidCreditCardNameIntoNameInputField() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
         wait.until(ExpectedConditions.visibilityOf(creditCardNameInputField));
         creditCardNameInputField.sendKeys(guestCardHolderName);
     }
@@ -87,7 +89,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
 
         TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
 
-        regUserCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName() ;
+        regUserCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
         cardNumber = TestDataGenerator.generateCreditCardNumber();
         cardCVCNumber = TestDataGenerator.generateCVC(cardNumber);
         System.out.println("Valid generated user credit card data (registered user): " + "\n");

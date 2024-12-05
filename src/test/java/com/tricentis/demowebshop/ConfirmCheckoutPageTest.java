@@ -202,7 +202,7 @@ public class ConfirmCheckoutPageTest extends TestMethods {
 
     //Test 009j -> check out confirmation of a single product test (as a registered user - with 'Credit Card' payment method)
     @Test
-    @DisplayName("Checkout Confirmation Of A Single Product Test (as a registered user)")
+    @DisplayName("Checkout Confirmation Of A Single Product Test (as a registered user ('Credit Card' payment method))")
     @Tag("Single_Product_Checkout_Confirmation_Reg_User")
     @Tag("Single_Product_Checkout_Confirmation")
     @Tag("Credit_Card_Payment_Method")
@@ -220,6 +220,22 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         addProductToCheckoutTest(shoppingCartPage);
         //check out confirmation of a single product test (as a registered user - with 'Credit Card' payment method)
         validRegUserCheckoutCreditCardConfirmationTest();
+    }
+
+    //Test 009k -> check out confirmation of multiple available products test (as a guest - with 'Credit Card' payment method)
+    @Test
+    @DisplayName("Checkout Confirmation Of Multiple Products Test (as a guest ('Credit Card' payment method))")
+    @Tag("Multiple_Products_Checkout_Confirmation_Guest")
+    @Tag("Multiple_Products_Checkout_Confirmation")
+    @Tag("Credit_Card_Payment_Method")
+    void multipleProductsCheckoutWithCreditCardConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple available products to cart test (as a guest)
+        addMultipleAvailableProductsToCartTest();
+        //add multiple available products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of multiple products test (as a guest - with 'Credit Card' payment method) //this test method is universal for all product types
+        validGuestCheckoutCreditCardConfirmationTest();
     }
 
 }

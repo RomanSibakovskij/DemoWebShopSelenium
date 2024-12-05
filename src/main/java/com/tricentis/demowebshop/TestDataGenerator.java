@@ -202,17 +202,17 @@ public class TestDataGenerator extends BasePage{
         return phoneNumber;
     }
 
-    // Random credit card number generator
+    //random credit card number generator
     public static String generateCreditCardNumber() {
         Random rand = new Random();
 
-        // Generate the first 15 digits randomly
+        //random first 15 digits
         StringBuilder base = new StringBuilder();
         for (int i = 0; i < 15; i++) {
             base.append(rand.nextInt(10));
         }
 
-        // Calculate the Luhn checksum digit
+        //calculate the Luhn checksum digit
         String cardWithoutCheckDigit = base.toString();
         int checksum = calculateLuhnChecksum(cardWithoutCheckDigit);
 
@@ -220,7 +220,7 @@ public class TestDataGenerator extends BasePage{
         return cardWithoutCheckDigit + checksum;
     }
 
-    // Luhn algorithm for credit card number validation
+    // [Luhn algorithm] for credit card number validation
     public static int calculateLuhnChecksum(String cardWithoutCheckDigit) {
         int sum = 0;
         boolean shouldDouble = true; // Start doubling from the rightmost digit
@@ -239,7 +239,7 @@ public class TestDataGenerator extends BasePage{
             shouldDouble = !shouldDouble;
         }
 
-        // Return the checksum digit that makes the sum a multiple of 10
+        //return the checksum digit that makes the sum a multiple of 10
         return (10 - (sum % 10)) % 10;
     }
 

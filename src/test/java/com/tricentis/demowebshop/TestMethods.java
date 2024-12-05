@@ -1358,7 +1358,7 @@ public class TestMethods extends BaseTest{
 
     //checkout with 'Check Money' payment option
 
-    //valid registered user checkout confirmation test method
+    //valid registered user checkout confirmation test method ('Check/Money Order')
     protected void validRegUserCheckoutCheckMoneyConfirmationTest(){
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         //checkout page billing address web element assert
@@ -1427,7 +1427,7 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Valid Registered User Order Confirmation Test Result");
     }
 
-    //valid guest checkout confirmation test method
+    //valid guest checkout confirmation test method ('Check/Money Order')
     protected void validGuestCheckoutCheckMoneyConfirmationTest(){
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
@@ -1500,12 +1500,12 @@ public class TestMethods extends BaseTest{
         //click 'Confirm' button
         checkoutPage.clickConfirmButton();
         //capture screenshot at the end of the test (capture the result)
-        captureScreenshot(driver, "Valid Registered User Order Confirmation Test Result (guest (with 'Check/Money Order'))");
+        captureScreenshot(driver, "Valid Guest Order Confirmation Test Result (with 'Check/Money Order')");
     }
 
     //checkout with 'Credit card' payment option
 
-    //valid registered user checkout confirmation test method
+    //valid registered user checkout confirmation test method ('Credit Card')
     protected void validRegUserCheckoutCreditCardConfirmationTest(){
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         CheckoutPaymentMethodPage checkoutPaymentMethodPage = new CheckoutPaymentMethodPage(driver);
@@ -1547,7 +1547,7 @@ public class TestMethods extends BaseTest{
         checkoutPage.clickShippingAddressContinueButton();
         //payment method section web element assert //Selenium fails to find these elements with VALID selectors
         //isPaymentMethodSectionWebElementDisplayed(checkoutPage);
-        //click 'Check/Money Order' radio button
+        //click 'Credit Card' radio button
         checkoutPage.clickCreditCardRadioButton();
         //capture screenshot at payment method section (for verification)
         captureScreenshot(driver, "Payment Method Section Display (with 'Credit Card' selected)");
@@ -1587,6 +1587,97 @@ public class TestMethods extends BaseTest{
         checkoutPage.clickConfirmButton();
         //capture screenshot at the end of the test (capture the result)
         captureScreenshot(driver, "Valid Registered User Order Confirmation Test Result (with 'Credit Card' payment method)");
+    }
+
+    //valid guest checkout confirmation test method ('Credit Card')
+    protected void validGuestCheckoutCreditCardConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        CheckoutPaymentMethodPage checkoutPaymentMethodPage = new CheckoutPaymentMethodPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //valid guest input data getter
+        checkoutGuestDataPage.validAdditionalGuestDataGetter(checkoutGuestDataPage);
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //capture screenshot after the user data input (for verification)
+        captureScreenshot(driver, "Added Additional Required Guest Data for Billing Address");
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //shipping address section web element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionWebElementDisplayed(checkoutPage);
+        //shipping address section text element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionTextAsExpected(checkoutPage);
+        //capture screenshot at shipping address section (for verification)
+        captureScreenshot(driver, "Shipping Address Section Display (guest)");
+        //click 'In-store' checkbox
+        checkoutPage.clickInStoreCheckbox();
+        //click 'Continue' button (shipping address)
+        checkoutPage.clickShippingAddressContinueButton();
+        //payment method section web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentMethodSectionWebElementDisplayed(checkoutPage);
+        //click 'Credit Card' radio button
+        checkoutPage.clickCreditCardRadioButton();
+        //capture screenshot at payment method section (for verification)
+        captureScreenshot(driver, "Payment Method Section Display (guest ('Credit Card' payment method))");
+        //click 'Continue' button (payment method)
+        checkoutPage.clickPaymentMethodContinueButton();
+        //payment information web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentInformationSectionWebElementDisplayed(checkoutPage);
+        //valid guest credit card data getter
+        checkoutPaymentMethodPage.validGuestCreditCardDataGetter();
+        //input valid guest card holder name
+        checkoutPaymentMethodPage.inputValidCreditCardNameIntoNameInputField();
+        //input valid user credit card number
+        checkoutPaymentMethodPage.inputValidCreditCardNumberIntoCardNumberInputField();
+        //click credit card month dropdown menu
+        checkoutPaymentMethodPage.clickCreditCardMonthDropdownMenu();
+        //select valid month
+        checkoutPaymentMethodPage.selectCreditCardValidMonthOption();
+        //click credit card year dropdown menu
+        checkoutPaymentMethodPage.clickCreditCardYearDropdownMenu();
+        //select valid year
+        checkoutPaymentMethodPage.selectCreditCardValidYearOption();
+        //input valid user credit card CVC number
+        checkoutPaymentMethodPage.inputValidCreditCardCVCIntoCVCInputField();
+        //capture screenshot at payment information section (for verification)
+        captureScreenshot(driver, "Payment Information Section Display (guest ('Credit Card' payment method))");
+        //click 'Continue' button (payment information)
+        checkoutPage.clickPaymentInfoContinueButton();
+        //confirm order section web element assert
+        //isConfirmOrderSectionWebElementDisplayed(checkoutPage); //Selenium fails to find these elements with VALID selectors
+        //capture screenshot at confirm order section (for verification)
+        captureScreenshot(driver, "Confirm Order Section Display (pre-confirmation (guest))");
+        //log billing/shipping data
+        logOrderBillingShippingData(checkoutPage);
+        //log the pre-confirm order data (with credit card)
+        logPreConfirmOrderWithCreditCardProductData(checkoutPage);
+        //click 'Confirm' button
+        checkoutPage.clickConfirmButton();
+        //capture screenshot at the end of the test (capture the result)
+        captureScreenshot(driver, "Valid Guest Order Confirmation Test Result (with 'Credit Card' payment method)");
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
