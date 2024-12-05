@@ -41,6 +41,7 @@ public class CheckoutGuestDataPage extends BasePage{
     private String noFirstName;
     private String noLastName;
     private String noEmail;
+    private String noCity;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -193,6 +194,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
         emailAddressInputField.sendKeys(noEmail);
+    }
+
+    //invalid guest input data getter - no city
+    public void invalidAdditionalGuestNoCityDataGetter(CheckoutGuestDataPage checkoutGuestDataPage){
+        System.out.println("Invalid guest user data generated (no city): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        noCity = "";
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (no city): " + firstName);
+        logger.info("Valid guest last name (no city): " + lastName);
+        logger.info("Valid guest email (no city): " + email);
+        logger.info("No guest city: " + city);
+        logger.info("Valid guest address (no city): " + address1);
+        logger.info("Valid guest zip code (no city): " + zipCode);
+        logger.info("Valid guest phone number (no city): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - no city
+    public void inputNoCityIntoCityInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(cityInputField));
+        cityInputField.sendKeys(noCity);
     }
 
     //guest first/last name getters
