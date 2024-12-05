@@ -22,7 +22,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private WebElement creditCardValidMonthOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[4]/td[2]/select[@id='ExpireYear']")
     private WebElement creditCardYearDropdownMenu;
-    @FindBy(xpath = "//select[@id='ExpireYear']/option[@value='2032']")
+    @FindBy(xpath = "//select[@id='ExpireYear']/option[@value='2029']")
     private WebElement creditCardValidYearOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[5]/td[2]/input")
     private WebElement creditCardCVCInputField;
@@ -46,6 +46,9 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private String noGuestCardHolderName;
     private String noCardNumber;
     private String noCardCVCNumber;
+
+    //no purchase order number data
+    private String noPurchaseOrderNumber = "";
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -122,13 +125,6 @@ public class CheckoutPaymentMethodPage extends BasePage{
         creditCardNameInputField.sendKeys(regUserCardHolderName);
     }
 
-    //'Purchase Order' number input method
-    public void inputValidPurchaseOrderNumberIntoPONumberInputField() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
-        wait.until(ExpectedConditions.visibilityOf(purchaseOrderNumberInputField));
-        purchaseOrderNumberInputField.sendKeys(purchaseOrderNumber);
-    }
-
     //invalid guest credit card data getter - no guest cardholder name
     public void invalidGuestCreditCardNoCardNameDataGetter(){
 
@@ -187,7 +183,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
         noCardCVCNumber = "";
         System.out.println("Invalid generated user credit card data (guest - no card CVC number): " + "\n");
 
-        logger.info("Credit card holder name (guest - no card CVC number): " + noGuestCardHolderName);
+        logger.info("Credit card holder name (guest - no card CVC number): " + guestCardHolderName);
         logger.info("Credit card number (guest - no card CVC number): " + cardNumber);
         logger.info("No guest credit card CVC number: " + cardCVCNumber);
 
@@ -206,5 +202,19 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(750));
         wait.until(ExpectedConditions.visibilityOf(missingCreditCardInputErrorMessage));
         return missingCreditCardInputErrorMessage.getText();
+    }
+
+    //'Purchase Order' number input method
+    public void inputValidPurchaseOrderNumberIntoPONumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(purchaseOrderNumberInputField));
+        purchaseOrderNumberInputField.sendKeys(purchaseOrderNumber);
+    }
+
+    //invalid 'Purchase Order' number input method - no number input
+    public void inputNoPurchaseOrderNumberIntoPONumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(purchaseOrderNumberInputField));
+        purchaseOrderNumberInputField.sendKeys(noPurchaseOrderNumber);
     }
 }

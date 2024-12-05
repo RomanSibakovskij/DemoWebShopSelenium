@@ -459,4 +459,23 @@ public class ConfirmCheckoutPageTest extends TestMethods {
         //invalid check out confirmation test - no credit card CVC number (as a guest)
         invalidGuestCheckoutCreditCardNoCardCVCNumberConfirmationTest();
     }
+
+    //no 'Purchase Order' number test
+
+    //Test 009y -> invalid check out confirmation test - no purchase order number (as a guest) (the guest has confirmed the order despite empty purchase order number - this defeats the purpose of further 'Purchase Order' section testing)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - No Purchase Order Number (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Purchase_Order_Input")
+    @Tag("No_Singular_Input")
+    void invalidCheckoutNoPurchaseOrderNumberConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - no purchase order number (as a guest)
+        invalidGuestCheckoutNoPurchaseOrderNumberConfirmationTest();
+    }
+
 }

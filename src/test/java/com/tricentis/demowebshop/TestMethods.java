@@ -2380,6 +2380,85 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid Guest Payment Information Test Result (with 'Credit Card' payment method - no credit card CVC number)");
     }
 
+    //no 'Purchase Order' number input
+
+    //invalid guest checkout confirmation test method ('Purchase Order') - no number input
+    protected void invalidGuestCheckoutNoPurchaseOrderNumberConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        CheckoutPaymentMethodPage checkoutPaymentMethodPage = new CheckoutPaymentMethodPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //valid guest input data getter
+        checkoutGuestDataPage.validAdditionalGuestDataGetter(checkoutGuestDataPage);
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input valid email address
+        checkoutGuestDataPage.inputValidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //capture screenshot after the user data input (for verification)
+        captureScreenshot(driver, "Added Additional Required Guest Data for Billing Address");
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //shipping address section web element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionWebElementDisplayed(checkoutPage);
+        //shipping address section text element assert //Selenium fails to find these elements with VALID selectors
+        //isShippingAddressSectionTextAsExpected(checkoutPage);
+        //capture screenshot at shipping address section (for verification)
+        captureScreenshot(driver, "Shipping Address Section Display (guest)");
+        //click 'In-store' checkbox
+        checkoutPage.clickInStoreCheckbox();
+        //click 'Continue' button (shipping address)
+        checkoutPage.clickShippingAddressContinueButton();
+        //payment method section web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentMethodSectionWebElementDisplayed(checkoutPage);
+        //click 'Purchase Order' radio button
+        checkoutPage.clickPurchaseOrderRadioButton();
+        //capture screenshot at payment method section (for verification)
+        captureScreenshot(driver, "Payment Method Section Display (guest ('Purchase Order' payment method))");
+        //click 'Continue' button (payment method)
+        checkoutPage.clickPaymentMethodContinueButton();
+        //payment information web element assert //Selenium fails to find these elements with VALID selectors
+        //isPaymentInformationSectionWebElementDisplayed(checkoutPage);
+        //don't input purchase order number
+        checkoutPaymentMethodPage.inputNoPurchaseOrderNumberIntoPONumberInputField();
+        //capture screenshot at payment information section (for verification)
+        captureScreenshot(driver, "Payment Information Section Display (guest ('Purchase Order' payment method) - no purchase order number input)");
+        //click 'Continue' button (payment information)
+        checkoutPage.clickPaymentInfoContinueButton();
+        //confirm order section web element assert
+        //isConfirmOrderSectionWebElementDisplayed(checkoutPage); //Selenium fails to find these elements with VALID selectors
+        //capture screenshot at confirm order section (for verification)
+        captureScreenshot(driver, "Confirm Order Section Display (pre-confirmation (guest ('Purchase Order')))");
+        //log billing/shipping data
+        logOrderBillingShippingData(checkoutPage);
+        //log the pre-confirm order data (with purchase order - this uses the same logger as credit card logger)
+        logPreConfirmOrderWithCreditCardProductData(checkoutPage);
+        //click 'Confirm' button
+        checkoutPage.clickConfirmButton();
+        //capture screenshot at the end of the test (capture the result)
+        captureScreenshot(driver, "Invalid Guest Order Confirmation Test Result (with 'Purchase Order' payment method - empty purchase order number)");
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method
