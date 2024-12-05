@@ -46,6 +46,9 @@ public class CheckoutGuestDataPage extends BasePage{
     private String noZipCode;
     private String noPhone;
 
+    //too short / too long singular input data
+    private String tooShortFirstName;
+
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
 
@@ -313,6 +316,37 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
         phoneNumberInputField.sendKeys(noPhone);
+    }
+
+    //too short / too long singular input methods
+
+    //invalid guest input data getter - too short first name
+    public void invalidAdditionalGuestTooShortFirstNameDataGetter(){
+        System.out.println("Invalid guest user data generated (too short first name): " + "\n");
+
+        tooShortFirstName = "X";
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(12);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Too short guest first name: " + tooShortFirstName);
+        logger.info("Valid guest last name (too short first name): " + lastName);
+        logger.info("Valid guest email (too short first name): " + email);
+        logger.info("Valid guest city (too short first name): " + city);
+        logger.info("Valid guest address (too short first name): " + address1);
+        logger.info("Valid guest zip code (too short first name): " + zipCode);
+        logger.info("Valid guest phone number (too short first name): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - too short first name
+    public void inputTooShortFirstNameIntoFirstNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(firstNameInputField));
+        firstNameInputField.sendKeys(tooShortFirstName);
     }
 
     //guest first/last name getters

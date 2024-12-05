@@ -203,4 +203,24 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         //invalid check out confirmation test - no purchase order number (as a guest)
         invalidGuestCheckoutNoPurchaseOrderNumberConfirmationTest();
     }
+
+    //too short / too long singular input tests
+
+    //Test 009z -> invalid check out confirmation test - too short first name (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Too Short First Name (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("No_Billing_Address_Singular_Input")
+    @Tag("Too_Short_Singular_Input")
+    void invalidCheckoutTooShortFirstNameConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - too short first name (as a guest)
+        invalidGuestCheckoutTooShortFirstNameConfirmationTest();
+    }
+
+
 }
