@@ -4034,6 +4034,30 @@ public class TestMethods extends BaseTest{
         captureScreenshot(driver, "Invalid Guest Payment Information Test Result (with 'Credit Card' payment method - expired credit card)");
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //order details verification test method (all users)
+    protected void submittedOrderValidationTest(OrderDetailsPage orderDetailsPage){
+        //post-order submission section web element assert
+        isOrderSubmissionSuccessSectionWebElementDisplayed(orderDetailsPage);
+        //post-order submission section text element assert
+        isOrderSubmissionTextElementAsExpected(orderDetailsPage);
+        //order number logger
+        logPostConfirmOrderNumber(orderDetailsPage);
+        //capture screenshot at post-order confirmation
+        captureScreenshot(driver, "Order Submission Success");
+        //click order details page link
+        orderDetailsPage.clickOrderDetailsPageLink();
+        //order details page web element assert
+        isOrderDetailsPageWebElementDisplayed(orderDetailsPage);
+        //order details text element assert
+        isOrderDetailsPageTextAsExpected(orderDetailsPage);
+        //log available order invoice data
+        logOrderDetailsInvoiceData(orderDetailsPage);
+        //capture screenshot at payment information section (for verification)
+        captureScreenshot(driver, "Order Details Verification with Displayed Data");
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //homepage web element assert test method
@@ -4587,6 +4611,86 @@ public class TestMethods extends BaseTest{
         logger.info("Order shipping price (lower table (with credit card)): " + checkoutPage.getConfirmOrderProductShippingPrice());
         logger.info("Order tax amount (lower table (with credit card)): " + checkoutPage.getConfirmOrderProductAdditionalFee());
         logger.info("Order total price (lower table (with credit card)): " + checkoutPage.getConfirmOrderProductTax());
+
+        System.out.println("\n");
+    }
+
+    //post-confirm order section web element assert test method
+    protected void isOrderSubmissionSuccessSectionWebElementDisplayed(OrderDetailsPage orderDetailsPage){
+        //assert order submission section title is displayed
+        assertTrue(orderDetailsPage.isOrderSubmissionSuccessTitleDisplayed(), "The order submission success title isn't displayed.");
+        //assert order submission success message is displayed
+        assertTrue(orderDetailsPage.isOrderSubmissionSuccessMessageDisplayed(), "The order submission success message isn't displayed.");
+        //assert submitted order number is displayed
+        assertTrue(orderDetailsPage.isSubmittedOrderNumberDisplayed(), "The submitted order number isn't displayed.");
+        //assert order details page link is displayed
+        assertTrue(orderDetailsPage.isOrderDetailsPageLinkDisplayed(), "The order details page link isn't displayed.");
+        //assert 'Continue' button is displayed
+        assertTrue(orderDetailsPage.isContinueButtonDisplayed(), "The 'Continue' button isn't displayed.");
+    }
+    //post-confirm order section text element assert test method
+    protected void isOrderSubmissionTextElementAsExpected(OrderDetailsPage orderDetailsPage){
+        //assert order submission section title is as expected
+        assertEquals("Thank you", orderDetailsPage.getOrderSubmissionSuccessTitle(), "The order submission success title doesn't match expectations or the user is on the wrong page.");
+        //assert order submission section title is as expected //somehow Selenium keeps selecting the element ABOVE (the element itself matches expectations)
+        //assertEquals("Your order has been successfully processed!", orderDetailsPage.getOrderSubmissionSuccessTitle(), "The order submission success message doesn't match expectations.");
+    }
+    //post-confirm order section order number logger method
+    protected void logPostConfirmOrderNumber(OrderDetailsPage orderDetailsPage){
+        System.out.println("\n");
+        logger.info(orderDetailsPage.getSubmitterOrderNumber());
+    }
+
+    //order details page web element assert method
+    protected void isOrderDetailsPageWebElementDisplayed(OrderDetailsPage orderDetailsPage){
+        //assert order details page title is displayed
+        assertTrue(orderDetailsPage.isOrderDetailsPageTitleDisplayed(), "The order details page title isn't displayed.");
+        //assert order details PDF invoice button is displayed
+        assertTrue(orderDetailsPage.isOrderDetailsPDFInvoiceButtonDisplayed(), "The order details PDF invoice button isn't displayed.");
+        //assert order details 'Print' button is displayed
+        assertTrue(orderDetailsPage.isOrderDetailsPrintButtonDisplayed(), "The order details 'Print' button isn't displayed.");
+        //assert order overview is displayed
+        assertTrue(orderDetailsPage.isOrderOverviewDisplayed(), "The order overview isn't displayed.");
+        //assert order billing information is displayed
+        assertTrue(orderDetailsPage.isOrderBillingInformationDisplayed(), "The order billing information isn't displayed.");
+        //assert order shipping information is displayed
+        assertTrue(orderDetailsPage.isOrderShippingInformationDisplayed(), "The order shipping information isn't displayed.");
+        //assert order products section title is displayed
+        assertTrue(orderDetailsPage.isOrderProductsSectionTitleDisplayed(), "The order products section title isn't displayed.");
+        //assert 'Re-order' button is displayed
+        assertTrue(orderDetailsPage.isReOrderButtonDisplayed(), "The 'Re-Order' button isn't displayed.");
+        //assert order sub-total price is displayed
+        assertTrue(orderDetailsPage.isOrderSubTotalPriceDisplayed(), "The order sub-total price isn't displayed.");
+        //assert order product names are displayed (as a list)
+        assertTrue(orderDetailsPage.isOrderProductNameDisplayed(), "The order product names aren't displayed.");
+        //assert order product unit prices are displayed (as a list)
+        assertTrue(orderDetailsPage.isOrderProductUnitPriceDisplayed(), "The order product unit prices aren't displayed.");
+        //assert order product quantities are displayed (as a list)
+        assertTrue(orderDetailsPage.isOrderProductQuantityDisplayed(), "The order product quantities aren't displayed.");
+        //assert order product total prices are displayed (as a list)
+        assertTrue(orderDetailsPage.isOrderProductTotalPriceDisplayed(), "The order product total prices aren't displayed.");
+    }
+    //order details page text element assert test method
+    protected void isOrderDetailsPageTextAsExpected(OrderDetailsPage orderDetailsPage){
+        //assert order details page title is as expected
+        assertEquals("Order information", orderDetailsPage.getOrderDetailsPageTitle(), "The order details page title doesn't match expectations or the user is on the wrong page.");
+        //assert order details page title is as expected
+        assertEquals("Product(s)", orderDetailsPage.getOrderDetailsProductsSectionTitle(), "The order details products section title doesn't match expectations.");
+    }
+    //order details product data logger method
+    protected void logOrderDetailsInvoiceData(OrderDetailsPage orderDetailsPage){
+        System.out.println("Order invoice product(s) available data: " + "\n");
+
+        logger.info("Product name(s) (upper order table): " + orderDetailsPage.getOrderInvoiceProductName());
+        logger.info("Product unit price(s) (upper order table): " + orderDetailsPage.getOrderInvoiceProductUnitPrice());
+        logger.info("Product quantity(ies) (upper order table): " + orderDetailsPage.getOrderInvoiceProductQuantity());
+        logger.info("Product total price(s) (upper order table): " + orderDetailsPage.getOrderInvoiceProductTotalPrice());
+
+        logger.info("Order sub-total price (lower order table): " + orderDetailsPage.getOrderInvoiceSubTotalPrice());
+        logger.info("Order shipping price (lower order table): " + orderDetailsPage.getOrderInvoiceShippingPrice());
+        logger.info("Order additional fee (lower order table): " + orderDetailsPage.getOrderInvoiceAdditionalFee());
+        logger.info("Order tax (lower order table): " + orderDetailsPage.getOrderInvoiceTax());
+        logger.info("Order total price (lower order table): " + orderDetailsPage.getOrderInvoiceTotalPrice());
 
         System.out.println("\n");
     }

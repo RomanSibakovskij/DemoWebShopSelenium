@@ -12,7 +12,7 @@ public class OrderDetailsPage extends BasePage{
     //pre-order information page elements
     @FindBy(xpath = "//div[@class='page checkout-page']/div[@class='page-title']")
     private WebElement orderSubmissionSuccessTitle;
-    @FindBy(xpath = "//div[@class='section order-completed']//strong")
+    @FindBy(xpath = "//div[@class='section order-completed']/div[@class='title']/strong[.= 'Your order has been successfully processed!']")
     private WebElement orderSubmissionSuccessMessage;
     @FindBy(xpath = "//div[@class='section order-completed']//ul/li[1]")
     private WebElement submittedOrderNumber;
@@ -21,8 +21,12 @@ public class OrderDetailsPage extends BasePage{
     @FindBy(xpath = "//div[@class='buttons']/input[@type='button']")
     private WebElement continueButton;
     //order details page elements
-    @FindBy(xpath = "//div[@class='page order-details-page']/div[@class='page-title']")
+    @FindBy(xpath = "//div[@class='page order-details-page']/div[@class='page-title']/h1")
     private WebElement orderDetailsPageTitle;
+    @FindBy(xpath = "//div[@class='page order-details-page']/div[@class='page-title']/a[2]")
+    private WebElement orderPDFInvoiceButton;
+    @FindBy(xpath = "//div[@class='page order-details-page']/div[@class='page-title']/a[1]")
+    private WebElement orderPrintButton;
     @FindBy(xpath = "//div[@class='order-overview']")
     private WebElement orderOverview;
     @FindBy(xpath = "//div[@class='order-details-area']/table//ul[@class='billing-info']")
@@ -94,6 +98,67 @@ public class OrderDetailsPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(orderDetailsPageTitle));
         return orderDetailsPageTitle.getText();
     }
+    //order details products section title getter
+    public String getOrderDetailsProductsSectionTitle(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderProductsSectionTitle));
+        return orderProductsSectionTitle.getText();
+    }
+
+    //order details invoice product data (both tables) getters
+    public List<String> getOrderInvoiceProductName() {
+        List<String> productNames = new ArrayList<>();
+        for (WebElement element : orderProductNameElements) {
+            productNames.add(element.getText());
+        }
+        return productNames;
+    }
+    public List<String> getOrderInvoiceProductUnitPrice() {
+        List<String> productUnitPrices = new ArrayList<>();
+        for (WebElement element : orderProductUnitPriceElements) {
+            productUnitPrices.add(element.getText());
+        }
+        return productUnitPrices;
+    }
+    public List<String> getOrderInvoiceProductQuantity() {
+        List<String> productQuantities = new ArrayList<>();
+        for (WebElement element : orderProductQuantityElements) {
+            productQuantities.add(element.getText());
+        }
+        return productQuantities;
+    }
+    public List<String> getOrderInvoiceProductTotalPrice() {
+        List<String> productTotalPrices = new ArrayList<>();
+        for (WebElement element : orderProductTotalPriceElements) {
+            productTotalPrices.add(element.getText());
+        }
+        return productTotalPrices;
+    }
+    public String getOrderInvoiceSubTotalPrice(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderSubTotalPrice));
+        return orderSubTotalPrice.getText();
+    }
+    public String getOrderInvoiceShippingPrice(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderShippingPrice));
+        return orderShippingPrice.getText();
+    }
+    public String getOrderInvoiceAdditionalFee(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderAdditionalFee));
+        return orderAdditionalFee.getText();
+    }
+    public String getOrderInvoiceTax(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderTax));
+        return orderTax.getText();
+    }
+    public String getOrderInvoiceTotalPrice(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderTotalPrice));
+        return orderTotalPrice.getText();
+    }
 
     //pre-order information page web element assert methods
     public boolean isOrderSubmissionSuccessTitleDisplayed() {return orderSubmissionSuccessTitle.isDisplayed();}
@@ -104,6 +169,8 @@ public class OrderDetailsPage extends BasePage{
 
     //order details page web element assert methods
     public boolean isOrderDetailsPageTitleDisplayed() {return orderDetailsPageTitle.isDisplayed();}
+    public boolean isOrderDetailsPDFInvoiceButtonDisplayed() {return orderPDFInvoiceButton.isDisplayed();}
+    public boolean isOrderDetailsPrintButtonDisplayed() {return orderPrintButton.isDisplayed();}
     public boolean isOrderOverviewDisplayed() {return orderOverview.isDisplayed();}
     public boolean isOrderBillingInformationDisplayed() {return orderBillingInformation.isDisplayed();}
     public boolean isOrderShippingInformationDisplayed() {return orderShippingInformation.isDisplayed();}
