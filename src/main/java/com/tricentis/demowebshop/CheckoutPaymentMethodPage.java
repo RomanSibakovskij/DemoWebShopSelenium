@@ -56,6 +56,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private String tooShortGuestCardHolderName;
     private String tooLongGuestCardHolderName;
     private String tooShortCardNumber;
+    private String tooLongCardNumber;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -290,7 +291,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
         guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
         tooShortCardNumber= "049887243186538";
         cardCVCNumber = "334";
-        System.out.println("Invalid generated user credit card data (guest - no card number): " + "\n");
+        System.out.println("Invalid generated user credit card data (guest - too short card number): " + "\n");
 
         logger.info("Credit card holder name (guest - too short card number): " + guestCardHolderName);
         logger.info("Too short guest credit card number: " + tooShortCardNumber);
@@ -303,5 +304,28 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
         wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
         creditCardNumberInputField.sendKeys(tooShortCardNumber);
+    }
+
+    //invalid guest credit card data getter - too long guest card number
+    public void invalidGuestCreditCardTooLongCardNumberDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
+        tooLongCardNumber= "049887024318653844";
+        cardCVCNumber = "334";
+        System.out.println("Invalid generated user credit card data (guest - too long card number): " + "\n");
+
+        logger.info("Credit card holder name (guest - too long card number): " + guestCardHolderName);
+        logger.info("Too long guest credit card number: " + tooLongCardNumber);
+        logger.info("Credit card CVC number (guest - too long card number): " + cardCVCNumber);
+
+        System.out.println("\n");
+    }
+    //invalid credit card data input method - too short credit card number (18 digits)
+    public void inputTooLongCreditCardNumberIntoCardNumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
+        creditCardNumberInputField.sendKeys(tooLongCardNumber);
     }
 }
