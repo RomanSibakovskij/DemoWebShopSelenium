@@ -27,6 +27,8 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private WebElement creditCardValidMonthOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[4]/td[2]/select[@id='ExpireYear']")
     private WebElement creditCardYearDropdownMenu;
+    @FindBy(xpath = "//select[@id='ExpireYear']/option[@value='2024']")
+    private WebElement creditCardExpiredYearOption;
     @FindBy(xpath = "//select[@id='ExpireYear']/option[@value='2029']")
     private WebElement creditCardValidYearOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[5]/td[2]/input")
@@ -141,6 +143,8 @@ public class CheckoutPaymentMethodPage extends BasePage{
         creditCardYearDropdownMenu.click();
     }
     public void selectCreditCardValidYearOption() {creditCardValidYearOption.click();}
+    //expired year click method
+    public void selectCreditCardExpiredYearOption() {creditCardExpiredYearOption.click();}
 
     //valid registered user credit card data getter
     public void validUserCreditCardDataGetter(){

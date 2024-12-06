@@ -607,4 +607,19 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         //invalid check out confirmation test - invalid user card CVC format (as a guest) (chars only)
         invalidGuestCheckoutCreditCardInvalidCardCVCFormatConfirmationTest();
     }
+
+    //Test 009ay -> invalid check out confirmation test - expired user credit card (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Expired Credit Card (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Invalid_Payment_Method")
+    void invalidCheckoutExpiredCardConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - expired user credit card (as a guest)
+        invalidGuestCheckoutExpiredCreditCardConfirmationTest();
+    }
 }
