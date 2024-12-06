@@ -222,7 +222,7 @@ public class OrderDetailsPageTest extends TestMethods{
     @Tag("Single_Product_Order_Validation_Reg_User")
     @Tag("Single_Product_Order_Validation")
     @Tag("Credit_Card_Payment_Method")
-    void singleProductCheckoutWithCreditCardConfirmationRegUserTest(){
+    void singleProductCreditCardOrderValidationRegUserTest(){
         HomePage homePage = new HomePage(driver);
         RegisterPage registerPage = new RegisterPage(driver);
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
@@ -236,6 +236,24 @@ public class OrderDetailsPageTest extends TestMethods{
         addProductToCheckoutTest(shoppingCartPage);
         //check out confirmation of a single product test (as a registered user - with 'Credit Card' payment method)
         validRegUserCheckoutCreditCardConfirmationTest();
+        //order validation test //this test method is universal (for 'Credit Card' payment option)
+        submittedOrderValidationCreditCardTest();
+    }
+
+    //Test 010k -> order details validation of multiple available products test (as a guest - with 'Credit Card' payment method)
+    @Test
+    @DisplayName("Order Details Validation Of Multiple Products Test (as a guest ('Credit Card' payment method))")
+    @Tag("Multiple_Products_Order_Validation_Guest")
+    @Tag("Multiple_Products_Order_Validation")
+    @Tag("Credit_Card_Payment_Method")
+    void multipleProductsCreditCardOrderValidationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple available products to cart test (as a guest)
+        addMultipleAvailableProductsToCartTest();
+        //add multiple available products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of multiple products test (as a guest - with 'Credit Card' payment method) //this test method is universal for all product types
+        validGuestCheckoutCreditCardConfirmationTest();
         //order validation test //this test method is universal (for 'Credit Card' payment option)
         submittedOrderValidationCreditCardTest();
     }
