@@ -1402,7 +1402,7 @@ public class TestMethods extends BaseTest{
         //click 'Check/Money Order' radio button
         checkoutPage.clickCheckMoneyOrderRadioButton();
         //capture screenshot at payment method section (for verification)
-        captureScreenshot(driver, "Payment Method Section Display (with 'Check/Money Order' selected)");
+        captureScreenshot(driver, "Payment Method Section Display (with 'Check Money Order' selected)");
         //click 'Continue' button (payment method)
         checkoutPage.clickPaymentMethodContinueButton();
         //payment information web element assert //Selenium fails to find these elements with VALID selectors

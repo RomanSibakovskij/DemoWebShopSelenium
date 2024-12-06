@@ -169,4 +169,30 @@ public class OrderDetailsPageTest extends TestMethods{
         //order validation test //this test method is universal for all product types
         submittedOrderValidationTest();
     }
+
+    // 'Check Money' order payment method tests
+
+    //Test 010h -> order details validation of a single product test - with 'Check/Money Order' payment method (as a registered user)
+    @Test
+    @DisplayName("Order Details Validation Of A Product Test (as a registered user - 'Check/Money Order' payment method)")
+    @Tag("Single_Product_Order_Validation_Reg_User")
+    @Tag("Single_Product_Order_Validation")
+    @Tag("Check_Money_Payment_Method")
+    void singleProductCheckMoneyOrderValidationRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add a single featured product to cart test (as a registered user)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
+        //check out confirmation of a single product test (as a registered user - with selected 'Check/Money Order' payment method)
+        validRegUserCheckoutCheckMoneyConfirmationTest();
+        //order validation test //this test method is universal for all product types
+        submittedOrderValidationTest();
+    }
 }
