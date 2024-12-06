@@ -86,4 +86,29 @@ public class OrderDetailsPageTest extends TestMethods{
         submittedOrderValidationTest();
     }
 
+    //multiple featured products
+
+    //Test 010d -> order details validation of multiple featured products test (as a registered user)
+    @Test
+    @DisplayName("Order Details Validation Of Multiple Featured Products Test (as a registered user)")
+    @Tag("Multiple_Featured_Products_Order_Validation_Reg_User")
+    @Tag("Multiple_Featured_Products_Order_Validation")
+    void multipleFeaturedProductsOrderValidationRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add multiple featured products to cart test (as a registered user)
+        addMultipleFeaturedProductToCartTest();
+        //add multiple featured products to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
+        //check out confirmation of a multiple featured products test (as a registered user) //this test method is universal for all product types
+        validRegUserCheckoutConfirmationTest();
+        //order validation test //this test method is universal for all product types
+        submittedOrderValidationTest();
+    }
+
 }
