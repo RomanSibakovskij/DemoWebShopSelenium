@@ -283,4 +283,22 @@ public class OrderDetailsPageTest extends TestMethods{
         //order validation test //this test method is universal (this payment method uses the same logger method as 'Credit Card')
         submittedOrderValidationCreditCardTest();
     }
+
+    //Test 010m -> order details validation of a single product test (as a guest - with 'Purchase Order' payment method)
+    @Test
+    @DisplayName("Order Details Validation Of A Single Product Test (as a guest ('Purchase Order' payment method))")
+    @Tag("Single_Product_Order_Validation_Guest")
+    @Tag("Single_Product_Order_Validation")
+    @Tag("Purchase_Order_Payment_Method")
+    void singleProductPurchaseOrderValidationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of a single featured product test (as a guest - with 'Purchase Order' payment method)
+        validGuestCheckoutPurchaseOrderConfirmationTest();
+        //order validation test //this test method is universal (this payment method uses the same logger method as 'Credit Card')
+        submittedOrderValidationCreditCardTest();
+    }
 }
