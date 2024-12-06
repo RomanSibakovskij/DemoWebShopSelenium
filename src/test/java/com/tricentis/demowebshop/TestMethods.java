@@ -1500,7 +1500,7 @@ public class TestMethods extends BaseTest{
         //click 'Confirm' button
         checkoutPage.clickConfirmButton();
         //capture screenshot at the end of the test (capture the result)
-        captureScreenshot(driver, "Valid Guest Order Confirmation Test Result (with 'Check/Money Order')");
+        captureScreenshot(driver, "Valid Guest Order Confirmation Test Result (with 'Check Money Order')");
     }
 
     //checkout with 'Credit card' payment option

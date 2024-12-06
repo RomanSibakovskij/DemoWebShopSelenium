@@ -195,4 +195,22 @@ public class OrderDetailsPageTest extends TestMethods{
         //order validation test //this test method is universal for all product types
         submittedOrderValidationTest();
     }
+
+    //Test 010i -> order details validation of multiple products test (as a guest - with selected 'Check/Money Order' payment method)
+    @Test
+    @DisplayName("Order Details Validation Of Multiple Products Test (as a guest - 'Check/Money Order' payment method)")
+    @Tag("Multiple_Products_Order_Validation_Guest")
+    @Tag("Multiple_Products_Order_Validation")
+    @Tag("Check_Money_Payment_Method")
+    void multipleProductsCheckMoneyOrderValidationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple featured products to cart test (as a guest)
+        addMultipleFeaturedProductToCartTest();
+        //add multiple featured products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of multiple products test (as a guest - with selected 'Check/Money Order' payment method)
+        validGuestCheckoutCheckMoneyConfirmationTest();
+        //order validation test //this test method is universal for all product types
+        submittedOrderValidationTest();
+    }
 }
