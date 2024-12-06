@@ -4037,7 +4037,8 @@ public class TestMethods extends BaseTest{
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //order details verification test method (all users)
-    protected void submittedOrderValidationTest(OrderDetailsPage orderDetailsPage){
+    protected void submittedOrderValidationTest(){
+        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
         //post-order submission section web element assert
         isOrderSubmissionSuccessSectionWebElementDisplayed(orderDetailsPage);
         //post-order submission section text element assert
