@@ -2,7 +2,9 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.*;
 
 public class OrderDetailsPage extends BasePage{
@@ -54,6 +56,44 @@ public class OrderDetailsPage extends BasePage{
     private WebElement orderTotalPrice;
 
     public OrderDetailsPage(WebDriver driver) {super(driver);}
+
+    //order details page link click method
+    public void clickOrderDetailsPageLink(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.elementToBeClickable(orderDetailsPageLink));
+        orderDetailsPageLink.click();
+    }
+    // 'Continue' button click method
+    public void clickContinueButton(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.elementToBeClickable(continueButton));
+        continueButton.click();
+    }
+
+    //order submission success title getter
+    public String getOrderSubmissionSuccessTitle(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderSubmissionSuccessTitle));
+        return orderSubmissionSuccessTitle.getText();
+    }
+    //order submission success message getter
+    public String getOrderSubmissionMessageTitle(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderSubmissionSuccessMessage));
+        return orderSubmissionSuccessMessage.getText();
+    }
+    //submitted order number getter
+    public String getSubmitterOrderNumber(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(submittedOrderNumber));
+        return submittedOrderNumber.getText();
+    }
+    //order details page title getter
+    public String getOrderDetailsPageTitle(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
+        wait.until(ExpectedConditions.visibilityOf(orderDetailsPageTitle));
+        return orderDetailsPageTitle.getText();
+    }
 
     //pre-order information page web element assert methods
     public boolean isOrderSubmissionSuccessTitleDisplayed() {return orderSubmissionSuccessTitle.isDisplayed();}
