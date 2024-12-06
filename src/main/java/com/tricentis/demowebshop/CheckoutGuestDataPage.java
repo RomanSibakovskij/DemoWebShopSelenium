@@ -65,6 +65,7 @@ public class CheckoutGuestDataPage extends BasePage{
     //invalid format input data
     private String invalidEmailFormat;
     private String alreadyUsedBeforeEmail; //the one used in manual testing
+    private String invalidPhoneFormat;
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -794,6 +795,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
         emailAddressInputField.sendKeys(alreadyUsedBeforeEmail);
+    }
+
+    //invalid guest input data getter - invalid phone number format (special symbols only)
+    public void invalidAdditionalGuestInvalidPhoneFormatDataGetter(){
+        System.out.println("Invalid guest user data generated (invalid user phone number format): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        email = TestDataGenerator.generateRandomEmailAddress(8);
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(6);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        invalidPhoneFormat = "!@#$%^&*()_+";
+
+        logger.info("Valid guest first name (invalid user phone number format): " + firstName);
+        logger.info("Valid guest last name (invalid user phone number format): " + lastName);
+        logger.info("Valid guest email (invalid user phone number format): " + email);
+        logger.info("Valid guest city (invalid user phone number format): " + city);
+        logger.info("Valid guest address (invalid user phone number format): " + address1);
+        logger.info("Valid guest zip code (invalid user phone number format): " + zipCode);
+        logger.info("Invalid guest phone number format: " + invalidPhoneFormat);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - invalid phone number format (special symbols only)
+    public void inputInvalidPhoneIntoPhoneNumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
+        phoneNumberInputField.sendKeys(invalidPhoneFormat);
     }
 
     //guest first/last name getters

@@ -350,7 +350,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooShortCityConfirmationTest();
     }
 
-    //Test 009ag -> invalid check out confirmation test - too long user city (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009ai -> invalid check out confirmation test - too long user city (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Long City (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -366,7 +366,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooLongCityConfirmationTest();
     }
 
-    //Test 009ah -> invalid check out confirmation test - too short user address (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009ak -> invalid check out confirmation test - too short user address (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short Address (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -382,7 +382,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooShortAddressConfirmationTest();
     }
 
-    //Test 009ai -> invalid check out confirmation test - too long user address (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009al -> invalid check out confirmation test - too long user address (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Long Address (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -398,7 +398,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooLongAddressConfirmationTest();
     }
 
-    //Test 009aj -> invalid check out confirmation test - too short user zip code (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009am -> invalid check out confirmation test - too short user zip code (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short Zip Code (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -414,7 +414,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooShortZipCodeConfirmationTest();
     }
 
-    //Test 009ak -> invalid check out confirmation test - too long user zip code (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009an -> invalid check out confirmation test - too long user zip code (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Long Zip Code (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -430,7 +430,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooLongZipCodeConfirmationTest();
     }
 
-    //Test 009al -> invalid check out confirmation test - too short user phone number (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009ao -> invalid check out confirmation test - too short user phone number (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short Phone (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -446,7 +446,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooShortPhoneConfirmationTest();
     }
 
-    //Test 009am -> invalid check out confirmation test - too long user phone number (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009ap -> invalid check out confirmation test - too long user phone number (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Long Phone (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -460,6 +460,22 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         addProductToCheckoutAsGuestTest(shoppingCartPage);
         //invalid check out confirmation test - too long user phone number (as a guest) (25 chars)
         invalidGuestCheckoutTooLongPhoneConfirmationTest();
+    }
+
+    //Test 009ap -> invalid check out confirmation test - invalid user phone number format (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Invalid Phone Format (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Invalid_Billing_Address_Singular_Input")
+    @Tag("Invalid_Singular_Input")
+    void invalidCheckoutInvalidPhoneFormatConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - invalid user phone number format (as a guest) (special symbols only)
+        invalidGuestCheckoutInvalidPhoneFormatConfirmationTest();
     }
 
     //'Payment Information' section negative too short / too long tests
