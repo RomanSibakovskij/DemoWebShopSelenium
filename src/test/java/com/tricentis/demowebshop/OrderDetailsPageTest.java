@@ -111,4 +111,20 @@ public class OrderDetailsPageTest extends TestMethods{
         submittedOrderValidationTest();
     }
 
+    //Test 010e -> order details validation of multiple featured products test (as a guest)
+    @Test
+    @DisplayName("Order Details Validation Of Multiple Featured Products Test (as a guest)")
+    @Tag("Multiple_Featured_Products_Order_Validation_Guest")
+    @Tag("Multiple_Featured_Products_Order_Validation")
+    void multipleFeaturedProductsOrderValidationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple featured products to cart test (as a guest)
+        addMultipleFeaturedProductToCartTest();
+        //add multiple featured products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of multiple featured products test (as a guest) //this test method is universal for all product types
+        validGuestCheckoutConfirmationTest();
+        //order validation test //this test method is universal for all product types
+        submittedOrderValidationTest();
+    }
 }
