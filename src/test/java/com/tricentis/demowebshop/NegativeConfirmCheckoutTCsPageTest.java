@@ -302,7 +302,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooLongEmailNameConfirmationTest();
     }
 
-    //Test 009af -> invalid check out confirmation test - invalid email address format (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009af -> invalid check out confirmation test - invalid email address format (as a guest)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Invalid Email Format (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -318,7 +318,23 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutInvalidEmailFormatConfirmationTest();
     }
 
-    //Test 009ag -> invalid check out confirmation test - too short user city (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009ag -> invalid check out confirmation test - used email address format (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Used Email (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Invalid_Billing_Address_Singular_Input")
+    @Tag("Invalid_Singular_Input")
+    void invalidCheckoutUsedEmailConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - used email address (as a guest)
+        invalidGuestCheckoutUsedEmailConfirmationTest();
+    }
+
+    //Test 009ah -> invalid check out confirmation test - too short user city (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short City (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")

@@ -64,6 +64,7 @@ public class CheckoutGuestDataPage extends BasePage{
 
     //invalid format input data
     private String invalidEmailFormat;
+    private String alreadyUsedBeforeEmail; //the one used in manual testing
 
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
@@ -751,7 +752,7 @@ public class CheckoutGuestDataPage extends BasePage{
 
         logger.info("Valid guest first name (invalid email address format): " + firstName);
         logger.info("Valid guest last name (invalid email address format): " + lastName);
-        logger.info("Invalid guest email format: " + noEmail);
+        logger.info("Invalid guest email format: " + invalidEmailFormat);
         logger.info("Valid guest city (invalid email address format): " + city);
         logger.info("Valid guest address (invalid email address format): " + address1);
         logger.info("Valid guest zip code (invalid email address format): " + zipCode);
@@ -764,6 +765,35 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
         emailAddressInputField.sendKeys(invalidEmailFormat);
+    }
+
+    //invalid guest input data getter - already used email address
+    public void invalidAdditionalGuestUsedEmailDataGetter(){
+        System.out.println("Invalid guest user data generated (used email address): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        alreadyUsedBeforeEmail = "m0@example.com";
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (used email address): " + firstName);
+        logger.info("Valid guest last name (used email address): " + lastName);
+        logger.info("Used email (existing in database, or, at least, it should): " + alreadyUsedBeforeEmail);
+        logger.info("Valid guest city (used email address): " + city);
+        logger.info("Valid guest address (used email address): " + address1);
+        logger.info("Valid guest zip code (used email address): " + zipCode);
+        logger.info("Valid guest phone number (used email address): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - already used email address (in manual testing)
+    public void inputUsedEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(alreadyUsedBeforeEmail);
     }
 
     //guest first/last name getters
