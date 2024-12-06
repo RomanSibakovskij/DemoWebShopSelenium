@@ -2,8 +2,7 @@ package com.tricentis.demowebshop;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
@@ -14,6 +13,8 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private WebElement creditCardTypeDropdownMenu;
     @FindBy(xpath = "//select[@id='CreditCardType']/option[@value='MasterCard']")
     private WebElement creditCardMasterCardOption;
+    @FindBy(xpath = "//select[@id='CreditCardType']/option[@value='Discover']")
+    private WebElement creditCardDiscoverOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[2]/td[2]/input")
     private WebElement creditCardNameInputField;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[3]/td[2]/input")
@@ -57,6 +58,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private String tooLongGuestCardHolderName;
     private String tooShortCardNumber;
     private String tooLongCardNumber;
+    private String tooShortCVCNumber;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -72,6 +74,12 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
         wait.until(ExpectedConditions.visibilityOf(creditCardMasterCardOption));
         creditCardMasterCardOption.click();
+    }
+    //select 'Discover' option method
+    public void selectDiscoverOption(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
+        wait.until(ExpectedConditions.visibilityOf(creditCardDiscoverOption));
+        creditCardDiscoverOption.click();
     }
 
     //valid guest credit card data getter
@@ -327,5 +335,29 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
         wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
         creditCardNumberInputField.sendKeys(tooLongCardNumber);
+    }
+
+    //invalid guest credit card data getter - too short guest credit card CVC number
+    public void invalidGuestCreditCardTooShortCardCVCNumberDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
+        cardNumber = TestDataGenerator.generateCreditCardNumber();
+        tooShortCVCNumber = "21";
+        System.out.println("Invalid generated user credit card data (guest - too short card CVC number): " + "\n");
+
+        logger.info("Credit card holder name (guest - too short card CVC number): " + guestCardHolderName);
+        logger.info("Credit card number (guest - too short card CVC number): " + tooShortCVCNumber);
+        logger.info("Too short guest credit card CVC number: " + tooShortCVCNumber);
+
+        System.out.println("\n");
+    }
+
+    //invalid credit card data input methods - too short credit card CVC number (2 digits)
+    public void inputTooShortCreditCardCVCIntoCVCInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
+        wait.until(ExpectedConditions.visibilityOf(creditCardCVCInputField));
+        creditCardCVCInputField.sendKeys(tooShortCVCNumber);
     }
 }
