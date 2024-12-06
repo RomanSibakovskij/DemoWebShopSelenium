@@ -257,4 +257,30 @@ public class OrderDetailsPageTest extends TestMethods{
         //order validation test //this test method is universal (for 'Credit Card' payment option)
         submittedOrderValidationCreditCardTest();
     }
+
+    //'Purchase Order' payment method tests
+
+    //Test 010l -> order details validation of a single product test (as a registered user - with 'Purchase Order' payment method)
+    @Test
+    @DisplayName("Order Details Validation Of A Single Product Test (as a registered user ('Purchase Order' payment method))")
+    @Tag("Single_Product_Order_Validation_Reg_User")
+    @Tag("Single_Product_Order_Validation")
+    @Tag("Purchase_Order_Payment_Method")
+    void singleProductPurchaseOrderValidationRegUserTest(){
+        HomePage homePage = new HomePage(driver);
+        RegisterPage registerPage = new RegisterPage(driver);
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //user navigation to register page
+        userNavigationToRegisterPageTest(homePage);
+        //valid user account creation test (male gender button)
+        validMaleUserCreationTest(registerPage);
+        //add a single available product to cart test (as a registered user)
+        addASingleAvailableProductToCartTest();
+        //add a single available product to check out test (as a registered user) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutTest(shoppingCartPage);
+        //check out confirmation of a single available product test (as a registered user - with 'Purchase Order' payment method)
+        validRegUserCheckoutPurchaseOrderConfirmationTest();
+        //order validation test //this test method is universal (this payment method uses the same logger method as 'Credit Card')
+        submittedOrderValidationCreditCardTest();
+    }
 }
