@@ -42,13 +42,16 @@ public class CheckoutPaymentMethodPage extends BasePage{
     //valid purchase order number data
     private String purchaseOrderNumber = String.valueOf(TestDataGenerator.getRandomPostalOrderNumber());
 
-    //no singular credit data input data
+    //no singular credit input data
     private String noGuestCardHolderName;
     private String noCardNumber;
     private String noCardCVCNumber;
 
     //no purchase order number data
     private String noPurchaseOrderNumber = "";
+
+    //invalid singular credit input data
+    private String tooShortGuestCardHolderName;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -142,7 +145,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
         System.out.println("\n");
     }
 
-    //invalid credit card data input methods - no card holder name
+    //invalid credit card data input methods - no cardholder name
     public void inputNoCreditCardNameIntoNameInputField() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
         wait.until(ExpectedConditions.visibilityOf(creditCardNameInputField));
@@ -216,5 +219,30 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(purchaseOrderNumberInputField));
         purchaseOrderNumberInputField.sendKeys(noPurchaseOrderNumber);
+    }
+
+    //invalid guest credit card data getter - too short guest cardholder name
+    public void invalidGuestCreditCardTooShortCardNameDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        tooShortGuestCardHolderName = "Himn";
+        cardNumber = TestDataGenerator.generateCreditCardNumber();
+        cardCVCNumber = TestDataGenerator.generateCVC(cardNumber);
+
+        System.out.println("Invalid generated user credit card data (guest - too short cardholder name): " + "\n");
+
+        logger.info("Too short guest credit card holder name: " + noGuestCardHolderName);
+        logger.info("Credit card number (guest - too short cardholder name)): " + cardNumber);
+        logger.info("Credit card CVC number (guest - too short cardholder name): " + cardCVCNumber);
+
+        System.out.println("\n");
+    }
+
+    //invalid credit card data input methods - too short cardholder name (1 char)
+    public void inputTooShortCreditCardNameIntoNameInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
+        wait.until(ExpectedConditions.visibilityOf(creditCardNameInputField));
+        creditCardNameInputField.sendKeys(tooShortGuestCardHolderName);
     }
 }
