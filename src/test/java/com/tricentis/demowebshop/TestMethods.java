@@ -2733,6 +2733,47 @@ public class TestMethods extends BaseTest{
         //capture screenshot of the invalid test result (too long email address)
         captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (too long email address)");
     }
+    //invalid guest checkout confirmation test method - invalid email address format
+    protected void invalidGuestCheckoutInvalidEmailFormatConfirmationTest(){
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        CheckoutGuestDataPage checkoutGuestDataPage = new CheckoutGuestDataPage(driver);
+        //checkout page billing address web element assert
+        isBillingAddressSectionWebElementDisplayed(checkoutPage);
+        //capture screenshot before the test (for user verification)
+        captureScreenshot(driver, "Guest on Checkout Confirmation Page");
+        //invalid guest input data getter (invalid email address format)
+        checkoutGuestDataPage.invalidAdditionalGuestInvalidEmailFormatDataGetter();
+        //input valid first name
+        checkoutGuestDataPage.inputValidFirstNameIntoFirstNameInputField();
+        //input valid last name
+        checkoutGuestDataPage.inputValidLastNameIntoLastNameInputField();
+        //input invalid email address (by format)
+        checkoutGuestDataPage.inputInvalidEmailIntoEmailInputField();
+        //click billing country dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressCountryDropdownMenu();
+        //select 'United States' option
+        checkoutPage.selectUSOption();
+        //click billing state dropdown menu (somehow the webpage doesn't keep the chosen result before after refresh)
+        checkoutPage.clickBillingAddressStateDropdownMenu();
+        //select 'Illinois' option
+        checkoutPage.selectIllinoisOption();
+        //input valid user city
+        checkoutGuestDataPage.inputValidUserCityIntoCityInputField();
+        //input valid address (address 1 is required only)
+        checkoutGuestDataPage.inputValidAddressIntoAddress1InputField();
+        //input valid user zip code
+        checkoutGuestDataPage.inputValidZipCodeIntoPostCodeInputField();
+        //input valid user phone number
+        checkoutGuestDataPage.inputValidPhoneIntoPhoneNumberInputField();
+        //capture screenshot of the invalid input (too long email address)
+        captureScreenshot(driver, "Invalid guest email address format");
+        //click 'Continue' button
+        checkoutPage.clickBillingAddressContinueButton();
+        //assert the expected error message appears
+        assertEquals("Wrong email", checkoutGuestDataPage.getInvalidInputErrorMessage(), "The error message doesn't match expectations.");
+        //capture screenshot of the invalid test result (too long email address)
+        captureScreenshot(driver, "Invalid Required Guest Data for Billing Address (invalid email address format)");
+    }
 
     //invalid guest checkout confirmation test method - too short city (1 char)
     protected void invalidGuestCheckoutTooShortCityConfirmationTest(){

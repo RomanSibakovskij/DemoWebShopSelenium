@@ -62,6 +62,9 @@ public class CheckoutGuestDataPage extends BasePage{
     private String tooShortPhone;
     private String tooLongPhone;
 
+    //invalid format input data
+    private String invalidEmailFormat;
+
 
     public CheckoutGuestDataPage(WebDriver driver) {super(driver);}
 
@@ -730,6 +733,37 @@ public class CheckoutGuestDataPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOf(phoneNumberInputField));
         phoneNumberInputField.sendKeys(tooLongPhone);
+    }
+
+    //invalid input data format
+
+    //invalid guest input data getter - no email address
+    public void invalidAdditionalGuestInvalidEmailFormatDataGetter(){
+        System.out.println("Invalid guest user data generated (invalid email address format): " + "\n");
+
+        firstName = TestDataGenerator.getRandomFirstName();
+        lastName = TestDataGenerator.getRandomLastName();
+        invalidEmailFormat = "fr334example.org";
+        city = TestDataGenerator.getRandomCity();
+        address1 = TestDataGenerator.generateRandomAddress(8);
+        zipCode = String.valueOf(TestDataGenerator.getRandomPostalCode());
+        phoneNumber = TestDataGenerator.generatePhoneNumber(6);
+
+        logger.info("Valid guest first name (invalid email address format): " + firstName);
+        logger.info("Valid guest last name (invalid email address format): " + lastName);
+        logger.info("Invalid guest email format: " + noEmail);
+        logger.info("Valid guest city (invalid email address format): " + city);
+        logger.info("Valid guest address (invalid email address format): " + address1);
+        logger.info("Valid guest zip code (invalid email address format): " + zipCode);
+        logger.info("Valid guest phone number (invalid email address format): " + phoneNumber);
+
+        System.out.println("\n");
+    }
+    //invalid guest data input method - invalid email address format
+    public void inputInvalidEmailIntoEmailInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));
+        wait.until(ExpectedConditions.visibilityOf(emailAddressInputField));
+        emailAddressInputField.sendKeys(invalidEmailFormat);
     }
 
     //guest first/last name getters

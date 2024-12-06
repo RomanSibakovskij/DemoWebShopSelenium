@@ -302,7 +302,23 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutTooLongEmailNameConfirmationTest();
     }
 
-    //Test 009af -> invalid check out confirmation test - too short user city (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009af -> invalid check out confirmation test - invalid email address format (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Invalid Email Format (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Invalid_Billing_Address_Singular_Input")
+    @Tag("Invalid_Singular_Input")
+    void invalidCheckoutInvalidEmailFormatConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - invalid email address format (as a guest)
+        invalidGuestCheckoutInvalidEmailFormatConfirmationTest();
+    }
+
+    //Test 009ag -> invalid check out confirmation test - too short user city (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short City (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -496,7 +512,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutCreditCardTooLongCardNumberConfirmationTest();
     }
 
-    //Test 009ar -> invalid check out confirmation test - too short user card CVC number (as a guest)
+    //Test 009ar -> invalid check out confirmation test - too short user card CVC number (as a guest) (this input field has a 4 char limit, so too long CVC scenario cannot be enacted here)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short CVC Number (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
