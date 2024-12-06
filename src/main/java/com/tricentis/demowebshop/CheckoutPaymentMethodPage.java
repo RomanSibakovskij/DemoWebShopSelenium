@@ -65,6 +65,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
     //invalid singular credit input data
     private String invalidGuestCardHolderNameFormat;
     private String invalidCardNumberFormat;
+    private String invalidCVCNumberFormat;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -418,5 +419,29 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
         wait.until(ExpectedConditions.visibilityOf(creditCardCVCInputField));
         creditCardCVCInputField.sendKeys(tooShortCVCNumber);
+    }
+
+    //invalid guest credit card data getter - invalid guest credit card CVC number format (chars only)
+    public void invalidGuestCreditCardInvalidCardCVCFormatDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
+        cardNumber = TestDataGenerator.generateCreditCardNumber();
+        invalidCVCNumberFormat = "AFD";
+        System.out.println("Invalid generated user credit card data (guest - invalid CVC number format): " + "\n");
+
+        logger.info("Credit cardholder name (guest - invalid CVC number format): " + guestCardHolderName);
+        logger.info("Credit card number (guest - invalid CVC number format): " + tooShortCVCNumber);
+        logger.info("Invalid guest credit card CVC number format: " + invalidCVCNumberFormat);
+
+        System.out.println("\n");
+    }
+
+    //invalid credit card data input methods - invalid credit card CVC number format (chars only)
+    public void inputInvalidCreditCardCVCFormatIntoCVCInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
+        wait.until(ExpectedConditions.visibilityOf(creditCardCVCInputField));
+        creditCardCVCInputField.sendKeys(invalidCVCNumberFormat);
     }
 }

@@ -576,7 +576,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutCreditCardInvalidCardNumberFormatConfirmationTest();
     }
 
-    //Test 009ar -> invalid check out confirmation test - too short user card CVC number (as a guest) (this input field has a 4 char limit, so too long CVC scenario cannot be enacted here)
+    //Test 009aw -> invalid check out confirmation test - too short user card CVC number (as a guest) (this input field has a 4 char limit, so too long CVC scenario cannot be enacted here)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short CVC Number (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -590,5 +590,21 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         addProductToCheckoutAsGuestTest(shoppingCartPage);
         //invalid check out confirmation test - too short user card CVC number (as a guest) (2 digits)
         invalidGuestCheckoutCreditCardTooShortCardCVCNumberConfirmationTest();
+    }
+
+    //Test 009ax -> invalid check out confirmation test - invalid user card CVC number (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Invalid CVC Format (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Invalid_Payment_Information_Singular_Input")
+    @Tag("Invalid_Singular_Input")
+    void invalidCheckoutInvalidCardCVCFormatConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - invalid user card CVC format (as a guest) (chars only)
+        invalidGuestCheckoutCreditCardInvalidCardCVCFormatConfirmationTest();
     }
 }
