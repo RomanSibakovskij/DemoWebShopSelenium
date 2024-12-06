@@ -12,6 +12,8 @@ public class CheckoutPaymentMethodPage extends BasePage{
     //credit card section input elements
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[1]/td[2]/select")
     private WebElement creditCardTypeDropdownMenu;
+    @FindBy(xpath = "//select[@id='CreditCardType']/option[@value='MasterCard']")
+    private WebElement creditCardMasterCardOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[2]/td[2]/input")
     private WebElement creditCardNameInputField;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[3]/td[2]/input")
@@ -50,12 +52,26 @@ public class CheckoutPaymentMethodPage extends BasePage{
     //no purchase order number data
     private String noPurchaseOrderNumber = "";
 
-    //invalid singular credit input data
+    //too short / too long singular credit input data
     private String tooShortGuestCardHolderName;
     private String tooLongGuestCardHolderName;
+    private String tooShortCardNumber;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
+
+    //credit card dropdown menu click method
+    public void clickCreditCardDropdownMenu(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(700));
+        wait.until(ExpectedConditions.elementToBeClickable(creditCardTypeDropdownMenu));
+        creditCardTypeDropdownMenu.click();
+    }
+    //select 'MasterCard' option method
+    public void selectMasterCardOption(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
+        wait.until(ExpectedConditions.visibilityOf(creditCardMasterCardOption));
+        creditCardMasterCardOption.click();
+    }
 
     //valid guest credit card data getter
     public void validGuestCreditCardDataGetter(){
@@ -264,5 +280,28 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1200));
         wait.until(ExpectedConditions.visibilityOf(creditCardNameInputField));
         creditCardNameInputField.sendKeys(tooLongGuestCardHolderName);
+    }
+
+    //invalid guest credit card data getter - too short guest card number
+    public void invalidGuestCreditCardTooShortCardNumberDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
+        tooShortCardNumber= "049887243186538";
+        cardCVCNumber = "334";
+        System.out.println("Invalid generated user credit card data (guest - no card number): " + "\n");
+
+        logger.info("Credit card holder name (guest - too short card number): " + guestCardHolderName);
+        logger.info("Too short guest credit card number: " + tooShortCardNumber);
+        logger.info("Credit card CVC number (guest - too short card number): " + cardCVCNumber);
+
+        System.out.println("\n");
+    }
+    //invalid credit card data input method - too short credit card number (15 digits)
+    public void inputTooShortCreditCardNumberIntoCardNumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
+        creditCardNumberInputField.sendKeys(tooShortCardNumber);
     }
 }
