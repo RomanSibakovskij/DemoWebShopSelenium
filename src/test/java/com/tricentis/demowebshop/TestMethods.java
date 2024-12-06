@@ -4058,6 +4058,28 @@ public class TestMethods extends BaseTest{
         //capture screenshot at payment information section (for verification)
         captureScreenshot(driver, "Order Details Verification with Displayed Data");
     }
+    //order details verification test method (all users -> 'Credit Card' payment method)
+    protected void submittedOrderValidationCreditCardTest(){
+        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+        //post-order submission section web element assert
+        isOrderSubmissionSuccessSectionWebElementDisplayed(orderDetailsPage);
+        //post-order submission section text element assert
+        isOrderSubmissionTextElementAsExpected(orderDetailsPage);
+        //order number logger
+        logPostConfirmOrderNumber(orderDetailsPage);
+        //capture screenshot at post-order confirmation
+        captureScreenshot(driver, "Order Submission Success");
+        //click order details page link
+        orderDetailsPage.clickOrderDetailsPageLink();
+        //order details page web element assert
+        isOrderDetailsPageWebElementDisplayed(orderDetailsPage);
+        //order details text element assert
+        isOrderDetailsPageTextAsExpected(orderDetailsPage);
+        //log available order invoice data
+        logOrderDetailsInvoiceCreditCardData(orderDetailsPage);
+        //capture screenshot at payment information section (for verification)
+        captureScreenshot(driver, "Order Details Verification with Displayed Data");
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4599,7 +4621,7 @@ public class TestMethods extends BaseTest{
         System.out.println("\n");
     }
 
-    //confirm order product tabular data logger method
+    //confirm order product tabular data logger method ('Credit Card' method)
     protected void logPreConfirmOrderWithCreditCardProductData(CheckoutPage checkoutPage){
         System.out.println("Pre-confirm order displayed product data: " + "\n");
 
@@ -4692,6 +4714,22 @@ public class TestMethods extends BaseTest{
         logger.info("Order additional fee (lower order table): " + orderDetailsPage.getOrderInvoiceAdditionalFee());
         logger.info("Order tax (lower order table): " + orderDetailsPage.getOrderInvoiceTax());
         logger.info("Order total price (lower order table): " + orderDetailsPage.getOrderInvoiceTotalPrice());
+
+        System.out.println("\n");
+    }
+    //order details product data logger method ('Credit Card' payment method)
+    protected void logOrderDetailsInvoiceCreditCardData(OrderDetailsPage orderDetailsPage){
+        System.out.println("Order invoice product(s) available data: " + "\n");
+
+        logger.info("Product name(s) (upper order table(with credit card)): " + orderDetailsPage.getOrderInvoiceProductName());
+        logger.info("Product unit price(s) (upper order table(with credit card)): " + orderDetailsPage.getOrderInvoiceProductUnitPrice());
+        logger.info("Product quantity(ies) (upper order table(with credit card)): " + orderDetailsPage.getOrderInvoiceProductQuantity());
+        logger.info("Product total price(s) (upper order table(with credit card)): " + orderDetailsPage.getOrderInvoiceProductTotalPrice());
+
+        logger.info("Order sub-total price (lower order table(with credit card)): " + orderDetailsPage.getOrderInvoiceSubTotalPrice());
+        logger.info("Order shipping price (lower order table(with credit card)): " + orderDetailsPage.getOrderInvoiceShippingPrice());
+        logger.info("Order tax (lower order table(with credit card)): " + orderDetailsPage.getOrderInvoiceAdditionalFee());
+        logger.info("Order total price (lower order table(with credit card)): " + orderDetailsPage.getOrderInvoiceTax());
 
         System.out.println("\n");
     }
