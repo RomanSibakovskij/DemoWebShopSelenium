@@ -46,7 +46,7 @@ public class OrderDetailsPageTest extends TestMethods{
 
     //single available product
 
-    //Test 010b -> check out confirmation of a single available product test (as a registered user)
+    //Test 010b -> order details validation of a single available product test (as a registered user)
     @Test
     @DisplayName("Order Details Validation Of A Single Available Product Test (as a registered user)")
     @Tag("Single_Available_Product_Order_Validation_Reg_User")
@@ -65,6 +65,23 @@ public class OrderDetailsPageTest extends TestMethods{
         addProductToCheckoutTest(shoppingCartPage);
         //check out confirmation of a single available product test (as a registered user) //this test method is universal for all product types
         validRegUserCheckoutConfirmationTest();
+        //order validation test //this test method is universal for all product types
+        submittedOrderValidationTest();
+    }
+
+    //Test 010c -> order details validation of a single available product test (as a guest)
+    @Test
+    @DisplayName("Order Details Validation Of A Single Available Product Test (as a guest)")
+    @Tag("Single_Available_Product_Order_Validation_Guest")
+    @Tag("Single_Available_Product_Order_Validation")
+    void singleAvailableProductOrderValidationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single available product to cart test (as a guest)
+        addASingleAvailableProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of a single available product test (as a guest) //this test method is universal for all product types
+        validGuestCheckoutConfirmationTest();
         //order validation test //this test method is universal for all product types
         submittedOrderValidationTest();
     }
