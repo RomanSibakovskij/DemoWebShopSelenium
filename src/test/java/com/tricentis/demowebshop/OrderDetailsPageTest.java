@@ -152,4 +152,21 @@ public class OrderDetailsPageTest extends TestMethods{
         //order validation test //this test method is universal for all product types
         submittedOrderValidationTest();
     }
+
+    //Test 010g -> order details validation of multiple available products test (as a guest)
+    @Test
+    @DisplayName("Order Details Validation Of Multiple Available Products Test (as a guest)")
+    @Tag("Multiple_Available_Products_Order_Validation_Guest")
+    @Tag("Multiple_Available_Products_Order_Validation")
+    void multipleAvailableProductsOrderValidationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add multiple available products to cart test (as a guest)
+        addMultipleAvailableProductsToCartTest();
+        //add multiple available products to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //check out confirmation of multiple available products test (as a guest) //this test method is universal for all product types
+        validGuestCheckoutConfirmationTest();
+        //order validation test //this test method is universal for all product types
+        submittedOrderValidationTest();
+    }
 }
