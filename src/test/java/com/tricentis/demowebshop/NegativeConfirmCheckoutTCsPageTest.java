@@ -516,8 +516,8 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Invalid Card Name Format (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
-    @Tag("Too_Long_Payment_Method_Singular_Input")
-    @Tag("Too_Long_Singular_Input")
+    @Tag("Invalid_Payment_Method_Singular_Input")
+    @Tag("Invalid_Singular_Input")
     void invalidCheckoutInvalidCardNameFormatConfirmationGuestTest(){
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
         //add a single featured product to cart test (as a guest)
@@ -528,7 +528,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutCreditCardInvalidCardNameFormatConfirmationTest();
     }
 
-    //Test 009ap -> invalid check out confirmation test - too short user card number (as a guest)
+    //Test 009at -> invalid check out confirmation test - too short user card number (as a guest)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Short Card Number (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -544,7 +544,7 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         invalidGuestCheckoutCreditCardTooShortCardNumberConfirmationTest();
     }
 
-    //Test 009aq -> invalid check out confirmation test - too long user card number (as a guest) (the test proceeds further instead of failing on missing error - test has failed)
+    //Test 009au -> invalid check out confirmation test - too long user card number (as a guest)
     @Test
     @DisplayName("Invalid Checkout Confirmation Test - Too Long Card Number (as a guest)")
     @Tag("Invalid_Checkout_Confirmation_Guest")
@@ -558,6 +558,22 @@ public class NegativeConfirmCheckoutTCsPageTest extends TestMethods{
         addProductToCheckoutAsGuestTest(shoppingCartPage);
         //invalid check out confirmation test - too long user card number (as a guest) (18 digits)
         invalidGuestCheckoutCreditCardTooLongCardNumberConfirmationTest();
+    }
+
+    //Test 009av -> invalid check out confirmation test - invalid user card number format (as a guest)
+    @Test
+    @DisplayName("Invalid Checkout Confirmation Test - Invalid Card Number Format (as a guest)")
+    @Tag("Invalid_Checkout_Confirmation_Guest")
+    @Tag("Invalid_Payment_Method_Singular_Input")
+    @Tag("Invalid_Singular_Input")
+    void invalidCheckoutInvalidCardNumberFormatConfirmationGuestTest(){
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(driver);
+        //add a single featured product to cart test (as a guest)
+        addASingleFeaturedProductToCartTest();
+        //add a single featured product to check out test (as a guest) //this test method is universal for all product types since they all end up on same checkout page
+        addProductToCheckoutAsGuestTest(shoppingCartPage);
+        //invalid check out confirmation test - invalid user card number format (as a guest) (random 16 digits - no structure / algorithm)
+        invalidGuestCheckoutCreditCardInvalidCardNumberFormatConfirmationTest();
     }
 
     //Test 009ar -> invalid check out confirmation test - too short user card CVC number (as a guest) (this input field has a 4 char limit, so too long CVC scenario cannot be enacted here)

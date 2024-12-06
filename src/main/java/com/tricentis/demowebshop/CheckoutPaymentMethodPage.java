@@ -15,6 +15,8 @@ public class CheckoutPaymentMethodPage extends BasePage{
     private WebElement creditCardMasterCardOption;
     @FindBy(xpath = "//select[@id='CreditCardType']/option[@value='Discover']")
     private WebElement creditCardDiscoverOption;
+    @FindBy(xpath = "//select[@id='CreditCardType']/option[@value='Amex']")
+    private WebElement creditCardAmexOption;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[2]/td[2]/input")
     private WebElement creditCardNameInputField;
     @FindBy(xpath = "//div[@class='section payment-info']//table//tr[3]/td[2]/input")
@@ -62,6 +64,7 @@ public class CheckoutPaymentMethodPage extends BasePage{
 
     //invalid singular credit input data
     private String invalidGuestCardHolderNameFormat;
+    private String invalidCardNumberFormat;
 
 
     public CheckoutPaymentMethodPage(WebDriver driver) {super(driver);}
@@ -83,6 +86,12 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
         wait.until(ExpectedConditions.visibilityOf(creditCardDiscoverOption));
         creditCardDiscoverOption.click();
+    }
+    //select 'Amex' option method
+    public void selectAmexOption(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(1100));
+        wait.until(ExpectedConditions.visibilityOf(creditCardAmexOption));
+        creditCardAmexOption.click();
     }
 
     //valid guest credit card data getter
@@ -362,6 +371,29 @@ public class CheckoutPaymentMethodPage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
         wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
         creditCardNumberInputField.sendKeys(tooLongCardNumber);
+    }
+
+    //invalid guest credit card data getter - invalid guest card number format (random 16 digits)
+    public void invalidGuestCreditCardInvalidCardNumberFormatDataGetter(){
+
+        TestDataGenerator testDataGenerator = new TestDataGenerator(driver);
+
+        guestCardHolderName = testDataGenerator.getFirstName() + " " + testDataGenerator.getLastName();
+        invalidCardNumberFormat= "1234568765444566";
+        cardCVCNumber = "334";
+        System.out.println("Invalid generated user credit card data (guest - invalid card number format): " + "\n");
+
+        logger.info("Credit cardholder name (guest - invalid card number format): " + guestCardHolderName);
+        logger.info("Invalid guest credit card number format: " + invalidCardNumberFormat);
+        logger.info("Credit card CVC number (guest - invalid card number format): " + cardCVCNumber);
+
+        System.out.println("\n");
+    }
+    //invalid credit card data input method - invalid credit card number format (random 16 digits)
+    public void inputInvalidCreditCardNumberFormatIntoCardNumberInputField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(800));
+        wait.until(ExpectedConditions.visibilityOf(creditCardNumberInputField));
+        creditCardNumberInputField.sendKeys(invalidCardNumberFormat);
     }
 
     //invalid guest credit card data getter - too short guest credit card CVC number (2 digits)
