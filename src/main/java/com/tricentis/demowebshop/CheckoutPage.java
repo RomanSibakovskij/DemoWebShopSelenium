@@ -165,10 +165,6 @@ public class CheckoutPage extends BasePage{
         phoneNumberInputField.sendKeys(phoneNumber);
     }
 
-    //registered user first / last name getters
-    public String getUserFirstName() {return firstNameInputField.getText();}
-    public String getUserLastName() {return lastNameInputField.getText();}
-
     //billing address section country dropdown menu click method
     public void clickBillingAddressCountryDropdownMenu() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(500));

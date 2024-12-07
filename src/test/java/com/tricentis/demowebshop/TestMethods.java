@@ -1003,7 +1003,7 @@ public class TestMethods extends BaseTest{
         singleProductPage.changeSingleProductQuantity();
         //click 'Add to cart' button
         singleProductPage.clickAddToCartButton();
-        //assert the success message is as expected (expensive computers addition)
+        //assert the success message is as expected (expensive-computers addition)
         assertEquals("The product has been added to your shopping cart", homePage.getProductAddToCartSuccessMessageText(), "The success message doesn't match expectations.");
         //click 'Shopping cart' head nav link
         homePage.clickShoppingCartNavLink();
@@ -2198,7 +2198,7 @@ public class TestMethods extends BaseTest{
         //isPaymentInformationSectionWebElementDisplayed(checkoutPage);
         //invalid guest credit card data getter (no cardholder name)
         checkoutPaymentMethodPage.invalidGuestCreditCardNoCardNameDataGetter();
-        //don't input guest card holder name
+        //don't input guest cardholder name
         checkoutPaymentMethodPage.inputNoCreditCardNameIntoNameInputField();
         //input valid user credit card number
         checkoutPaymentMethodPage.inputValidCreditCardNumberIntoCardNumberInputField();
@@ -4564,7 +4564,7 @@ public class TestMethods extends BaseTest{
     //confirm order section web element assert test method
     protected void isConfirmOrderSectionWebElementDisplayed(CheckoutPage checkoutPage){
         //assert confirm order section title is displayed
-        //assertTrue(checkoutPage.isConfirmOrderSectionTitleDisplayed(), "The confirm order section title isn't displayed.");
+        assertTrue(checkoutPage.isConfirmOrderSectionTitleDisplayed(), "The confirm order section title isn't displayed.");
         //assert confirm order billing address data is displayed
         assertTrue(checkoutPage.isConfirmOrderBillingAddressDataDisplayed(), "The confirm order billing address data isn't displayed.");
         //assert confirm order shipping method data is displayed

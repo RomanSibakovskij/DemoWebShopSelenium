@@ -67,24 +67,12 @@ public class OrderDetailsPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(orderDetailsPageLink));
         orderDetailsPageLink.click();
     }
-    // 'Continue' button click method
-    public void clickContinueButton(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
-        wait.until(ExpectedConditions.elementToBeClickable(continueButton));
-        continueButton.click();
-    }
 
     //order submission success title getter
     public String getOrderSubmissionSuccessTitle(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
         wait.until(ExpectedConditions.visibilityOf(orderSubmissionSuccessTitle));
         return orderSubmissionSuccessTitle.getText();
-    }
-    //order submission success message getter
-    public String getOrderSubmissionMessageTitle(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(850));
-        wait.until(ExpectedConditions.visibilityOf(orderSubmissionSuccessMessage));
-        return orderSubmissionSuccessMessage.getText();
     }
     //submitted order number getter
     public String getSubmitterOrderNumber(){

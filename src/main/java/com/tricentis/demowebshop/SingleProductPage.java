@@ -29,10 +29,6 @@ public class SingleProductPage extends BasePage{
     private WebElement productViewReviewsLink;
     @FindBy(xpath = "//div[@class='product-review-links']/a[2]")
     private WebElement productAddReviewLink;
-    @FindBy(xpath = "//select[@id='product_attribute_16_5_4']")
-    private WebElement productProcessorDropdownMenu;
-    @FindBy(xpath = "//select[@id='product_attribute_16_6_5']")
-    private WebElement productRAMDropdownMenu;
     //list elements
     @FindBy(xpath = "//div[@class='breadcrumb']//li//a")
     private List <WebElement> breadcrumbPathElements;
@@ -57,8 +53,6 @@ public class SingleProductPage extends BasePage{
     private WebElement productAddToCompareButton;
     @FindBy(xpath = "//div[@class='add-to-cart']//input[@value='Add to cart']")
     private WebElement productAddToCartButton;
-    @FindBy(xpath = "//div[@class='add-to-cart']//input[@value='Add to wishlist']")
-    private WebElement productAddToWishlistButton;
 
 
     public SingleProductPage(WebDriver driver) {super(driver);}
@@ -150,9 +144,6 @@ public class SingleProductPage extends BasePage{
 
     //elements that not all pages have
     public boolean isProductFreeShippingBadgeDisplayed() {return productFreeShippingBadge.isDisplayed();}
-    public boolean isProductProcessorDropdownMenuDisplayed() {return productProcessorDropdownMenu.isDisplayed();}
-    public boolean isProductRAMDropdownMenuDisplayed() {return productRAMDropdownMenu.isDisplayed();}
-    public boolean isProductAddToWishlistButtonDisplayed() {return productAddToWishlistButton.isDisplayed();}
 
     public boolean isProductThumbPictureDisplayed() {
         for (WebElement element : thumbProductPicturesElements) {
